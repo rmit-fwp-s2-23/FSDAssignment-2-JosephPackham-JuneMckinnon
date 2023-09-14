@@ -1,0 +1,12 @@
+.footer{
+    background-color: rgb(85, 124, 197);
+    font-size: 16px;
+    text-align: center;
+    padding: 1px;
+
+    height: 10vh;
+    left:0;
+    bottom:0;
+    right:0;
+    box-shadow: 20px 20px 20px 20px rgba(0, 0, 0, 0.2), 20px 20px 20px 20px rgba(0, 0, 0, 0.19); 
+}

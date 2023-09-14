@@ -1,0 +1,86 @@
+.movie-background {
+    width: 100vw;
+    height: 75vh; 
+    background:
+        linear-gradient(
+        rgba(0, 0, 0, 0.7), 
+        rgba(0, 0, 0, 0.7)
+        ),
+        url("../images/barbie/barbie-bkg.webp");
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.form-background {
+    background-color: rgb(23, 24, 31);
+    box-shadow: 0 0 2rem rgb(10, 10, 10);
+    border-radius: 1rem;
+    height: 60vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+#form-bkg {
+    width: 30vw;
+}
+
+#review-bkg {
+    width: 65vw;
+}
+
+.rating-input {
+    background-color: rgba(100, 100, 100, 0.5);
+    width: 8rem;
+    padding: 1rem 4rem;
+    display: flex;
+    justify-content: space-around;
+    border-radius: 1rem;
+    box-shadow: 0 0 1rem rgb(10, 10, 10);
+}
+
+.form-reviewcontent {
+    width: 14rem;
+    height: 10rem;
+    margin-top: 2rem;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    box-shadow: 0 0 1rem black;
+}
+
+.review-form {
+    display: flex;
+    flex-direction: column;
+}
+
+.submit {
+    display: flex;
+    justify-content: center;
+    margin-top: 1rem;
+}
+
+.rating-number {
+    border-radius: 0.3rem;
+    border: none;
+}
+
+.review-container {
+    display: grid;
+    grid-template-columns: auto auto auto auto;
+    gap: 1rem;
+    overflow-y: scroll;
+}
+
+.review {
+    background-color: rgba(100, 100, 100, 0.5);
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+    box-shadow: 0 0 1rem rgb(10, 10, 10);
+    width: auto;
+}
+
+#review-button {
+    box-shadow: none;
+}

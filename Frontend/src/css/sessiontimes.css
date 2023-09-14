@@ -1,0 +1,22 @@
+.sessiontimes{
+    text-align: center;
+    margin-right: 50px;
+    
+}
+.sessiontimes li{
+    text-align: center;
+    display: inline-block;
+    padding: 10px;
+    margin-bottom: 20px;
+    padding-left: 30px;
+    font-size: 20px ;
+    
+}
+.sessiontimes h1{
+    padding-top: 5px ;
+    font-size: 24px;
+}
+
+.heading h1{
+    font-size:36px
+}

@@ -1,0 +1,155 @@
+.movie-container {
+    width: 100vw;
+    height: 70vh; 
+    background:
+        linear-gradient(
+        rgba(0, 0, 0, 0.7), 
+        rgba(0, 0, 0, 0.7)
+        ),
+        url("../images/barbie/barbie-bkg.webp");
+    display: flex;
+    justify-content: space-between;
+}
+
+#movie-title {
+    font-size: 5vh;
+    padding: 2vh 2vw;
+    background-color: rgba(100, 100, 100, 0.2);
+    backdrop-filter: blur(2px);
+    width: 20vw;
+    margin-left: 1vw;
+    border-radius: 0vw 0vw 1vw 1vw;
+    display: flex;
+    justify-content: center;
+}
+
+#movie-poster {
+    width: 20vw;
+    height: 27vw;
+    margin-left: 3vw;
+    margin-top: 5vh;
+    border-radius: 2vw 0px 2vw 0px;
+    box-shadow: 1vh 1vh 0px rgba(60, 50, 70, 0.6);
+    filter: brightness(0.9)
+}
+
+#movie-times {
+    width: 71vw;
+    height: 64vh;
+    background-color: rgba(100, 100, 100, 0.2);
+    backdrop-filter: blur(3px);
+    margin-right: 1vw;
+    padding: 2vh 2vw;
+    box-sizing: border-box;
+    border-radius: 0vw 0vw 2vw 2vw;
+    overflow-y: scroll;
+}
+
+.session-times {
+    width: 67vw;
+    height: 10vh;
+    display: flex;
+    align-items: center;
+    gap: 3vw;
+    box-sizing: border-box;
+    padding: 0vh 2vw;
+    background-color: rgba(100, 100, 100, 0.2);
+    border-radius: 1vw;
+    margin-top: 1vh;
+}
+
+.session-time {
+    width: 5vw;
+    height: 5vh;
+    background-color: rgba(100, 100, 100, 0.3);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-color: rgba(100, 100, 100, 0.5);
+    border-style: solid;
+    border-radius: 1vh;
+    border-width: 0.3vh;
+    transition: transform 0.3s ease;
+    user-select: none;
+    -moz-user-select: none;
+    -webkit-text-select: none;
+    -webkit-user-select: none;
+}
+
+.session-time:hover {
+    transform: scale(1.09);
+    background-color: rgba(100, 100, 100, 0.5);
+    cursor: pointer;
+}
+
+.session-time:active {
+    background-color: rgba(100, 100, 100, 0.8);
+}
+
+.session-day {
+    margin-top: 1vh;
+}
+    
+#movie-select {
+    width: 32vw;
+    height: 20vh;
+    background-color: rgba(100, 100, 100, 0.4);
+    display: flex;
+    justify-content: space-between;
+    padding-top: 1.5vh;
+    padding-left: 1vw;
+    padding-right: 1vw;
+    border-radius: 1vw 1vw 0px 0px;
+    box-sizing: border-box;
+}
+
+.movie {
+    width: 6vw;
+    height: 18.5vh;
+    margin-top: 0px;
+    transition: margin-top ease 0.2s;
+    box-shadow: 0vw 0vw 4vw rgb(20, 20, 20);
+    background-size: cover;
+    background-position: center;
+    border-radius: 0.5rem 0.5rem 0rem 0rem;
+}
+
+.movie:hover {
+    margin-top: -2vh;
+    filter: brightness(1.1);
+}
+
+.movie:active {
+    margin-top: 0vh;
+    filter: brightness(0.9);
+}
+
+.movie:nth-child(1) {
+    background-image: url('../images/barbie/barbie-side.jpeg');
+}
+
+.movie:nth-child(2) {
+    background-image: url('../images/oppenheimer/oppenheimer-side.jpeg');
+}
+
+.movie:nth-child(3) {
+    background-image: url('../images/avengers/avengers-side.jpeg');
+}
+
+.movie:nth-child(4) {
+    background-image: url('../images/lotr/lotr-side.jpeg');
+}
+
+.handle-review {
+    background-color: rgba(100, 100, 100, 0.5);
+    backdrop-filter: blur(6px);
+    width: 20vw;
+    display: flex;
+    justify-content: center;
+    margin-left: 3vw;
+    margin-top: 2vh;
+    padding: 0.5rem;
+    box-sizing: border-box;
+    border-radius: 0.5rem;
+    box-shadow: 1vh 1vh 0 rgba(60, 50, 70, 0.6);
+}

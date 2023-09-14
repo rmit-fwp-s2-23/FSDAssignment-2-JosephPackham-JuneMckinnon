@@ -1,0 +1,30 @@
+.input{
+    background-color: #ffffff;
+    
+    border-radius: 8px;
+    padding: 10px 32px;
+    text-align: center;
+    text-decoration: none;
+    margin: 20px;
+    font-size: 20px;
+    width: 270px;
+    border: none;
+    border-bottom: 1px solid;
+    font-family: sans-serif;
+}
+
+.small-background {
+    background-color: rgba(105, 100, 120, 0.5);
+    backdrop-filter: blur(1px);
+    padding: 1rem;
+    margin: 0.5rem;
+    box-shadow: 0rem 0rem 1rem rgb(10, 10, 20);
+    border-radius: 1rem;
+}
+
+.button-container {
+    display: flex;
+    justify-content: space-evenly;
+    width: 100%;
+    margin-top: 2rem;
+}

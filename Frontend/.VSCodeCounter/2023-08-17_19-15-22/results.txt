@@ -1,0 +1,89 @@
+Date : 2023-08-17 19:15:22
+Directory : e:\Full Stack Development\assignment1
+Total : 48 files,  31904 codes, 70 comments, 496 blanks, all 32470 lines
+
+Languages
++------------+------------+------------+------------+------------+------------+
+| language   | files      | code       | comment    | blank      | total      |
++------------+------------+------------+------------+------------+------------+
+| JSON       |          3 |     30,210 |          0 |          3 |     30,213 |
+| JavaScript |         27 |      1,146 |         47 |        346 |      1,539 |
+| CSS        |         15 |        489 |          0 |        113 |        602 |
+| Markdown   |          1 |         38 |          0 |         33 |         71 |
+| HTML       |          1 |         20 |         23 |          1 |         44 |
+| XML        |          1 |          1 |          0 |          0 |          1 |
++------------+------------+------------+------------+------------+------------+
+
+Directories
++-----------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| path                                                                                    | files      | code       | comment    | blank      | total      |
++-----------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| .                                                                                       |         48 |     31,904 |         70 |        496 |     32,470 |
+| . (Files)                                                                               |          3 |     30,223 |          0 |         35 |     30,258 |
+| public                                                                                  |          2 |         45 |         23 |          2 |         70 |
+| src                                                                                     |         43 |      1,636 |         47 |        459 |      2,142 |
+| src (Files)                                                                             |          6 |         55 |         14 |         21 |         90 |
+| src\Routing                                                                             |          1 |         28 |          0 |          4 |         32 |
+| src\components                                                                          |         11 |        395 |          7 |        108 |        510 |
+| src\components (Files)                                                                  |          6 |        180 |          4 |         61 |        245 |
+| src\components\sessiontimemodals                                                        |          5 |        215 |          3 |         47 |        265 |
+| src\css                                                                                 |         15 |        489 |          0 |        113 |        602 |
+| src\pages                                                                               |         10 |        669 |         26 |        213 |        908 |
+| src\pages (Files)                                                                       |          6 |        233 |         14 |         86 |        333 |
+| src\pages\reviewpages                                                                   |          4 |        436 |         12 |        127 |        575 |
++-----------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+
+Files
++-----------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| filename                                                                                | language   | code       | comment    | blank      | total      |
++-----------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| e:\Full Stack Development\assignment1\README.md                                         | Markdown   |         38 |          0 |         33 |         71 |
+| e:\Full Stack Development\assignment1\package-lock.json                                 | JSON       |     30,145 |          0 |          1 |     30,146 |
+| e:\Full Stack Development\assignment1\package.json                                      | JSON       |         40 |          0 |          1 |         41 |
+| e:\Full Stack Development\assignment1\public\index.html                                 | HTML       |         20 |         23 |          1 |         44 |
+| e:\Full Stack Development\assignment1\public\manifest.json                              | JSON       |         25 |          0 |          1 |         26 |
+| e:\Full Stack Development\assignment1\src\App.js                                        | JavaScript |         22 |          7 |         13 |         42 |
+| e:\Full Stack Development\assignment1\src\App.test.js                                   | JavaScript |          7 |          0 |          2 |          9 |
+| e:\Full Stack Development\assignment1\src\Routing\routing.js                            | JavaScript |         28 |          0 |          4 |         32 |
+| e:\Full Stack Development\assignment1\src\components\about.js                           | JavaScript |         12 |          1 |          4 |         17 |
+| e:\Full Stack Development\assignment1\src\components\footer.js                          | JavaScript |          8 |          0 |          3 |         11 |
+| e:\Full Stack Development\assignment1\src\components\header.js                          | JavaScript |         18 |          0 |         10 |         28 |
+| e:\Full Stack Development\assignment1\src\components\modal.js                           | JavaScript |         14 |          1 |          6 |         21 |
+| e:\Full Stack Development\assignment1\src\components\moviegrid.js                       | JavaScript |        102 |          1 |         27 |        130 |
+| e:\Full Stack Development\assignment1\src\components\navbar.js                          | JavaScript |         26 |          1 |         11 |         38 |
+| e:\Full Stack Development\assignment1\src\components\sessiontimemodals\avengersst.js    | JavaScript |         42 |          1 |          8 |         51 |
+| e:\Full Stack Development\assignment1\src\components\sessiontimemodals\barbiest.js      | JavaScript |         42 |          0 |         13 |         55 |
+| e:\Full Stack Development\assignment1\src\components\sessiontimemodals\cinematimes.js   | JavaScript |         47 |          2 |          5 |         54 |
+| e:\Full Stack Development\assignment1\src\components\sessiontimemodals\lotrst.js        | JavaScript |         42 |          0 |         12 |         54 |
+| e:\Full Stack Development\assignment1\src\components\sessiontimemodals\oppenheimerst.js | JavaScript |         42 |          0 |          9 |         51 |
+| e:\Full Stack Development\assignment1\src\css\App.css                                   | CSS        |          4 |          0 |          3 |          7 |
+| e:\Full Stack Development\assignment1\src\css\about.css                                 | CSS        |         11 |          0 |          3 |         14 |
+| e:\Full Stack Development\assignment1\src\css\footer.css                                | CSS        |         11 |          0 |          7 |         18 |
+| e:\Full Stack Development\assignment1\src\css\header.css                                | CSS        |         18 |          0 |          7 |         25 |
+| e:\Full Stack Development\assignment1\src\css\index.css                                 | CSS        |         14 |          0 |          5 |         19 |
+| e:\Full Stack Development\assignment1\src\css\landingpage.css                           | CSS        |         19 |          0 |          7 |         26 |
+| e:\Full Stack Development\assignment1\src\css\modal.css                                 | CSS        |         37 |          0 |          8 |         45 |
+| e:\Full Stack Development\assignment1\src\css\moviegrid.css                             | CSS        |         43 |          0 |         13 |         56 |
+| e:\Full Stack Development\assignment1\src\css\navbar.css                                | CSS        |         40 |          0 |         13 |         53 |
+| e:\Full Stack Development\assignment1\src\css\reviews.css                               | CSS        |        104 |          0 |         17 |        121 |
+| e:\Full Stack Development\assignment1\src\css\sessiontimes.css                          | CSS        |         23 |          0 |          6 |         29 |
+| e:\Full Stack Development\assignment1\src\css\signin.css                                | CSS        |         45 |          0 |          9 |         54 |
+| e:\Full Stack Development\assignment1\src\css\signout.css                               | CSS        |         32 |          0 |          3 |         35 |
+| e:\Full Stack Development\assignment1\src\css\signup.css                                | CSS        |         45 |          0 |          8 |         53 |
+| e:\Full Stack Development\assignment1\src\css\userprofile.css                           | CSS        |         43 |          0 |          4 |         47 |
+| e:\Full Stack Development\assignment1\src\index.js                                      | JavaScript |         12 |          3 |          3 |         18 |
+| e:\Full Stack Development\assignment1\src\logo.svg                                      | XML        |          1 |          0 |          0 |          1 |
+| e:\Full Stack Development\assignment1\src\pages\editprofile.js                          | JavaScript |         44 |          0 |         15 |         59 |
+| e:\Full Stack Development\assignment1\src\pages\landingpage.js                          | JavaScript |         17 |          6 |         13 |         36 |
+| e:\Full Stack Development\assignment1\src\pages\reviewpages\avengersreviews.js          | JavaScript |        108 |          3 |         35 |        146 |
+| e:\Full Stack Development\assignment1\src\pages\reviewpages\barbiereviews.js            | JavaScript |        113 |          3 |         34 |        150 |
+| e:\Full Stack Development\assignment1\src\pages\reviewpages\lotrreviews.js              | JavaScript |        107 |          3 |         37 |        147 |
+| e:\Full Stack Development\assignment1\src\pages\reviewpages\oppenheimerreviews.js       | JavaScript |        108 |          3 |         21 |        132 |
+| e:\Full Stack Development\assignment1\src\pages\signin.js                               | JavaScript |         44 |          4 |         19 |         67 |
+| e:\Full Stack Development\assignment1\src\pages\signout.js                              | JavaScript |         24 |          0 |          6 |         30 |
+| e:\Full Stack Development\assignment1\src\pages\signup.js                               | JavaScript |         69 |          2 |         22 |         93 |
+| e:\Full Stack Development\assignment1\src\pages\userprofile.js                          | JavaScript |         35 |          2 |         11 |         48 |
+| e:\Full Stack Development\assignment1\src\reportWebVitals.js                            | JavaScript |         12 |          0 |          2 |         14 |
+| e:\Full Stack Development\assignment1\src\setupTests.js                                 | JavaScript |          1 |          4 |          1 |          6 |
+| Total                                                                                   |            |     31,904 |         70 |        496 |     32,470 |
++-----------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+

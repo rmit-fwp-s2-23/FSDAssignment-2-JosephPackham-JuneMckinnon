@@ -1,0 +1,55 @@
+.grid-container {
+    display: grid;
+    grid-template-columns: auto auto auto;
+    padding: 10px;
+    text-align: center;
+    background-color: gb(105,105,105)
+    
+  }
+
+.poster{
+    width: 200px;
+    height: 320px;
+    border-radius: 8px;
+    box-shadow: 0 20px 20px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.moviename {
+    text-align: center;
+    font-size: 24px;
+    font-family: 'sans serif';
+    font-style: italic;
+    
+
+}
+
+.grid-item {
+    background-color: gb(105,105,105);
+    
+    padding: 20px;
+    
+    text-align: center;
+  }
+.sessiontimes button{
+  background-color:aliceblue;
+  color: black;
+  border: 2px solid rgb(85, 124, 197);
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  border-radius: 10px;
+  display: inline-block;
+  margin-right: 10px;
+  transition: 0.5s;
+  box-shadow: 0 20px 20px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.sessiontimes button:hover {
+  background-color: rgb(85, 124, 197);
+  color: white;
+  box-shadow: 0 20px 20px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+
+

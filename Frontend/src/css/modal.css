@@ -1,0 +1,44 @@
+.modal{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  
+  top:0;
+  left:0;
+  width: 100%;
+  height: 100vh;
+  
+  
+  background-color: rgba(0, 0, 0, 0.7);
+  overflow: auto;
+}
+.modal-content {
+  background-color: #fff;
+  padding: 10px;
+  border-radius: 8px ;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  
+}
+
+.modal button{
+    background-color:aliceblue;
+    color: black;
+    border: 2px solid rgb(85, 124, 197);
+    padding: 5px 15px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    border-radius: 10px;
+    display: inline-block;
+    margin-right: 10px;
+    transition: 0.5s;
+    box-shadow: 0 20px 20px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); 
+  }
+  
+  .modal button:hover {
+    background-color: rgb(85, 124, 197);
+    color: white;
+    box-shadow: 0 20px 20px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  }
+  
