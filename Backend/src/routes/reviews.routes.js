@@ -1,5 +1,5 @@
 module.exports = (express, app) => {
-  const controller = require("../controllers/post.controller.js");
+  const controller = require("../controllers/reviews.controller.js");
   const router = express.Router();
 
   // Select all posts.
@@ -9,5 +9,5 @@ module.exports = (express, app) => {
   router.post("/", controller.create);
 
   // Add routes to server.
-  app.use("/api/posts", router);
+  app.use("/api/reviews", router);
 };
