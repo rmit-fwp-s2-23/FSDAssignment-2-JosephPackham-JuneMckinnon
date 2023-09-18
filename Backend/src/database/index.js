@@ -15,8 +15,7 @@ db.user = require('./models/user.js')(db.sequelize, DataTypes);
 db.reviews = require('./models/reviews.js')(db.sequelize, DataTypes);
 
 db.reviews.belongsTo(db.user, {foreignKey: {name: 'author_name', allowNull: false}});
-db.reviews.belongsTo(db.user, {foreignKey: {name: 'author_email', allowNull: false}});
-
+// db.reviews.belongsTo(db.user, {foreignKey: {name: 'author_email', allowNull: false, targetKey: 'email'}, onDelete: 'CASCADE'});
 db.sync = async () => {
   await db.sequelize.sync();
   await seedData();
@@ -30,7 +29,10 @@ async function seedData() {
 
   let hash = await argon2.hash('abc123', {type: argon2.argon2id});
   await db.user.create({name: 'Joseph Packham', password_hash: hash, email:'JosephPackham@gmail.com', joined: '2021-04-01'});
-  await db.user.create({name: 'Matthew Bolger', password_hash: hash, email:'MBolger@gmail.com', joined: '2021-04-01'});
+  // await db.user.create({name: 'Matthew Bolger', password_hash: hash, email:'MBolger@gmail.com', joined: '2021-04-01'});
+  // await db.user.create({name: 'Shekhar Kalra', password_hash: hash, email:'JPackham@gmail.com', joined: '2021-04-01'});
+  
+  await db.reviews.create({author_name: 'Joseph Packham', author_email: 'JosephPackham@gmail.com', review_rating: 5, review_text: 'This is a review', review_date: '2021-04-01'});
 }
 
 module.exports = db;
