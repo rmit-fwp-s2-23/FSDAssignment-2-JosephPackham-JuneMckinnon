@@ -40,3 +40,27 @@ exports.create = async (req, res) => {
 
   res.json(user);
 };
+
+//delete a user from the database
+exports.delete = async (req, res) => {
+  const user = await db.user.findByPk(req.params.id);
+
+  await user.destroy();
+
+  res.json(user);
+}
+
+//update a user in the database
+exports.update = async (req, res) => {
+  const user = await db.user.findByPk(req.params.id);
+
+  user.name = req.body.name;
+  user.email = req.body.email;
+  user.password_hash = req.body.password_hash;
+
+  await user.save();
+
+  res.json(user);
+}
+
+

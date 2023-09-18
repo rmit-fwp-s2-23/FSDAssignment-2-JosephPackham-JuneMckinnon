@@ -26,3 +26,39 @@ exports.create = async (req, res) => {
 
   res.json(reviews);
 };
+
+//select review by movie name
+exports.one = async (req, res) => {
+  const reviews = await db.reviews.findAll({
+    where: {
+      movie: req.params.movie
+    }
+  });
+
+  res.json(reviews);
+}
+
+//delete a review from the database
+exports.delete = async (req, res) => {
+  const reviews = await db.reviews.findByPk(req.params.id);
+
+  await reviews.destroy();
+
+  res.json(reviews);
+}
+
+//update a review in the database
+exports.update = async (req, res) => {
+  const reviews = await db.reviews.findByPk(req.params.id);
+
+  reviews.author_name = req.body.author_name;
+  reviews.author_email = req.body.author_email;
+  reviews.review_rating = req.body.review_rating;
+  reviews.review_text = req.body.review_text;
+
+  await reviews.save();
+
+  res.json(reviews);
+}
+
+

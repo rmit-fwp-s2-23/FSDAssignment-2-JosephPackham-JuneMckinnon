@@ -32,7 +32,7 @@ async function seedData() {
   // await db.user.create({name: 'Matthew Bolger', password_hash: hash, email:'MBolger@gmail.com', joined: '2021-04-01'});
   // await db.user.create({name: 'Shekhar Kalra', password_hash: hash, email:'JPackham@gmail.com', joined: '2021-04-01'});
   
-  await db.reviews.create({author_name: 'Joseph Packham', author_email: 'JosephPackham@gmail.com', review_rating: 5, review_text: 'This is a review', review_date: '2021-04-01'});
+  await db.reviews.create({movie: 'Movie1', author_name: 'Joseph Packham', author_email: 'JosephPackham@gmail.com', review_rating: 5, review_text: 'This is a review', review_date: '2021-04-01'});
 }
 
 module.exports = db;

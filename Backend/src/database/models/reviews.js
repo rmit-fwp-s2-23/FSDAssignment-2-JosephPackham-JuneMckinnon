@@ -1,8 +1,11 @@
 module.exports = (sequelize, DataTypes) =>
   sequelize.define("review", {
-    author_name: {
+    movie: {
       type: DataTypes.STRING(32),
       primaryKey: true
+    },
+    author_name: {
+      type: DataTypes.STRING(32),
     },
     author_email: {
       type: DataTypes.STRING(40),
