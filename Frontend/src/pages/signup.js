@@ -1,6 +1,7 @@
 import React from "react";
 import '../css/signinup.css'
 import { useNavigate } from "react-router";
+import { createUser} from "../data/repository";
 
 // TODO: add in validation for strong password - just need to do special characters, password already has validation for length and number
 
@@ -13,24 +14,24 @@ const SignUp = (props) => {
 
     const validation = (user) => {
 
-        let users = JSON.parse(localStorage.getItem('users')); //get all registered users from local storage
-        for(let i = 0; i < users.length; i++){ //loop through all registered users
-            if(user.email === users[i].email){ //if email is already registered
-                return 'Email is already in use';
-            }
-        }
+        // let users = JSON.parse(localStorage.getItem('users')); //get all registered users from local storage
+        // for(let i = 0; i < users.length; i++){ //loop through all registered users
+        //     if(user.email === users[i].email){ //if email is already registered
+        //         return 'Email is already in use';
+        //     }
+        // }
 
         
-        if(user.password.length < 8){ //if password is less than 8 characters
-            console.log(user.password);
-            return 'Password must be at least 8 characters long';
+        // if(user.password.length < 8){ //if password is less than 8 characters
+        //     console.log(user.password);
+        //     return 'Password must be at least 8 characters long';
 
-        }
-        else if(user.password.search(/[0-9]/i) < 0){ //if password does not contain a number
-            return 'Password must contain at least one number';
-        }else if(user.password.search(/[!@#$%^&*]/i) < 0){ //if password does not contain a special character
-            return 'Password must contain at least one special character';
-        }
+        // }
+        // else if(user.password.search(/[0-9]/i) < 0){ //if password does not contain a number
+        //     return 'Password must contain at least one number';
+        // }else if(user.password.search(/[!@#$%^&*]/i) < 0){ //if password does not contain a special character
+        //     return 'Password must contain at least one special character';
+        // }
         
     };
 
@@ -54,17 +55,25 @@ const SignUp = (props) => {
             return;
         }
         else{
-            let registered = JSON.parse(localStorage.getItem('users')); //get all registered users from local storage
-            if(registered=== null){ //if there are no registered users, create an empty array
-                registered = []
-            };
+            createUser(user).then((response) => {
+                localStorage.setItem('loggedUser' , JSON.stringify(user)); //set loggedUser in local storage to new user
+                props.setUser({name: user.name, password: user.password, email: user.email, joined: user.joined }); //set user state to new user
+                navigate('/');
+            })
 
-            registered.push(user); //add new user to array of registered users
-            localStorage.setItem('users', JSON.stringify(registered)); //set local storage to new array of registered users
-            localStorage.setItem('loggedUser' , JSON.stringify(user)); //set loggedUser in local storage to new user
-            props.setUser({name: user.name, password: user.password, email: user.email, joined: user.joined }); //set user state to new user
-            navigate('/'); //navigate to landing page
-            alert('Account created successfully!'); //alert user that account was created
+            
+            
+            // let registered = JSON.parse(localStorage.getItem('users')); //get all registered users from local storage
+            // if(registered=== null){ //if there are no registered users, create an empty array
+            //     registered = []
+            // };
+
+            // registered.push(user); //add new user to array of registered users
+            // localStorage.setItem('users', JSON.stringify(registered)); //set local storage to new array of registered users
+            // localStorage.setItem('loggedUser' , JSON.stringify(user)); //set loggedUser in local storage to new user
+            // props.setUser({name: user.name, password: user.password, email: user.email, joined: user.joined }); //set user state to new user
+            // navigate('/'); //navigate to landing page
+            // alert('Account created successfully!'); //alert user that account was created
             
         };
 

@@ -14,8 +14,13 @@ db.sequelize = new Sequelize(config.DB, config.USER, config.PASSWORD, {
 db.user = require('./models/user.js')(db.sequelize, DataTypes);
 db.reviews = require('./models/reviews.js')(db.sequelize, DataTypes);
 
-db.reviews.belongsTo(db.user, {foreignKey: {name: 'author_name', allowNull: false}});
-// db.reviews.belongsTo(db.user, {foreignKey: {name: 'author_email', allowNull: false, targetKey: 'email'}, onDelete: 'CASCADE'});
+db.reviews.belongsTo(db.user, {foreignKey: {name: 'author_email', allowNull: false}});
+
+
+
+
+
+
 db.sync = async () => {
   await db.sequelize.sync();
   await seedData();

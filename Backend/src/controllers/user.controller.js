@@ -53,7 +53,6 @@ exports.delete = async (req, res) => {
 //update a user in the database
 exports.update = async (req, res) => {
   const user = await db.user.findByPk(req.params.id);
-
   user.name = req.body.name;
   user.email = req.body.email;
   user.password_hash = req.body.password_hash;

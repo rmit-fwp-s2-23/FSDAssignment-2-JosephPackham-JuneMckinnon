@@ -1,16 +1,27 @@
 module.exports = (sequelize, DataTypes) =>
   sequelize.define("review", {
+    review_id: {
+      type: DataTypes.INTEGER,
+      autoIncrement: true,
+      primaryKey: true
+    },
     movie: {
       type: DataTypes.STRING(32),
-      primaryKey: true
+      allowNull: false
+
+      
     },
     author_name: {
       type: DataTypes.STRING(32),
+      allowNull: false
+
     },
     author_email: {
       type: DataTypes.STRING(40),
-      allowNull: false
+      allowNull: false,
+      ForeignKey: true
     },
+
     review_rating: {
       type: DataTypes.INTEGER,
       allowNull: false

@@ -12,10 +12,11 @@ exports.all = async (req, res) => {
   res.json(reviews);
 };
 
-// Create a post in the database.
+// Create a review in the database.
 exports.create = async (req, res) => {
   console.log(req.body);
   const reviews = await db.reviews.create({
+    movie: req.body.movie,
     author_name: req.body.author_name,
     author_email: req.body.author_email,
     review_rating: req.body.review_rating,
@@ -50,7 +51,7 @@ exports.delete = async (req, res) => {
 //update a review in the database
 exports.update = async (req, res) => {
   const reviews = await db.reviews.findByPk(req.params.id);
-
+  reviews.movie = req.body.movie;
   reviews.author_name = req.body.author_name;
   reviews.author_email = req.body.author_email;
   reviews.review_rating = req.body.review_rating;
