@@ -28,6 +28,12 @@ async function updateUser(id, user) {
     return response.data;
 }
 
+async function verifyUser(email, password) {
+    const response = await axios.get(API_HOST + `/api/users/verify/${email}/${password}`);
+
+    return response.data;
+}
+
 // --- Reviews -----------------------------------------------------------------------------
 
 export {
