@@ -11,6 +11,12 @@ async function findUser(id) {
     return response.data;
 }
 
+async function getAllUsers() {
+    const response = await axios.get(API_HOST + "/api/users");
+
+    return response.data;
+}
+
 async function createUser(user) {
     const response = await axios.post(API_HOST + "/api/users", user);
 
@@ -28,11 +34,9 @@ async function updateUser(id, user) {
     return response.data;
 }
 
-async function verifyUser(email, password) {
-    const response = await axios.get(API_HOST + `/api/users/verify/${email}/${password}`);
 
-    return response.data;
-}
+
+
 
 // --- Reviews -----------------------------------------------------------------------------
 
@@ -40,7 +44,8 @@ export {
     findUser,
     createUser,
     deleteUser,
-    updateUser
+    updateUser,
+    getAllUsers,
 };
 
 

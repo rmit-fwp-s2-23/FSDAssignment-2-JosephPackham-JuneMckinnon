@@ -1,7 +1,8 @@
 import React from "react";
 import '../css/signinup.css'
 import { useNavigate } from "react-router";
-import { createUser} from "../data/repository";
+import { createUser, getAllUsers, findUser} from "../data/repository";
+
 
 // TODO: add in validation for strong password - just need to do special characters, password already has validation for length and number
 
@@ -11,31 +12,45 @@ const SignUp = (props) => {
     const navigate = useNavigate(); //used to navigate to different pages
     let error;
 
+    async function checkEmailAvailability(user) {
+        try {
+          const users = await getAllUsers();
+          for (let i = 0; i < users.length; i++) {
+            if (user.email === users[i].email) {
+              return 'Email is already in use';
+            }
+          }
+          return 'Email is available';
+        } catch (error) {
+          console.error(error);
+          return 'Error checking email availability';
+        }
+      }
 
-    const validation = (user) => {
 
-        // let users = JSON.parse(localStorage.getItem('users')); //get all registered users from local storage
-        // for(let i = 0; i < users.length; i++){ //loop through all registered users
-        //     if(user.email === users[i].email){ //if email is already registered
-        //         return 'Email is already in use';
-        //     }
-        // }
+    const validation = async (user) => {
 
-        
-        // if(user.password.length < 8){ //if password is less than 8 characters
-        //     console.log(user.password);
-        //     return 'Password must be at least 8 characters long';
+        const emailAvailability = await checkEmailAvailability(user);
+        if (emailAvailability === 'Email is already in use') {
+          return emailAvailability;
+        } else if (user.name.length < 1) {
+          return 'Name cannot be empty';
+        } else if (user.email.length < 1) {
+          return 'Email cannot be empty';
+        } else if (user.password.length < 1) {
+          return 'Password cannot be empty';
+        } else if (user.password.length < 8) {
+          return 'Password must be at least 8 characters long';
+        } else if (user.password.search(/[0-9]/i) < 0) {
+          return 'Password must contain at least one number';
+        } else if (user.password.search(/[!@#$%^&*]/i) < 0) {
+          return 'Password must contain at least one special character';
+        } else {
+          return null;
+        }
+      };
 
-        // }
-        // else if(user.password.search(/[0-9]/i) < 0){ //if password does not contain a number
-        //     return 'Password must contain at least one number';
-        // }else if(user.password.search(/[!@#$%^&*]/i) < 0){ //if password does not contain a special character
-        //     return 'Password must contain at least one special character';
-        // }
-        
-    };
-
-    const handleSubmit = (e) => {  //when form is submitted, run handleSubmit function
+    const handleSubmit = async (e) => {  //when form is submitted, run handleSubmit function
         e.preventDefault(); //prevents page from refreshing
         let date = new Date(); //defined here so i can use the .tolocaledatesting function later
         const user = { //create user object with name, email, password and date joined
@@ -46,20 +61,22 @@ const SignUp = (props) => {
 
         }
 
-        error = validation(user); //validate user data
+        error = await validation(user); //validate user data
 
-        if(error){ //if there is an error, display error message
+        if(error != null){ //if there is an error, display error message
             console.log(error);
             let errormsg = document.getElementById('error');
             errormsg.innerHTML = error;
             return;
         }
         else{
-            createUser(user).then((response) => {
-                localStorage.setItem('loggedUser' , JSON.stringify(user)); //set loggedUser in local storage to new user
-                props.setUser({name: user.name, password: user.password, email: user.email, joined: user.joined }); //set user state to new user
-                navigate('/');
-            })
+            const createdUser = await createUser(user);
+            localStorage.setItem('loggedUser' , JSON.stringify(createdUser)); //set loggedUser in local storage to new user
+            props.setUser({name: user.name, password: user.password, email: user.email, joined: user.joined }); //set user state to new user
+            navigate('/');
+            // createUser(user).then((response) => {
+            //     
+            // })
 
             
             
