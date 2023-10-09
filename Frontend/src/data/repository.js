@@ -25,7 +25,7 @@ async function createUser(user) {
 
 async function deleteUser(id) {
     const response = await axios.delete(API_HOST + `/api/users/${id}`); 
-    return response.data;
+    return response.status;
 }
     
 async function updateUser(id, user) {
