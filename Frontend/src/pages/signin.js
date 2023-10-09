@@ -20,6 +20,17 @@ const SignIn = (props) => {
         }
 
         const user = await verifyUser(uservalues.email, uservalues.password); //verify user details
+        console.log(user);
+
+        //log user in if user details are correct
+        if (user !== null) {
+            localStorage.setItem('loggedUser', JSON.stringify(user)) //set loggedUser in local storage to logged in user
+            props.setUser({name: user.name, email: user.email, password: user.password }); //set user state to logged in user
+            alert('Logged in successfully! Welcome back ' + user.name)
+            navigate('/'); //navigate to landing page
+        } else {
+            document.getElementById('error').innerText = "Email or Password is incorrect";
+        }
 
 
 

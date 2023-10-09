@@ -24,10 +24,11 @@ exports.oneByEmail = async (req, res) => {
 
 // Select one user from the database if username and password are a match.
 exports.login = async (req, res) => {
-  const user = await db.user.findByPk(req.query.username);
-
+  const user = await db.user.findByPk(req.query.email);
+  
   if(user === null || await argon2.verify(user.password_hash, req.query.password) === false)
     // Login failed.
+  
     res.json(null);
   else
     res.json(user);
