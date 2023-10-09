@@ -16,26 +16,22 @@ const SignIn = (props) => {
         }
         //generate all the users that have already signed up
         const users = JSON.parse(localStorage.getItem('users'))
-        //loop through array of users to check if users details are correct, then log in
-        for (let i = 0; i < users.length; i++){
-            if (user.email === users[i].email && user.password === users[i].password){ //if user email and password match a user in the array
-                localStorage.setItem('loggedUser', JSON.stringify(users[i])) //set loggedUser in local storage to logged in user
-                props.setUser({name: users[i].name, email: users[i].email, password: users[i].password }); //set user state to logged in user
-                alert('Logged in successfully! Welcome back ' + users[i].name)
-                navigate('/userprofile'); //navigate to landing page
-                break;
-                
-            //if user email and password don't match a user in the array
-            } else {
-                document.getElementById('error').innerText = "Email or Password is incorrect";
+        if (users !== null) {
+            //loop through array of users to check if users details are correct, then log in
+            for (let i = 0; i < users.length; i++){
+                if (user.email === users[i].email && user.password === users[i].password){ //if user email and password match a user in the array
+                    localStorage.setItem('loggedUser', JSON.stringify(users[i])) //set loggedUser in local storage to logged in user
+                    props.setUser({name: users[i].name, email: users[i].email, password: users[i].password }); //set user state to logged in user
+                    alert('Logged in successfully! Welcome back ' + users[i].name)
+                    navigate('/userprofile'); //navigate to landing page
+                    break;
 
+                //if user email and password don't match a user in the array
+                } else {
+                    document.getElementById('error').innerText = "Email or Password is incorrect";
+                }   
             }
-            
-                
         }
-        
-
-
 
     }
 
