@@ -39,8 +39,8 @@ async function createUser(user) {
     return response.data;
 }
 
-async function deleteUser(id) {
-    const response = await axios.delete(API_HOST + `/api/users/${id}`); 
+async function deleteUser(email) {
+    const response = await axios.delete(API_HOST + `/api/users/${email}`); 
     return response.data;
 }
     

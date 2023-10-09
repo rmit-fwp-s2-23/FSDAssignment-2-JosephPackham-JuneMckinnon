@@ -8,6 +8,9 @@ module.exports = (express, app) => {
   // Select a single user with id.
   router.get("/select/:id", controller.one);
 
+  //select user by email
+  router.get("/select/:email", controller.oneByEmail);
+
 
   //select user from database if email and password match
   router.get("/login", controller.login);
@@ -15,6 +18,11 @@ module.exports = (express, app) => {
   // Create a new user.
   router.post("/", controller.create);
 
+  //delete user from database
+  router.delete("/:email", controller.delete);
+
   // Add routes to server.
   app.use("/api/users", router);
+
+  
 };
