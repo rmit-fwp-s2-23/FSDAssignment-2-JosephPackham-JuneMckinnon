@@ -43,11 +43,20 @@ exports.create = async (req, res) => {
 
 //delete a user from the database
 exports.delete = async (req, res) => {
-  const user = await db.user.findByPk(req.params.id);
+  try {
+    const user = await db.user.findByPk(req.params.id);
 
-  await user.destroy();
+    if (!user) {
+      res.status(400).json({ error: "User not found" });
+    }
 
-  res.json(user);
+    await user.destroy();
+    res.json({ message: "User deleted successfully" });
+
+  } catch (error) {
+    console.error('Error deleting user:', error);
+    res.status(500).json({ error: "Internal server error" })
+  }
 }
 
 //update a user in the database
