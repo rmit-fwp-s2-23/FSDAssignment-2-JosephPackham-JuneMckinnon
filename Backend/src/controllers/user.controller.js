@@ -53,13 +53,20 @@ exports.delete = async (req, res) => {
 //update a user in the database
 exports.update = async (req, res) => {
   const user = await db.user.findByPk(req.params.id);
+
+  if (await argon2.verify(user.password_hash, req.body.password) === false) {
+    res.status(401).json({ message: "Incorrect password" });
+  }
+
+  const hashed_password = await argon2.hash(req.body.password, { type: argon2.argon2id });
+
   user.name = req.body.name;
   user.email = req.body.email;
-  user.password_hash = req.body.password_hash;
+  user.password_hash = hashed_password;
 
   await user.save();
 
-  res.json(user);
+  res.status(200).json({ message: "Successfully updated details" });
 }
 
 
