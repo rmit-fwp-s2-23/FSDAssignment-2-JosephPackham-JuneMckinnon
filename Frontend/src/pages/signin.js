@@ -1,39 +1,67 @@
 import React from "react";
 import '../css/signinup.css';
 import { useNavigate } from "react-router";
+import { useState } from "react";
+import { findUserByEmail, verifyUser } from "../data/repository";
+
+
+
 
 
 
 const SignIn = (props) => {
     const navigate = useNavigate(); //used to navigate to different pages
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault(); //prevents page from refreshing
-        const user = { //create user object with email and password
+        const uservalues = { //create user object with email and password
             email: e.target[0].value,
             password: e.target[1].value
-
-        }
-        //generate all the users that have already signed up
-        const users = JSON.parse(localStorage.getItem('users'))
-        if (users !== null) {
-            //loop through array of users to check if users details are correct, then log in
-            for (let i = 0; i < users.length; i++){
-                if (user.email === users[i].email && user.password === users[i].password){ //if user email and password match a user in the array
-                    localStorage.setItem('loggedUser', JSON.stringify(users[i])) //set loggedUser in local storage to logged in user
-                    props.setUser({name: users[i].name, email: users[i].email, password: users[i].password }); //set user state to logged in user
-                    alert('Logged in successfully! Welcome back ' + users[i].name)
-                    navigate('/userprofile'); //navigate to landing page
-                    break;
-
-                //if user email and password don't match a user in the array
-                } else {
-                    document.getElementById('error').innerText = "Email or Password is incorrect";
-                }   
-            }
         }
 
+        const user = await verifyUser(uservalues.email, uservalues.password); //verify user details
+        console.log(user);
+
+        //log user in if user details are correct
+        if (user !== null) {
+            localStorage.setItem('loggedUser', JSON.stringify(user)) //set loggedUser in local storage to logged in user
+            props.setUser({name: user.name, email: user.email, password: user.password }); //set user state to logged in user
+            alert('Logged in successfully! Welcome back ' + user.name)
+            navigate('/'); //navigate to landing page
+        } else {
+            document.getElementById('error').innerText = "Email or Password is incorrect";
+        }
+
+
+
+      
+        
     }
+
+        //generate all the users that have already signed up
+        // const users = JSON.parse(localStorage.getItem('users'))
+        // //loop through array of users to check if users details are correct, then log in
+        // for (let i = 0; i < users.length; i++){
+        //     if (user.email === users[i].email && user.password === users[i].password){ //if user email and password match a user in the array
+        //         localStorage.setItem('loggedUser', JSON.stringify(users[i])) //set loggedUser in local storage to logged in user
+        //         props.setUser({name: users[i].name, email: users[i].email, password: users[i].password }); //set user state to logged in user
+        //         alert('Logged in successfully! Welcome back ' + users[i].name)
+        //         navigate('/userprofile'); //navigate to landing page
+        //         break;
+                
+        //     //if user email and password don't match a user in the array
+        //     } else {
+        //         document.getElementById('error').innerText = "Email or Password is incorrect";
+
+        //     }
+            
+                
+        
+        
+
+
+
+  
 
 
 

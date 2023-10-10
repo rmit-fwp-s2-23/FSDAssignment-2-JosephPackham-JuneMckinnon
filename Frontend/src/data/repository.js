@@ -11,6 +11,22 @@ async function findUser(id) {
     return response.data;
 }
 
+//verify user
+async function verifyUser(email, password) {
+    const response = await axios.get(API_HOST + "/api/users/login", { params: { email, password } });
+    const user = response.data;
+    
+    return user;
+  }
+
+
+//get user by email
+async function findUserByEmail(email) {
+    const response = await axios.get(API_HOST + `/api/users/select/${email}`);
+
+    return response.data;
+}
+
 async function getAllUsers() {
     const response = await axios.get(API_HOST + "/api/users");
 
@@ -46,6 +62,8 @@ export {
     deleteUser,
     updateUser,
     getAllUsers,
+    findUserByEmail,
+    verifyUser
 };
 
 
