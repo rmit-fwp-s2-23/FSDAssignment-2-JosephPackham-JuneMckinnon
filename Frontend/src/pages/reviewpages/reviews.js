@@ -17,6 +17,7 @@ const Reviews = (props) => {
         const getReviews = async () => {
             const reviews = await getReviewsByMovie(props.movie);
             setReviews(reviews);
+            console.log(reviews);
         }
         getReviews();
     }, [props.movie])
@@ -85,6 +86,7 @@ const Reviews = (props) => {
 
     const handleSubmit = async (e) => {
         let date = new Date();
+        console.log(date.toLocaleDateString());
         const review = {
             movie: props.movie,
             author_name: props.user.name,
@@ -172,7 +174,8 @@ const Reviews = (props) => {
                     <div className = 'review-container'>
                     {reviews.map((review) => (
                         <div className='review'>
-                            <p className='name'> {review.author_name} - {review.review_date}</p>
+                            <p className='name'> {review.author_name}</p>
+                            <p className='date'> {review.review_date.split("T")[0]}</p>
                             <hr></hr>
                             <p><b>Rating:</b> {review.review_rating}/5</p>
                             <p className='reviewcontent'> {review.review_text} </p>
