@@ -1,6 +1,7 @@
 import React from "react";
 import '../css/userprofile.css'
-import { useNavigate } from "react-router";
+import { useNavigate, } from "react-router";
+import { updateUser } from "../data/repository";
 
 
 const EditProfile = (props) => {
@@ -11,37 +12,31 @@ const EditProfile = (props) => {
         navigate('/userprofile');
     }
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault() //prevents page from refreshing
-        const old_password = e.target[2].value; //get old password from form
+
+        // create variables
         const error = document.getElementById('error'); //get error element
-        
-        if(props.user.password === old_password){ //if old password is correct
-            const newname = e.target[0].value; //get new name from form
-            const newpassword = e.target[1].value; //get new password from form
-            let users = JSON.parse(localStorage.getItem('users')); //get all registered users from local storage
-
-            for(let i = 0; i < users.length; i++){ //loop through all registered users
-                if(users[i].username === props.user.username){ //if user is found
-                    users[i].name = newname; //update name
-                    users[i].password = newpassword; //update password
-                    localStorage.setItem('users', JSON.stringify(users)); //update local storage
-                    props.setUser(users[i]); //update user state
-                }
-            }
-            
-            localStorage.setItem('users', JSON.stringify(users)); //update local storage
-            alert('Profile Updated')
-            navigate('/userprofile');
-
+        const email = JSON.parse(localStorage.getItem("loggedUser")).email;
+        const updateData = { // this isn't a user but rather the information to update & the current password
+            name: e.target[0].value,
+            new_password: e.target[1].value,
+            old_password: e.target[2].value
         }
-        else{
-            error.innerHTML = 'Incorrect Password';}
-    
+
+        // attempt to update the details and return the reponse status
+        const update_status = await updateUser(email, updateData);
+
+        // check the HTTP status
+        if (update_status === 401) { // HTTP 401 unauthorised
+            error.value("Incorrect Password")
+        } else if (update_status === 200) { // HTTP 200 ok
+            alert('Profile Updated!')
+            navigate('/userprofile');
+        } else { // I don't know how you got here
+            console.error("unexpected status:", update_status);
+        }
     }
-
-
-
 
     return (
         <div className = "page">

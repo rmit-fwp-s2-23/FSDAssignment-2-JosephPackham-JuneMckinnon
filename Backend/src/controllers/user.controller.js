@@ -51,23 +51,45 @@ exports.create = async (req, res) => {
 
 //delete a user from the database
 exports.delete = async (req, res) => {
-  const user = await db.user.findByPk(req.params.id);
+  try {
+    const user = await db.user.findByPk(req.params.id);
 
-  await user.destroy();
+    if (!user) {
+      res.status(400).json({ error: "User not found" });
+    }
 
-  res.json(user);
+    await user.destroy();
+    res.status(200).json({ message: "User deleted successfully" });
+
+  } catch (error) {
+    console.error('Error deleting user:', error);
+    res.status(500).json({ error: "Internal server error" })
+  }
 }
 
 //update a user in the database
 exports.update = async (req, res) => {
-  const user = await db.user.findByPk(req.params.id);
-  user.name = req.body.name;
-  user.email = req.body.email;
-  user.password_hash = req.body.password_hash;
+  // fetch user from db
+  const user = await db.user.findByPk(req.body.email);
+  console.log(user, req.body.email);
 
-  await user.save();
+  // check if the correct password was given
+  if (await argon2.verify(user.password_hash, req.body.old_password) === false) {
+    res.status(401).json({ message: "Incorrect password" });
+  } else {
+    // create new hashed password
+    const hashed_password = await argon2.hash(req.body.new_password, { type: argon2.argon2id });
 
-  res.json(user);
+    // update user details
+    user.name = req.body.name;
+    user.password_hash = hashed_password;
+
+    // save user to db
+    await user.save();
+
+    // return HTTP 200 ok response
+    res.status(200).json({ message: "Successfully updated details" });
+  }
 }
 
 

@@ -41,13 +41,18 @@ async function createUser(user) {
 
 async function deleteUser(id) {
     const response = await axios.delete(API_HOST + `/api/users/${id}`); 
-    return response.data;
+    return response.status;
 }
     
-async function updateUser(id, user) {
-    const response = await axios.put(API_HOST + `/api/users/${id}`, user);
-
-    return response.data;
+async function updateUser(email, updateData) {
+    const response = await axios.put(API_HOST + `/api/users/update`, {
+        name: updateData.name,
+        email: email,
+        old_password: updateData.old_password,
+        new_password: updateData.new_password
+    });
+    console.log(response);
+    return response.status;
 }
 
 
