@@ -10,8 +10,10 @@ const Reviews = (props) => {
     // let reviews = JSON.parse(localStorage.getItem('barbieReview'));
     // let error;
     // const [Avgrating, setAvgrating] = useState(0);
-    let movie = props.movie;
-    console.log(movie);
+    
+
+    
+    
 
     // useEffect(() => {
     //     let sum = 0;
@@ -71,7 +73,10 @@ const Reviews = (props) => {
 
 
     const handleSubmit = (e) => {
-        console.log(movie);
+        e.preventDefault();
+        
+        // 
+        
         
     //     let date = new Date();
         
@@ -107,11 +112,11 @@ const Reviews = (props) => {
 
 
     return (
-        <div classname = 'page'>
+        <div className = 'page'>
             <div className = "movie-background">
                 <div className = "form-background" id = "form-bkg">
                     <div className = "review-header" id = "header">
-                        {movie} Reviews
+                        Reviews of {props.movie}
                     </div>
                     <form onSubmit = { e => handleSubmit(e)}>
                         <div className = "review-form">

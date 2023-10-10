@@ -17,39 +17,56 @@ const LandingPage = (props) => {
     const navigate = useNavigate();
 
     const [imgSrc, setImgSrc] = useState(barbie);
-    const [movie, setMovie] = useState("barbie");
+    const movie = "Barbie"
+    
+    
+    const { setMovie } = props;
+
+    useEffect(() => {
+      setMovie(movie);
+    }, [movie, setMovie]);
+    
+   
     const changeImg = (movie) => {
         switch (movie) {
             case "barbie":
                 setImgSrc(barbie);
+                props.setMovie("Barbie");
+                
                 document.getElementById('movie-title').innerText = "Barbie (2023)";
                 break;
             case "oppenheimer":
                 setImgSrc(oppenheimer);
+                props.setMovie("Oppenheimer");
+                
                 document.getElementById('movie-title').innerText = "Oppenheimer";
                 break;
             case "avengers":
                 setImgSrc(avengers);
+                props.setMovie("Avengers");
+                
                 document.getElementById('movie-title').innerText = "Avengers";
                 break;
             case "lotr":
                 setImgSrc(lotr);
+                props.setMovie("LOTR");
+                
                 document.getElementById('movie-title').innerText = "LOTR";
                 break;
             default:
                 setImgSrc(barbie);
+                props.setMovie("Barbie");
                 document.getElementById('movie-title').innerText = "Barbie (2023)";
                 break;
         }
     }
 
     const handleReview = () => {
-        const cur_movie = document.getElementById('movie-title').innerText;
-        console.log(cur_movie);
-        props.setMovie(cur_movie);
+        localStorage.setItem('movie' , props.movie);
+        // props.setMovie(props.movie);
+        // console.log('props movie handleReview: ' , props.movie);
         navigate('/reviews');
-        }
-    
+    }
 
 
     return (

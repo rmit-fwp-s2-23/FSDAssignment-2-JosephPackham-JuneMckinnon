@@ -24,11 +24,10 @@ const Routing = (props) => {
             <Route path  = "/avengersreview" element = {<AvengersReviews user = {props.user} setUser = {props.setUser}/>}/> {/* if path is /review, render Review component */}
             <Route path  = "/barbiereview" element = {<Barbiereviews user = {props.user} setUser = {props.setUser}/>}/> {/* if path is /review, render Review component */}
             <Route path  = "/lotrreview" element = {<LotrReviews user = {props.user} setUser = {props.setUser}/>}/> {/* if path is /review, render Review component */}
-            <Route path  = "/reviews" element = {<Reviews user = {props.user} setUser = {props.setUser}/>} movie = {props.movie} setMovie = { props.setMovie}/> {/* if path is /review, render Review component */}
+            <Route path  = "/reviews" element = {<Reviews user = {props.user} setUser = {props.setUser} movie = {props.movie} setMovie = {props.setMovie}/>}/> {/* if path is /review, render Review component */}
         </Routes>
         );
     };
 
 export default Routing;
-    
     
