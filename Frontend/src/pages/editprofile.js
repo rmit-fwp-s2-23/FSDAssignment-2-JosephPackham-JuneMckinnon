@@ -17,15 +17,15 @@ const EditProfile = (props) => {
 
         // create variables
         const error = document.getElementById('error'); //get error element
-        const id = 1; // this needs reviewing, either get it from cookie or don't use ID as PK
-        const user = { // this isn't a user but rather the information to update & the current password
+        const email = JSON.parse(localStorage.getItem("loggedUser")).email;
+        const updateData = { // this isn't a user but rather the information to update & the current password
             name: e.target[0].value,
             new_password: e.target[1].value,
             old_password: e.target[2].value
         }
 
         // attempt to update the details and return the reponse status
-        const update_status = await updateUser(id, user);
+        const update_status = await updateUser(email, updateData);
 
         // check the HTTP status
         if (update_status === 401) { // HTTP 401 unauthorised
