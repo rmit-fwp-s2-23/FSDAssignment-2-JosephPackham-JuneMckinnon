@@ -55,6 +55,23 @@ async function updateUser(id, user) {
 
 
 // --- Reviews -----------------------------------------------------------------------------
+//create a review
+async function createReview(review) {
+    const response = await axios.post(API_HOST + "/api/reviews", review);
+
+    return response.data;
+}
+
+//get reviews by movie name
+async function getReviewsByMovie(movie) {
+    const response = await axios.get(API_HOST + `/api/reviews/${movie}`);
+
+    return response.data;
+}
+
+
+
+
 
 export {
     findUser,
@@ -63,7 +80,9 @@ export {
     updateUser,
     getAllUsers,
     findUserByEmail,
-    verifyUser
+    verifyUser,
+    createReview,
+    getReviewsByMovie,
 };
 
 

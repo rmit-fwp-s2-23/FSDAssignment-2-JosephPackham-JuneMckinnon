@@ -2,15 +2,25 @@ import React from 'react';
 import '../../css/reviews.css';
 import { useState } from 'react';
 import { useEffect } from 'react';
+import { createReview, getReviewsByMovie } from '../../data/repository';
 
 
- //TODO: if time: make there only be 1 review page, at this time, hard code each movie
 
 const Reviews = (props) => {
+    
     // let reviews = JSON.parse(localStorage.getItem('barbieReview'));
     // let error;
     // const [Avgrating, setAvgrating] = useState(0);
-    
+
+    const [reviews, setReviews] = useState([]);
+    useEffect(() => {
+        const getReviews = async () => {
+            const reviews = await getReviewsByMovie(props.movie);
+            setReviews(reviews);
+        }
+        getReviews();
+    }, [props.movie])
+
 
     
     
@@ -34,15 +44,16 @@ const Reviews = (props) => {
     //     setAvgrating(0);
     // }
     
-    
+    let error;
 
     const validate = (review) => {
-        
-        if (review.reviewcontent.length > 250) {
-            return "Review must be less than 250 characters long"
-        } else {
-            return;
+        if (review.review_text.length > 600) {
+            return 'Review must less than 600 characters long';
+        } else{
+            return null;
         }
+        
+        
         
     }
 
@@ -72,9 +83,32 @@ const Reviews = (props) => {
 
 
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
+    const handleSubmit = async (e) => {
+        let date = new Date();
+        const review = {
+            movie: props.movie,
+            author_name: props.user.name,
+            author_email: props.user.email,
+            review_rating: e.target.rating.value,
+            review_text: e.target.reviewcontent.value,
+            review_date: date.toLocaleDateString(),
+        }
+
+        error = await validate(review);
+        if(error != null){ //if there is an error, display error message
+            e.preventDefault();
+            console.log(error);
+            let errormsg = document.getElementById('error');
+            errormsg.innerHTML = error;
+            return;
+        } else{
+            await createReview(review);
+        }
         
+        
+
+
+
         // 
         
         
@@ -135,23 +169,23 @@ const Reviews = (props) => {
                     </form>
                 </div>
                 <div className = "form-background" id = "review-bkg">
-                    {/* <div className = "review-container">
-                        {reviews&&reviews.map((item, index) => {
-                            return (
-                                <div className='review'>
-                                    <p key={index} className='name'> {item.user} - {item.reviewdate}</p>
-                                    <hr></hr> 
-                                    <p key={index}><b>Rating:</b> {item.rating}/5</p>
-                                    <p key={index} className='reviewcontent'> {item.reviewcontent} </p>
-                                    <button id='review-button' onClick={handleEdit(item)}>Edit</button>
-                                    <button id='review-button' onClick={handleDelete(item)}>Delete</button>
-                                </div>
-                            )
-                        }
-                        )}
-                    </div> */}
+                    <div className = 'review-container'>
+                    {reviews.map((review) => (
+                        <div className='review'>
+                            <p className='name'> {review.author_name} - {review.review_date}</p>
+                            <hr></hr>
+                            <p><b>Rating:</b> {review.review_rating}/5</p>
+                            <p className='reviewcontent'> {review.review_text} </p>
+                            <button id='review-button' onClick={handleEdit(review)}>Edit</button>
+                            <button id='review-button' onClick={handleDelete(review)}>Delete</button>
+                        </div>
+
+
+                    ))}
+                        
                 </div>
             </div>
+        </div>
         </div>
     );
 }

@@ -69,8 +69,11 @@
 .review-container {
     display: grid;
     grid-template-columns: auto auto auto auto;
-    gap: 1rem;
+    gap: 3rem;
     overflow-y: scroll;
+    padding: 1rem;
+    max-height: 50vh;
+
 }
 
 .review {
@@ -79,8 +82,16 @@
     border-radius: 0.5rem;
     box-shadow: 0 0 1rem rgb(10, 10, 10);
     width: auto;
+    
+    
+
+    
+    
+
 }
 
 #review-button {
     box-shadow: none;
+    
+
 }
