@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
 import '../css/userprofile.css'
 import { useNavigate } from "react-router";
-import { findUser, deleteUser } from "../data/repository";
+import { findUser, deleteUser, findUserByEmail } from "../data/repository";
 
 //TODO: styling
 //TODO: add in confirmation fo deletion
@@ -13,9 +13,10 @@ const UserProfile = (props) => {
     const [user, setUser] = useState({});
 
     useEffect(() => {
-        const getUser = async (id) => {
+        const getUser = async () => {
             try {
-                const fetchedUser = await findUser(id);
+                const email = JSON.parse(localStorage.getItem("loggedUser")).email;
+                const fetchedUser = await findUserByEmail(email);
                 setUser(fetchedUser);
             } catch {
                 console.log("error fetching user, using test user instead")
@@ -28,7 +29,7 @@ const UserProfile = (props) => {
             }
         }
 
-        getUser(1);
+        getUser();
     }, [])
 
     const navigate = useNavigate(); //used to navigate to different pages
