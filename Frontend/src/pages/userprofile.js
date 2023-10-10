@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
 import '../css/userprofile.css'
-import { useNavigate } from "react-router";
+import { useNavigate } from "react-router-dom";
 import { findUser, deleteUser, findUserByEmail } from "../data/repository";
 
 //TODO: styling
