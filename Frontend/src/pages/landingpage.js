@@ -17,6 +17,7 @@ const LandingPage = (props) => {
     const navigate = useNavigate();
 
     const [imgSrc, setImgSrc] = useState(barbie);
+    const [movie, setMovie] = useState("barbie");
     const changeImg = (movie) => {
         switch (movie) {
             case "barbie":
@@ -37,7 +38,7 @@ const LandingPage = (props) => {
                 break;
             default:
                 setImgSrc(barbie);
-                document.getElementById('movie-title').innerText = "Barbie";
+                document.getElementById('movie-title').innerText = "Barbie (2023)";
                 break;
         }
     }
@@ -45,23 +46,10 @@ const LandingPage = (props) => {
     const handleReview = () => {
         const cur_movie = document.getElementById('movie-title').innerText;
         console.log(cur_movie);
-        switch (cur_movie) {
-            case 'Barbie':
-                navigate('/barbiereview');
-                break;
-            case 'Oppenheimer':
-                navigate('/oppenheimerreview');
-                break;
-            case 'Avengers':
-                navigate('/avengersreview');
-                break;
-            case 'LOTR':
-                navigate('/lotrreview');
-                break;
-            default:
-                navigate('/');
+        props.setMovie(cur_movie);
+        navigate('/reviews');
         }
-    }
+    
 
 
     return (

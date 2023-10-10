@@ -2,14 +2,16 @@ import React from 'react';
 import '../../css/reviews.css';
 import { useState } from 'react';
 import { useEffect } from 'react';
- //Barbie's review
+
 
  //TODO: if time: make there only be 1 review page, at this time, hard code each movie
 
-const BarbieReviews = (props) => {
+const Reviews = (props) => {
     // let reviews = JSON.parse(localStorage.getItem('barbieReview'));
     // let error;
     // const [Avgrating, setAvgrating] = useState(0);
+    let movie = props.movie;
+    console.log(movie);
 
     // useEffect(() => {
     //     let sum = 0;
@@ -69,6 +71,7 @@ const BarbieReviews = (props) => {
 
 
     const handleSubmit = (e) => {
+        console.log(movie);
         
     //     let date = new Date();
         
@@ -108,7 +111,7 @@ const BarbieReviews = (props) => {
             <div className = "movie-background">
                 <div className = "form-background" id = "form-bkg">
                     <div className = "review-header" id = "header">
-                        Barbie's Reviews
+                        {movie} Reviews
                     </div>
                     <form onSubmit = { e => handleSubmit(e)}>
                         <div className = "review-form">
@@ -148,4 +151,4 @@ const BarbieReviews = (props) => {
     );
 }
 
-export default BarbieReviews;
+export default Reviews;
