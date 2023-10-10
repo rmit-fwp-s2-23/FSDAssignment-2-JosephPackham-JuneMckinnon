@@ -67,6 +67,19 @@ async function getReviewsByMovie(movie) {
     const response = await axios.get(API_HOST + `/api/reviews/${movie}`);
 
     return response.data;
+    
+}
+
+//delete review
+async function deleteReview(review_id) {
+    const response = await axios.delete(API_HOST + `/api/reviews/${review_id}`); 
+    return response.data;
+}
+//update review
+async function updateReview(review_id, review) {
+    const response = await axios.put(API_HOST + `/api/reviews/${review_id}`, review);
+
+    return response.data;
 }
 
 
@@ -83,6 +96,8 @@ export {
     verifyUser,
     createReview,
     getReviewsByMovie,
+    deleteReview,
+    updateReview,
 };
 
 
