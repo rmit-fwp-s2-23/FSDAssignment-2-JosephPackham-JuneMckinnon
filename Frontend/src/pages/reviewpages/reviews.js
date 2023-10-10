@@ -2,15 +2,11 @@ import React from 'react';
 import '../../css/reviews.css';
 import { useState } from 'react';
 import { useEffect } from 'react';
-import { createReview, getReviewsByMovie, deleteReview } from '../../data/repository';
+import { createReview, getReviewsByMovie, deleteReview, updateReview } from '../../data/repository';
 
 
 
 const Reviews = (props) => {
-    
-    // let reviews = JSON.parse(localStorage.getItem('barbieReview'));
-    // let error;
-    // const [Avgrating, setAvgrating] = useState(0);
 
     const [reviews, setReviews] = useState([]);
     useEffect(() => {
@@ -48,9 +44,28 @@ const Reviews = (props) => {
 
             }
 
-    const handleEdit = (review_id, e) => {
-        return;
+    const handleEdit = async (review, e) => {
+        e.preventDefault();
+
+        console.log(review.author_email);
+        console.log(props.user.email);
+        if (review.author_email === props.user.email){
+            let edit = prompt('Edit your review', review.review_text);
+            if(edit === null){
+                return;
+            }
+            review.review_text = edit;
+            await updateReview(review.review_id, review);
+            window.location.reload(false);
+            
+        }
     }
+        
+
+            
+            
+
+
 
 
 
@@ -119,7 +134,7 @@ const Reviews = (props) => {
                             <hr></hr>
                             <p><b>Rating:</b> {review.review_rating}/5</p>
                             <p className='reviewcontent'> {review.review_text} </p>
-                            <button id='review-button' onClick={handleEdit(review)}>Edit</button>
+                            <button id='review-button' onClick={e => handleEdit(review, e)}>Edit</button>
                             <button id='review-button' onClick={e => handleDelete(review.review_id, e)}>Delete</button>
                         </div>
 
