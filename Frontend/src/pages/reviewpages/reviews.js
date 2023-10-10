@@ -2,7 +2,7 @@ import React from 'react';
 import '../../css/reviews.css';
 import { useState } from 'react';
 import { useEffect } from 'react';
-import { createReview, getReviewsByMovie } from '../../data/repository';
+import { createReview, getReviewsByMovie, deleteReview } from '../../data/repository';
 
 
 
@@ -22,28 +22,6 @@ const Reviews = (props) => {
         getReviews();
     }, [props.movie])
 
-
-    
-    
-
-    // useEffect(() => {
-    //     let sum = 0;
-    //     let count = 0;
-    //     if(reviews){
-    //         reviews.forEach(review => {
-    //             sum += parseInt(review.rating);
-    //             count++;
-    //         });
-    //         setAvgrating(sum/count);
-
-    //     }
-    // }, [reviews])
-    // if(reviews == null){
-    //     reviews = [
-
-    //     ];   
-    //     setAvgrating(0);
-    // }
     
     let error;
 
@@ -58,29 +36,26 @@ const Reviews = (props) => {
         
     }
 
-    const handleDelete = (review) => {
-        // if(review.user === props.user.name){
-        //     return () => {
-        //         reviews.splice(reviews.indexOf(review), 1);
-        //         localStorage.setItem('barbieReview', JSON.stringify(reviews));
-        //         window.location.reload(false);
-        //     }
-        // } 
+    const handleDelete = async (review_id, e) => {
+        e.preventDefault();
+        try {
+            await deleteReview(review_id);
+            // refresh the reviews list
+            window.location.reload();
+        } catch (error) {
+            console.error(error);
+        }
+
+            }
+
+    const handleEdit = (review_id, e) => {
+        return;
     }
 
-    const handleEdit = (review) => {
-        // if(review.user === props.user.name){
-        //     return () => {
-        //         let edit = prompt('Edit your review', review.reviewcontent);
-        //         if(edit === null){
-        //             return;
-        //         }
-        //         review.reviewcontent = edit;
-        //         localStorage.setItem('barbieReview', JSON.stringify(reviews));
-        //         window.location.reload(false);
-        //     }
-        // }
-    }
+
+
+
+
 
 
 
@@ -95,6 +70,7 @@ const Reviews = (props) => {
             review_text: e.target.reviewcontent.value,
             review_date: date.toLocaleDateString(),
         }
+    
 
         error = await validate(review);
         if(error != null){ //if there is an error, display error message
@@ -106,45 +82,9 @@ const Reviews = (props) => {
         } else{
             await createReview(review);
         }
-        
-        
-
-
-
-        // 
-        
-        
-    //     let date = new Date();
-        
-    //     const review ={
-    //         movie : 'Barbie',
-    //         user : props.user.name,
-    //         rating: e.target.rating.value,
-    //         reviewcontent: e.target.reviewcontent.value,
-    //         reviewdate: date.toLocaleDateString(),
-    //     }
-    //     error = validate(review)
-
-
-
-    //     if(error){
-    //         //if there is an error, display error message
-    //         e.preventDefault();
-    //         console.log(error);
-    //         let errormsg = document.getElementById('error');
-    //         errormsg.innerHTML = error;
-    //         return;
-        
-
-
-    //     } else {
-    //         reviews.unshift(review);
-    //         localStorage.setItem('barbieReview', JSON.stringify(reviews));
-    //         window.location.reload(false);
-            
-    // }
-
     }
+        
+        
 
 
     return (
@@ -180,7 +120,7 @@ const Reviews = (props) => {
                             <p><b>Rating:</b> {review.review_rating}/5</p>
                             <p className='reviewcontent'> {review.review_text} </p>
                             <button id='review-button' onClick={handleEdit(review)}>Edit</button>
-                            <button id='review-button' onClick={handleDelete(review)}>Delete</button>
+                            <button id='review-button' onClick={e => handleDelete(review.review_id, e)}>Delete</button>
                         </div>
 
 
@@ -192,5 +132,6 @@ const Reviews = (props) => {
         </div>
     );
 }
+
 
 export default Reviews;
