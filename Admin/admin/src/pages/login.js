@@ -1,7 +1,14 @@
-import React from 'react'; //import react to use react components
+import React from 'react';
+import { useNavigate } from "react-router-dom";
 import "../css/login.css";
 
 const Login = () => {
+
+    const navigate = useNavigate();
+    const handleClick = () => {
+        navigate('/home')
+    }
+
     return (
         <div className = "login-bkg">
             <div className = "login-form">
@@ -13,7 +20,7 @@ const Login = () => {
                         <input id = "remember-me" type = "checkbox"></input>
                         <label for = "remember-me">Remember Me</label>
                     </div>
-                    <button className = "login-button">Login</button>
+                    <button className = "login-button" onClick = {handleClick}>Login</button>
                 </div>
             </div>
         </div>
