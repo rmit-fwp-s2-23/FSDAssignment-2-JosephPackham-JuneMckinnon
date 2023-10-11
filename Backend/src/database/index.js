@@ -13,8 +13,10 @@ db.sequelize = new Sequelize(config.DB, config.USER, config.PASSWORD, {
 
 db.user = require('./models/user.js')(db.sequelize, DataTypes);
 db.reviews = require('./models/reviews.js')(db.sequelize, DataTypes);
+db.tickets = require('./models/tickets.js')(db.sequelize, DataTypes);
 
 db.reviews.belongsTo(db.user, {foreignKey: {name: 'author_email', allowNull: false}});
+db.tickets.belongsTo(db.user, {foreignKey: {name: 'author_email', allowNull: false}});
 
 
 
@@ -38,6 +40,8 @@ async function seedData() {
   // await db.user.create({name: 'Shekhar Kalra', password_hash: hash, email:'JPackham@gmail.com', joined: '2021-04-01'});
   
   await db.reviews.create({movie: 'Movie1', author_name: 'User1', author_email: 'User@Email.com', review_rating: 5, review_text: 'SampleReview', review_date: '2023-04-01'});
+
+  await db.tickets.create({movie: 'Movie1', author_name: 'User1', author_email: 'User@Email.com', ticket_quantity: 5, ticket_session: '2023-04-01-9:30'});
 }
 
 module.exports = db;
