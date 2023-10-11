@@ -1,15 +1,12 @@
 import React, {useState} from 'react'; //import react to use react components
 import {BrowserRouter} from "react-router-dom"; //import BrowserRouter to use routing
 import AdminRouting from "./Routing/routing.js";
+import "./index.css"
 
 const App = () => {
     return (
-        //return page with header, footer and routing
         <BrowserRouter>
-        {/* use user as prop data for header and routing */}
-            <div className='page'> 
-                <AdminRouting />
-            </div>
+            <AdminRouting />
         </BrowserRouter>
     );
 };
