@@ -49,6 +49,7 @@ body {
 
 .inactive:active {
     filter:brightness(70%);
+    letter-spacing: -0.1rem;
 }
 
 .inactive {
