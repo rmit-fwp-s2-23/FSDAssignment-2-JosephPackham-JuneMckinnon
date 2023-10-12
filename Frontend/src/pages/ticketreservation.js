@@ -2,7 +2,8 @@ import React from "react";
 import { useState, useEffect } from "react";
 import '../css/signinup.css'
 import { useNavigate , useLocation} from "react-router";
-import { getSessionTimeByDay } from "../data/repository";
+import { getSessionTimeByDay, updateSessionTime, updateAvailableSeats } from "../data/repository";
+import '../css/ticketreservation.css'
 
 
 const TicketReservation = (props) => {
@@ -19,16 +20,52 @@ const TicketReservation = (props) => {
         async function fetchData() {
             const response = await getSessionTimeByDay(session_day, movie);
             setSessionTimes(response);
+            console.log(response);
         }
         fetchData();
     }, []);
+
+    //handle seat availability
+    const handleSeatAvailability = (available_seats, seats, id) => {
+        if(seats > available_seats){
+            alert("There are not enough seats available");
+        }
+        else{
+            let newAvailableSeats = available_seats - seats;
+            console.log(newAvailableSeats);
+            updateAvailableSeats(id, newAvailableSeats);
+        }
+    }
+
+    //handle reservation
+    const handleReservation = (time, available_seats,id, e) => {
+        e.preventDefault();
+        console.log("time: " + time + " available seats: " + available_seats + " id: " + id);
+        let seats = prompt("How many seats would you like to reserve?");
+        console.log(seats);
+        if(!seats){
+            alert("Please enter a number");
+        }
+        else{
+            let error = handleSeatAvailability(available_seats, seats, id);
+        }
+    }
 
     
 
 
     return (
-        <div>
+        <div className="page">
             <h1>Session times for {movie} on {session_day.replace(/-/g, '/')}</h1>
+            <div >
+                {sessionTimes.map((sessiontime) => (
+                    <div>
+                        <h3>{sessiontime.sessiontime_time}</h3>
+                        <h3>{sessiontime.sessiontime_available_seats} seats available</h3>
+                        <button onClick={(e) => handleReservation(sessiontime.sessiontime_time, sessiontime.sessiontime_available_seats, sessiontime.sessiontime_id, e)}>Reserve</button>
+                    </div>
+                ))}
+                </div>
         </div>
     );
 

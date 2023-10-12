@@ -72,3 +72,13 @@ exports.create = async (req, res) => {
 
   res.json(sessiontimes);
 };
+
+//update available seats
+exports.updateAvailableSeats = async (req, res) => {
+  const sessiontimes = await db.sessiontimes.findByPk(req.params.id);
+  sessiontimes.sessiontime_available_seats = req.body.sessiontime_available_seats;
+
+  await sessiontimes.save();
+
+  res.json(sessiontimes);
+}

@@ -165,6 +165,12 @@ async function getSessionTimeByDay(sessiontime_day, sessiontime_movie) {
 
     return response.data;
 }
+//update available seats
+async function updateAvailableSeats(sessiontime_id, sessiontime_available_seats) {
+    const response = await axios.put(API_HOST + `/api/sessiontimes/${sessiontime_id}/${sessiontime_available_seats}`);
+
+    return response.data;
+}
 
 // --- Tickets ----------------------------------------------------------------------------------
 // get all tickets
@@ -246,7 +252,8 @@ export {
     getTicketByEmail,
     createTicket,
     deleteTicket,
-    updateTicket
+    updateTicket,
+    updateAvailableSeats
 
 };
 
