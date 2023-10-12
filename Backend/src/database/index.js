@@ -14,6 +14,8 @@ db.sequelize = new Sequelize(config.DB, config.USER, config.PASSWORD, {
 db.user = require('./models/user.js')(db.sequelize, DataTypes);
 db.reviews = require('./models/reviews.js')(db.sequelize, DataTypes);
 db.tickets = require('./models/tickets.js')(db.sequelize, DataTypes);
+db.movies = require('./models/movies.js')(db.sequelize, DataTypes);
+db.sessiontimes = require('./models/sessiontimes.js')(db.sequelize, DataTypes);
 
 db.reviews.belongsTo(db.user, { foreignKey: { name: 'author_email', allowNull: false } });
 db.tickets.belongsTo(db.user, { foreignKey: { name: 'author_email', allowNull: false } });
