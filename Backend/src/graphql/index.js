@@ -1,5 +1,6 @@
 const { buildSchema } = require("graphql");
 const db = require("../database");
+const argon2 = require("argon2");
 
 const graphql = { };
 
@@ -34,7 +35,13 @@ graphql.schema = buildSchema(`
 	type Mutation {
 		create_user(input: UserInput): User,
 		update_user(input: UserInput): User,
-		delete_user(email: String): Boolean
+		delete_user(email: String): Boolean,
+		verify_user(email: String, password: String): AuthResponse
+	}
+
+	type AuthResponse {
+		success: Boolean,
+		message: String
 	}
 `);
 
@@ -79,6 +86,27 @@ graphql.root = {
 		await user.destroy();
 
 		return true;
+	},
+	verify_user: async (args) => {
+		const user = await db.user.findByPk(args.email);
+  
+		if(!user) {
+			return {
+				success: false,
+				message: "User not found"
+			}
+		} else if (await argon2.verify(user.password_hash, args.password) === false) {
+			return {
+				success: false,
+				message: "Incorrect password"
+			}
+		} else {
+			return {
+				success: true,
+				message: "Login Success"
+			}
+		}
+
 	}
 };
 

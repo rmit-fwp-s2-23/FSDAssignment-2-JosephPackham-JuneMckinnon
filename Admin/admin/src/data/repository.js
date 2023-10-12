@@ -19,6 +19,24 @@ async function getUsers() {
     return data.all_users;
 }
 
+async function loginUser(email, password) {
+    const mutation = gql`
+        mutation VerifyUser($email: String, $password: String) {
+            verify_user(email: $email, password: $password) {
+                success
+                message
+            }
+        }
+    `;
+
+    const data = await request(GRAPH_QL_URL, mutation, {
+        email: email,
+        password: password
+    });
+
+    return data.verify_user;
+}
+
 export {
-    getUsers
+    getUsers, loginUser
 }

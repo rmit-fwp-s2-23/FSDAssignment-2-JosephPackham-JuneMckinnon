@@ -27,6 +27,7 @@ sequelize.define("user", {
     allowNull: false
   },
   admin: {
-    type: DataTypes.BOOLEAN
+    type: DataTypes.BOOLEAN,
+    allowNull: false
   }
 });
