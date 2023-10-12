@@ -10,7 +10,7 @@ exports.all = async (req, res) => {
 exports.one = async (req, res) => {
   const sessiontimes = await db.sessiontimes.findAll({
     where: {
-      movie: req.params.sessiontime_movie
+      sessiontime_movie: req.params.sessiontime_movie
     }
   });
 

@@ -58,7 +58,7 @@ async function seedData() {
 };
 //This is sample data for the assignment, This was the data hardcoded in assignment one
 async function seedAssignmentData() {
-    const count = await db.movies.count();
+    const count = await db.sessiontimes.count();
     if(count > 1) {
       return;
     }

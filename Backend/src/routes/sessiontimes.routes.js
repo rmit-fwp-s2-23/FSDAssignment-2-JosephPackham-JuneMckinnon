@@ -5,6 +5,7 @@ module.exports = (express, app) => {
     // Select all sessiontimes
     router.get("/", controller.all);
 
+
     // Create a new sessiontime
     router.post("/", controller.create);
 

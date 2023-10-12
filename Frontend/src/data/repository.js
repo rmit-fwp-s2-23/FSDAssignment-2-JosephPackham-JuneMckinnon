@@ -132,8 +132,8 @@ async function getAllSessionTimes() {
 }
 
 // get session time by movie name
-async function getSessionTime(movie) {
-    const response = await axios.get(API_HOST + `/api/sessiontimes/${movie}`);
+async function getSessionTime(sessiontime_movie) {
+    const response = await axios.get(API_HOST + `/api/sessiontimes/${sessiontime_movie}`);
 
     return response.data;
 }
@@ -160,8 +160,8 @@ async function updateSessionTime(sessiontime_id, sessiontime) {
 }
 
 // get session times by day and movie name
-async function getSessionTimeByDay(day, movie) {
-    const response = await axios.get(API_HOST + `/api/sessiontimes/${movie}/${day}`);
+async function getSessionTimeByDay(sessiontime_day, sessiontime_movie) {
+    const response = await axios.get(API_HOST + `/api/sessiontimes/${sessiontime_movie}/${sessiontime_day}`);
 
     return response.data;
 }
@@ -247,7 +247,7 @@ export {
     createTicket,
     deleteTicket,
     updateTicket
-    
+
 };
 
 
