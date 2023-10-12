@@ -14,9 +14,13 @@ db.sequelize = new Sequelize(config.DB, config.USER, config.PASSWORD, {
 db.user = require('./models/user.js')(db.sequelize, DataTypes);
 db.reviews = require('./models/reviews.js')(db.sequelize, DataTypes);
 db.tickets = require('./models/tickets.js')(db.sequelize, DataTypes);
+db.movies = require('./models/movies.js')(db.sequelize, DataTypes);
+db.sessiontimes = require('./models/sessiontimes.js')(db.sequelize, DataTypes);
 
 db.reviews.belongsTo(db.user, { foreignKey: { name: 'author_email', allowNull: false } });
 db.tickets.belongsTo(db.user, { foreignKey: { name: 'author_email', allowNull: false } });
+db.tickets.belongsTo(db.sessiontimes, { foreignKey: { name: 'ticket_session', allowNull: false } });
+db.sessiontimes.belongsTo(db.movies, { foreignKey: { name: 'sessiontime_movie', allowNull: false } });
 
 
 
@@ -41,7 +45,15 @@ async function seedData() {
   
   await db.reviews.create({movie: 'Movie1', author_name: 'User1', author_email: 'User@Email.com', review_rating: 5, review_text: 'SampleReview', review_date: '2023-04-01'});
 
+   await db.movies.create({movie_name: 'Movie1', movie_image: 'Movie1.jpg'});
+   
+   await db.sessiontimes.create({sessiontime_movie: 'Movie1', sessiontime_time: '2023-04-01-9:30', sessiontime_available_seats: 5,})
+  
   await db.tickets.create({movie: 'Movie1', author_name: 'User1', author_email: 'User@Email.com', ticket_quantity: 5, ticket_session: '2023-04-01-9:30'});
+
+ 
+
+  
 }
 
 module.exports = db;

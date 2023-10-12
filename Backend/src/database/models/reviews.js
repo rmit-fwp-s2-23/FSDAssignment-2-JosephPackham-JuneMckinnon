@@ -6,8 +6,8 @@ module.exports = (sequelize, DataTypes) =>
       primaryKey: true
     },
     movie: {
-      type: DataTypes.STRING(32),
-      allowNull: false
+      type: DataTypes.STRING(100),
+      allowNull: false,
 
       
     },
