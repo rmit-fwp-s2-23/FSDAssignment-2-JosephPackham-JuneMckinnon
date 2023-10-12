@@ -18,17 +18,12 @@ const Dashboard = () => {
                 <div className = "dash-toggles">
                     <div id = "dash-toggle" className = {tab === "movies" ? 'active' : tab === "edit" ? 'active' : 'inactive'} onClick = {() => tabSwitch("movies")}>Movies</div>
                     <div id = "dash-toggle" className = {tab === "users" ? 'active' : 'inactive'} onClick = {() => tabSwitch("users")}>Users</div>
+                    <div id = "dash-toggle" className = {tab === "stats" ? 'active' : 'inactive'} onClick = {() => tabSwitch("stats")}>Stats</div>
                 </div>
                 <div className = "dash-bkg">
-                    {tab === "users" ? (
-                        <div>users</div>
-                        ) : (
-                        tab === "movies" ? (
-                            <Movies />
-                        ) : (
-                            <EditMovie />
-                        )
-                    )}
+                    {tab === "movies" && <Movies />}
+                    {tab === "users" && <div>users</div>}
+                    {tab === "stats" && <div>stats</div>}
                 </div>
             </div>
         </TabContext.Provider>
