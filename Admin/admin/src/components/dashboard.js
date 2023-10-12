@@ -22,6 +22,7 @@ const Dashboard = () => {
                 </div>
                 <div className = "dash-bkg">
                     {tab === "movies" && <Movies />}
+                    {tab === "edit" && <EditMovie />}
                     {tab === "users" && <div>users</div>}
                     {tab === "stats" && <div>stats</div>}
                 </div>
