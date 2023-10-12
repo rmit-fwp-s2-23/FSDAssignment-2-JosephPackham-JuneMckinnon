@@ -78,103 +78,109 @@ async function seedAssignmentData() {
 
     //Barbie Session Times
     //Wednesday 23/10/2023
-    await db.sessiontimes.create({sessiontime_movie: 'Barbie', sessiontime_day:'Wednesday 23/10/2023', sessiontime_time: '9:00', sessiontime_available_seats: 10});
-    await db.sessiontimes.create({sessiontime_movie: 'Barbie', sessiontime_day:'Wednesday 23/10/2023', sessiontime_time: '12:00', sessiontime_available_seats: 10});
-    await db.sessiontimes.create({sessiontime_movie: 'Barbie', sessiontime_day:'Wednesday 23/10/2023', sessiontime_time: '15:00', sessiontime_available_seats: 10});
-    await db.sessiontimes.create({sessiontime_movie: 'Barbie', sessiontime_day:'Wednesday 23/10/2023', sessiontime_time: '18:00', sessiontime_available_seats: 10});
+    await db.sessiontimes.create({sessiontime_movie: 'Barbie', sessiontime_day:'Wednesday 23-10-2023', sessiontime_time: '9:00', sessiontime_available_seats: 10});
+    await db.sessiontimes.create({sessiontime_movie: 'Barbie', sessiontime_day:'Wednesday 23-10-2023', sessiontime_time: '12:00', sessiontime_available_seats: 10});
+    await db.sessiontimes.create({sessiontime_movie: 'Barbie', sessiontime_day:'Wednesday 23-10-2023', sessiontime_time: '15:00', sessiontime_available_seats: 10});
+    await db.sessiontimes.create({sessiontime_movie: 'Barbie', sessiontime_day:'Wednesday 23-10-2023', sessiontime_time: '18:00', sessiontime_available_seats: 10});
     //Thursday 24/10/2023
-    await db.sessiontimes.create({sessiontime_movie: 'Barbie', sessiontime_day:'Thursday 24/10/2023', sessiontime_time: '9:00', sessiontime_available_seats: 10});
-    await db.sessiontimes.create({sessiontime_movie: 'Barbie', sessiontime_day:'Thursday 24/10/2023', sessiontime_time: '12:00', sessiontime_available_seats: 10});
-    await db.sessiontimes.create({sessiontime_movie: 'Barbie', sessiontime_day:'Thursday 24/10/2023', sessiontime_time: '15:00', sessiontime_available_seats: 10});
-    await db.sessiontimes.create({sessiontime_movie: 'Barbie', sessiontime_day:'Thursday 24/10/2023', sessiontime_time: '18:00', sessiontime_available_seats: 10});
+    await db.sessiontimes.create({sessiontime_movie: 'Barbie', sessiontime_day:'Thursday 24-10-2023', sessiontime_time: '9:00', sessiontime_available_seats: 10});
+    await db.sessiontimes.create({sessiontime_movie: 'Barbie', sessiontime_day:'Thursday 24-10-2023', sessiontime_time: '12:00', sessiontime_available_seats: 10});
+    await db.sessiontimes.create({sessiontime_movie: 'Barbie', sessiontime_day:'Thursday 24-10-2023', sessiontime_time: '15:00', sessiontime_available_seats: 10});
+    await db.sessiontimes.create({sessiontime_movie: 'Barbie', sessiontime_day:'Thursday 24-10-2023', sessiontime_time: '18:00', sessiontime_available_seats: 10});
     //Friday 25/10/2023
-    await db.sessiontimes.create({sessiontime_movie: 'Barbie', sessiontime_day:'Friday 25/10/2023', sessiontime_time: '9:00', sessiontime_available_seats: 10});
-    await db.sessiontimes.create({sessiontime_movie: 'Barbie', sessiontime_day:'Friday 25/10/2023', sessiontime_time: '12:00', sessiontime_available_seats: 10});
-    await db.sessiontimes.create({sessiontime_movie: 'Barbie', sessiontime_day:'Friday 25/10/2023', sessiontime_time: '15:00', sessiontime_available_seats: 10});
-    await db.sessiontimes.create({sessiontime_movie: 'Barbie', sessiontime_day:'Friday 25/10/2023', sessiontime_time: '18:00', sessiontime_available_seats: 10});
+    await db.sessiontimes.create({sessiontime_movie: 'Barbie', sessiontime_day:'Friday 25-10-2023', sessiontime_time: '9:00', sessiontime_available_seats: 10});
+    await db.sessiontimes.create({sessiontime_movie: 'Barbie', sessiontime_day:'Friday 25-10-2023', sessiontime_time: '12:00', sessiontime_available_seats: 10});
+    await db.sessiontimes.create({sessiontime_movie: 'Barbie', sessiontime_day:'Friday 25-10-2023', sessiontime_time: '15:00', sessiontime_available_seats: 10});
+    await db.sessiontimes.create({sessiontime_movie: 'Barbie', sessiontime_day:'Friday 25-10-2023', sessiontime_time: '18:00', sessiontime_available_seats: 10});
     //Saturday 26/10/2023
-    await db.sessiontimes.create({sessiontime_movie: 'Barbie', sessiontime_day:'Saturday 26/10/2023', sessiontime_time: '9:00', sessiontime_available_seats: 10});
-    await db.sessiontimes.create({sessiontime_movie: 'Barbie', sessiontime_day:'Saturday 26/10/2023', sessiontime_time: '12:00', sessiontime_available_seats: 10});
-    await db.sessiontimes.create({sessiontime_movie: 'Barbie', sessiontime_day:'Saturday 26/10/2023', sessiontime_time: '15:00', sessiontime_available_seats: 10});
-    await db.sessiontimes.create({sessiontime_movie: 'Barbie', sessiontime_day:'Saturday 26/10/2023', sessiontime_time: '18:00', sessiontime_available_seats: 10});
+    await db.sessiontimes.create({sessiontime_movie: 'Barbie', sessiontime_day:'Saturday 26-10-2023', sessiontime_time: '9:00', sessiontime_available_seats: 10});
+    await db.sessiontimes.create({sessiontime_movie: 'Barbie', sessiontime_day:'Saturday 26-10-2023', sessiontime_time: '12:00', sessiontime_available_seats: 10});
+    await db.sessiontimes.create({sessiontime_movie: 'Barbie', sessiontime_day:'Saturday 26-10-2023', sessiontime_time: '15:00', sessiontime_available_seats: 10});
+    await db.sessiontimes.create({sessiontime_movie: 'Barbie', sessiontime_day:'Saturday 26-10-2023', sessiontime_time: '18:00', sessiontime_available_seats: 10});
     //Sunday 27/10/2023
-    await db.sessiontimes.create({sessiontime_movie: 'Barbie', sessiontime_day:'Sunday 27/10/2023', sessiontime_time: '9:00', sessiontime_available_seats: 10});
-    await db.sessiontimes.create({sessiontime_movie: 'Barbie', sessiontime_day:'Sunday 27/10/2023', sessiontime_time: '12:00', sessiontime_available_seats: 10});
-    await db.sessiontimes.create({sessiontime_movie: 'Barbie', sessiontime_day:'Sunday 27/10/2023', sessiontime_time: '15:00', sessiontime_available_seats: 10});
-    await db.sessiontimes.create({sessiontime_movie: 'Barbie', sessiontime_day:'Sunday 27/10/2023', sessiontime_time: '18:00', sessiontime_available_seats: 10});
-
+    await db.sessiontimes.create({sessiontime_movie: 'Barbie', sessiontime_day:'Sunday 27-10-2023', sessiontime_time: '9:00', sessiontime_available_seats: 10});
+    await db.sessiontimes.create({sessiontime_movie: 'Barbie', sessiontime_day:'Sunday 27-10-2023', sessiontime_time: '12:00', sessiontime_available_seats: 10});
+    await db.sessiontimes.create({sessiontime_movie: 'Barbie', sessiontime_day:'Sunday 27-10-2023', sessiontime_time: '15:00', sessiontime_available_seats: 10});
+    await db.sessiontimes.create({sessiontime_movie: 'Barbie', sessiontime_day:'Sunday 27-10-2023', sessiontime_time: '18:00', sessiontime_available_seats: 10});
     //Oppenheimer Session Times
     //Wednesday 23/10/2023
-    await db.sessiontimes.create({sessiontime_movie: 'Oppenheimer', sessiontime_day:'Wednesday 23/10/2023', sessiontime_time: '9:00', sessiontime_available_seats: 10});
-    await db.sessiontimes.create({sessiontime_movie: 'Oppenheimer', sessiontime_day:'Wednesday 23/10/2023', sessiontime_time: '12:00', sessiontime_available_seats: 10});
-    await db.sessiontimes.create({sessiontime_movie: 'Oppenheimer', sessiontime_day:'Wednesday 23/10/2023', sessiontime_time: '15:00', sessiontime_available_seats: 10});
-    await db.sessiontimes.create({sessiontime_movie: 'Oppenheimer', sessiontime_day:'Wednesday 23/10/2023', sessiontime_time: '18:00', sessiontime_available_seats: 10});
+    await db.sessiontimes.create({sessiontime_movie: 'Oppenheimer', sessiontime_day:'Wednesday 23-10-2023', sessiontime_time: '9:00', sessiontime_available_seats: 10});
+    await db.sessiontimes.create({sessiontime_movie: 'Oppenheimer', sessiontime_day:'Wednesday 23-10-2023', sessiontime_time: '12:00', sessiontime_available_seats: 10});
+    await db.sessiontimes.create({sessiontime_movie: 'Oppenheimer', sessiontime_day:'Wednesday 23-10-2023', sessiontime_time: '15:00', sessiontime_available_seats: 10});
+    await db.sessiontimes.create({sessiontime_movie: 'Oppenheimer', sessiontime_day:'Wednesday 23-10-2023', sessiontime_time: '18:00', sessiontime_available_seats: 10});
     //Thursday 24/10/2023
-    await db.sessiontimes.create({sessiontime_movie: 'Oppenheimer', sessiontime_day:'Thursday 24/10/2023', sessiontime_time: '9:00', sessiontime_available_seats: 10});
-    await db.sessiontimes.create({sessiontime_movie: 'Oppenheimer', sessiontime_day:'Thursday 24/10/2023', sessiontime_time: '12:00', sessiontime_available_seats: 10});
-    await db.sessiontimes.create({sessiontime_movie: 'Oppenheimer', sessiontime_day:'Thursday 24/10/2023', sessiontime_time: '15:00', sessiontime_available_seats: 10});
-    await db.sessiontimes.create({sessiontime_movie: 'Oppenheimer', sessiontime_day:'Thursday 24/10/2023', sessiontime_time: '18:00', sessiontime_available_seats: 10});
+    await db.sessiontimes.create({sessiontime_movie: 'Oppenheimer', sessiontime_day:'Thursday 24-10-2023', sessiontime_time: '9:00', sessiontime_available_seats: 10});
+    await db.sessiontimes.create({sessiontime_movie: 'Oppenheimer', sessiontime_day:'Thursday 24-10-2023', sessiontime_time: '12:00', sessiontime_available_seats: 10});
+    await db.sessiontimes.create({sessiontime_movie: 'Oppenheimer', sessiontime_day:'Thursday 24-10-2023', sessiontime_time: '15:00', sessiontime_available_seats: 10});
+    await db.sessiontimes.create({sessiontime_movie: 'Oppenheimer', sessiontime_day:'Thursday 24-10-2023', sessiontime_time: '18:00', sessiontime_available_seats: 10});
     //Friday 25/10/2023
-    await db.sessiontimes.create({sessiontime_movie: 'Oppenheimer', sessiontime_day:'Friday 25/10/2023', sessiontime_time: '9:00', sessiontime_available_seats: 10});
-    await db.sessiontimes.create({sessiontime_movie: 'Oppenheimer', sessiontime_day:'Friday 25/10/2023', sessiontime_time: '12:00', sessiontime_available_seats: 10});
-    await db.sessiontimes.create({sessiontime_movie: 'Oppenheimer', sessiontime_day:'Friday 25/10/2023', sessiontime_time: '15:00', sessiontime_available_seats: 10});
-    await db.sessiontimes.create({sessiontime_movie: 'Oppenheimer', sessiontime_day:'Friday 25/10/2023', sessiontime_time: '18:00', sessiontime_available_seats: 10});
+    await db.sessiontimes.create({sessiontime_movie: 'Oppenheimer', sessiontime_day:'Friday 25-10-2023', sessiontime_time: '9:00', sessiontime_available_seats: 10});
+    await db.sessiontimes.create({sessiontime_movie: 'Oppenheimer', sessiontime_day:'Friday 25-10-2023', sessiontime_time: '12:00', sessiontime_available_seats: 10});
+    await db.sessiontimes.create({sessiontime_movie: 'Oppenheimer', sessiontime_day:'Friday 25-10-2023', sessiontime_time: '15:00', sessiontime_available_seats: 10});
+    await db.sessiontimes.create({sessiontime_movie: 'Oppenheimer', sessiontime_day:'Friday 25-10-2023', sessiontime_time: '18:00', sessiontime_available_seats: 10});
     //Saturday 26/10/2023
-    await db.sessiontimes.create({sessiontime_movie: 'Oppenheimer', sessiontime_day:'Saturday 26/10/2023', sessiontime_time: '9:00', sessiontime_available_seats: 10});
-    await db.sessiontimes.create({sessiontime_movie: 'Oppenheimer', sessiontime_day:'Saturday 26/10/2023', sessiontime_time: '12:00', sessiontime_available_seats: 10});
-    await db.sessiontimes.create({sessiontime_movie: 'Oppenheimer', sessiontime_day:'Saturday 26/10/2023', sessiontime_time: '15:00', sessiontime_available_seats: 10});
-    await db.sessiontimes.create({sessiontime_movie: 'Oppenheimer', sessiontime_day:'Saturday 26/10/2023', sessiontime_time: '18:00', sessiontime_available_seats: 10});
+    await db.sessiontimes.create({sessiontime_movie: 'Oppenheimer', sessiontime_day:'Saturday 26-10-2023', sessiontime_time: '9:00', sessiontime_available_seats: 10});
+    await db.sessiontimes.create({sessiontime_movie: 'Oppenheimer', sessiontime_day:'Saturday 26-10-2023', sessiontime_time: '12:00', sessiontime_available_seats: 10});
+    await db.sessiontimes.create({sessiontime_movie: 'Oppenheimer', sessiontime_day:'Saturday 26-10-2023', sessiontime_time: '15:00', sessiontime_available_seats: 10});
+    await db.sessiontimes.create({sessiontime_movie: 'Oppenheimer', sessiontime_day:'Saturday 26-10-2023', sessiontime_time: '18:00', sessiontime_available_seats: 10});
     //Sunday 27/10/2023
-    await db.sessiontimes.create({sessiontime_movie: 'Oppenheimer', sessiontime_day:'Sunday 27/10/2023', sessiontime_time: '9:00', sessiontime_available_seats: 10});
-    await db.sessiontimes.create({sessiontime_movie: 'Oppenheimer', sessiontime_day:'Sunday 27/10/2023', sessiontime_time: '12:00', sessiontime_available_seats: 10});
-    await db.sessiontimes.create({sessiontime_movie: 'Oppenheimer', sessiontime_day:'Sunday 27/10/2023', sessiontime_time: '15:00', sessiontime_available_seats: 10});
-    await db.sessiontimes.create({sessiontime_movie: 'Oppenheimer', sessiontime_day:'Sunday 27/10/2023', sessiontime_time: '18:00', sessiontime_available_seats: 10});
+    await db.sessiontimes.create({sessiontime_movie: 'Oppenheimer', sessiontime_day:'Sunday 27-10-2023', sessiontime_time: '9:00', sessiontime_available_seats: 10});
+    await db.sessiontimes.create({sessiontime_movie: 'Oppenheimer', sessiontime_day:'Sunday 27-10-2023', sessiontime_time: '12:00', sessiontime_available_seats: 10});
+    await db.sessiontimes.create({sessiontime_movie: 'Oppenheimer', sessiontime_day:'Sunday 27-10-2023', sessiontime_time: '15:00', sessiontime_available_seats: 10});
+    await db.sessiontimes.create({sessiontime_movie: 'Oppenheimer', sessiontime_day:'Sunday 27-10-2023', sessiontime_time: '18:00', sessiontime_available_seats: 10});
+    //Lord of the Rings Session Times
+    //Wednesday 23/10/2023
+    await db.sessiontimes.create({sessiontime_movie: 'The Lord of the Rings', sessiontime_day:'Wednesday 23-10-2023', sessiontime_time: '9:00', sessiontime_available_seats: 10});
+    await db.sessiontimes.create({sessiontime_movie: 'The Lord of the Rings', sessiontime_day:'Wednesday 23-10-2023', sessiontime_time: '12:00', sessiontime_available_seats: 10});
+    await db.sessiontimes.create({sessiontime_movie: 'The Lord of the Rings', sessiontime_day:'Wednesday 23-10-2023', sessiontime_time: '15:00', sessiontime_available_seats: 10});
+    await db.sessiontimes.create({sessiontime_movie: 'The Lord of the Rings', sessiontime_day:'Wednesday 23-10-2023', sessiontime_time: '18:00', sessiontime_available_seats: 10});
+    //Thursday 24/10/2023
+    await db.sessiontimes.create({sessiontime_movie: 'The Lord of the Rings', sessiontime_day:'Thursday 24-10-2023', sessiontime_time: '9:00', sessiontime_available_seats: 10});
+    await db.sessiontimes.create({sessiontime_movie: 'The Lord of the Rings', sessiontime_day:'Thursday 24-10-2023', sessiontime_time: '12:00', sessiontime_available_seats: 10});
+    await db.sessiontimes.create({sessiontime_movie: 'The Lord of the Rings', sessiontime_day:'Thursday 24-10-2023', sessiontime_time: '15:00', sessiontime_available_seats: 10});
+    await db.sessiontimes.create({sessiontime_movie: 'The Lord of the Rings', sessiontime_day:'Thursday 24-10-2023', sessiontime_time: '18:00', sessiontime_available_seats: 10});
+    //Friday 25/10/2023
+    await db.sessiontimes.create({sessiontime_movie: 'The Lord of the Rings', sessiontime_day:'Friday 25-10-2023', sessiontime_time: '9:00', sessiontime_available_seats: 10});
+    await db.sessiontimes.create({sessiontime_movie: 'The Lord of the Rings', sessiontime_day:'Friday 25-10-2023', sessiontime_time: '12:00', sessiontime_available_seats: 10});
+    await db.sessiontimes.create({sessiontime_movie: 'The Lord of the Rings', sessiontime_day:'Friday 25-10-2023', sessiontime_time: '15:00', sessiontime_available_seats: 10});
+    await db.sessiontimes.create({sessiontime_movie: 'The Lord of the Rings', sessiontime_day:'Friday 25-10-2023', sessiontime_time: '18:00', sessiontime_available_seats: 10});
+    //Saturday 26/10/2023
+    await db.sessiontimes.create({sessiontime_movie: 'The Lord of the Rings', sessiontime_day:'Saturday 26-10-2023', sessiontime_time: '9:00', sessiontime_available_seats: 10});
+    await db.sessiontimes.create({sessiontime_movie: 'The Lord of the Rings', sessiontime_day:'Saturday 26-10-2023', sessiontime_time: '12:00', sessiontime_available_seats: 10});
+    await db.sessiontimes.create({sessiontime_movie: 'The Lord of the Rings', sessiontime_day:'Saturday 26-10-2023', sessiontime_time: '15:00', sessiontime_available_seats: 10});
+    await db.sessiontimes.create({sessiontime_movie: 'The Lord of the Rings', sessiontime_day:'Saturday 26-10-2023', sessiontime_time: '18:00', sessiontime_available_seats: 10});
+    //Sunday 27/10/2023
+    await db.sessiontimes.create({sessiontime_movie: 'The Lord of the Rings', sessiontime_day:'Sunday 27-10-2023', sessiontime_time: '9:00', sessiontime_available_seats: 10});
+    await db.sessiontimes.create({sessiontime_movie: 'The Lord of the Rings', sessiontime_day:'Sunday 27-10-2023', sessiontime_time: '12:00', sessiontime_available_seats: 10});
+    await db.sessiontimes.create({sessiontime_movie: 'The Lord of the Rings', sessiontime_day:'Sunday 27-10-2023', sessiontime_time: '15:00', sessiontime_available_seats: 10});
+    await db.sessiontimes.create({sessiontime_movie: 'The Lord of the Rings', sessiontime_day:'Sunday 27-10-2023', sessiontime_time: '18:00', sessiontime_available_seats: 10});
 
     //Avengers Session Times
     //Wednesday 23/10/2023
-    await db.sessiontimes.create({sessiontime_movie: 'Avengers', sessiontime_day:'Wednesday 23/10/2023', sessiontime_time: '9:00', sessiontime_available_seats: 10});
-    await db.sessiontimes.create({sessiontime_movie: 'Avengers', sessiontime_day:'Wednesday 23/10/2023', sessiontime_time: '12:00', sessiontime_available_seats: 10});
-    await db.sessiontimes.create({sessiontime_movie: 'Avengers', sessiontime_day:'Wednesday 23/10/2023', sessiontime_time: '15:00', sessiontime_available_seats: 10});
-    await db.sessiontimes.create({sessiontime_movie: 'Avengers', sessiontime_day:'Wednesday 23/10/2023', sessiontime_time: '18:00', sessiontime_available_seats: 10});
+    await db.sessiontimes.create({sessiontime_movie: 'Avengers', sessiontime_day:'Wednesday 23-10-2023', sessiontime_time: '9:00', sessiontime_available_seats: 10});
+    await db.sessiontimes.create({sessiontime_movie: 'Avengers', sessiontime_day:'Wednesday 23-10-2023', sessiontime_time: '12:00', sessiontime_available_seats: 10});
+    await db.sessiontimes.create({sessiontime_movie: 'Avengers', sessiontime_day:'Wednesday 23-10-2023', sessiontime_time: '15:00', sessiontime_available_seats: 10});
+    await db.sessiontimes.create({sessiontime_movie: 'Avengers', sessiontime_day:'Wednesday 23-10-2023', sessiontime_time: '18:00', sessiontime_available_seats: 10});
     //Thursday 24/10/2023
-    await db.sessiontimes.create({sessiontime_movie: 'Avengers', sessiontime_day:'Thursday 24/10/2023', sessiontime_time: '9:00', sessiontime_available_seats: 10});
-    await db.sessiontimes.create({sessiontime_movie: 'Avengers', sessiontime_day:'Thursday 24/10/2023', sessiontime_time: '12:00', sessiontime_available_seats: 10});
-    await db.sessiontimes.create({sessiontime_movie: 'Avengers', sessiontime_day:'Thursday 24/10/2023', sessiontime_time: '15:00', sessiontime_available_seats: 10});
-    await db.sessiontimes.create({sessiontime_movie: 'Avengers', sessiontime_day:'Thursday 24/10/2023', sessiontime_time: '18:00', sessiontime_available_seats: 10});
+    await db.sessiontimes.create({sessiontime_movie: 'Avengers', sessiontime_day:'Thursday 24-10-2023', sessiontime_time: '9:00', sessiontime_available_seats: 10});
+    await db.sessiontimes.create({sessiontime_movie: 'Avengers', sessiontime_day:'Thursday 24-10-2023', sessiontime_time: '12:00', sessiontime_available_seats: 10});
+    await db.sessiontimes.create({sessiontime_movie: 'Avengers', sessiontime_day:'Thursday 24-10-2023', sessiontime_time: '15:00', sessiontime_available_seats: 10});
+    await db.sessiontimes.create({sessiontime_movie: 'Avengers', sessiontime_day:'Thursday 24-10-2023', sessiontime_time: '18:00', sessiontime_available_seats: 10});
     //Friday 25/10/2023
-    await db.sessiontimes.create({sessiontime_movie: 'Avengers', sessiontime_day:'Friday 25/10/2023', sessiontime_time: '9:00', sessiontime_available_seats: 10});
-    await db.sessiontimes.create({sessiontime_movie: 'Avengers', sessiontime_day:'Friday 25/10/2023', sessiontime_time: '12:00', sessiontime_available_seats: 10});
-    await db.sessiontimes.create({sessiontime_movie: 'Avengers', sessiontime_day:'Friday 25/10/2023', sessiontime_time: '15:00', sessiontime_available_seats: 10});
-    await db.sessiontimes.create({sessiontime_movie: 'Avengers', sessiontime_day:'Friday 25/10/2023', sessiontime_time: '18:00', sessiontime_available_seats: 10});
+    await db.sessiontimes.create({sessiontime_movie: 'Avengers', sessiontime_day:'Friday 25-10-2023', sessiontime_time: '9:00', sessiontime_available_seats: 10});
+    await db.sessiontimes.create({sessiontime_movie: 'Avengers', sessiontime_day:'Friday 25-10-2023', sessiontime_time: '12:00', sessiontime_available_seats: 10});
+    await db.sessiontimes.create({sessiontime_movie: 'Avengers', sessiontime_day:'Friday 25-10-2023', sessiontime_time: '15:00', sessiontime_available_seats: 10});
+    await db.sessiontimes.create({sessiontime_movie: 'Avengers', sessiontime_day:'Friday 25-10-2023', sessiontime_time: '18:00', sessiontime_available_seats: 10});
     //Saturday 26/10/2023
-    await db.sessiontimes.create({sessiontime_movie: 'Avengers', sessiontime_day:'Saturday 26/10/2023', sessiontime_time: '9:00', sessiontime_available_seats: 10});
-    await db.sessiontimes.create({sessiontime_movie: 'Avengers', sessiontime_day:'Saturday 26/10/2023', sessiontime_time: '12:00', sessiontime_available_seats: 10});
-    await db.sessiontimes.create({sessiontime_movie: 'Avengers', sessiontime_day:'Saturday 26/10/2023', sessiontime_time: '15:00', sessiontime_available_seats: 10});
-    await db.sessiontimes.create({sessiontime_movie: 'Avengers', sessiontime_day:'Saturday 26/10/2023', sessiontime_time: '18:00', sessiontime_available_seats: 10});
+    await db.sessiontimes.create({sessiontime_movie: 'Avengers', sessiontime_day:'Saturday 26-10-2023', sessiontime_time: '9:00', sessiontime_available_seats: 10});
+    await db.sessiontimes.create({sessiontime_movie: 'Avengers', sessiontime_day:'Saturday 26-10-2023', sessiontime_time: '12:00', sessiontime_available_seats: 10});
+    await db.sessiontimes.create({sessiontime_movie: 'Avengers', sessiontime_day:'Saturday 26-10-2023', sessiontime_time: '15:00', sessiontime_available_seats: 10});
+    await db.sessiontimes.create({sessiontime_movie: 'Avengers', sessiontime_day:'Saturday 26-10-2023', sessiontime_time: '18:00', sessiontime_available_seats: 10});
     //Sunday 27/10/2023
-    await db.sessiontimes.create({sessiontime_movie: 'Avengers', sessiontime_day:'Sunday 27/10/2023', sessiontime_time: '9:00', sessiontime_available_seats: 10});
-    await db.sessiontimes.create({sessiontime_movie: 'Avengers', sessiontime_day:'Sunday 27/10/2023', sessiontime_time: '12:00', sessiontime_available_seats: 10});
-    await db.sessiontimes.create({sessiontime_movie: 'Avengers', sessiontime_day:'Sunday 27/10/2023', sessiontime_time: '15:00', sessiontime_available_seats: 10});
-    await db.sessiontimes.create({sessiontime_movie: 'Avengers', sessiontime_day:'Sunday 27/10/2023', sessiontime_time: '18:00', sessiontime_available_seats: 10});
-
-    //The Lord of the Rings Session Times
-    //Wednesday 23/10/2023
-    await db.sessiontimes.create({sessiontime_movie: 'The Lord of the Rings', sessiontime_day:'Wednesday 23/10/2023', sessiontime_time: '9:00', sessiontime_available_seats: 10});
-    await db.sessiontimes.create({sessiontime_movie: 'The Lord of the Rings', sessiontime_day:'Wednesday 23/10/2023', sessiontime_time: '12:00', sessiontime_available_seats: 10});
-    await db.sessiontimes.create({sessiontime_movie: 'The Lord of the Rings', sessiontime_day:'Wednesday 23/10/2023', sessiontime_time: '15:00', sessiontime_available_seats: 10});
-    await db.sessiontimes.create({sessiontime_movie: 'The Lord of the Rings', sessiontime_day:'Wednesday 23/10/2023', sessiontime_time: '18:00', sessiontime_available_seats: 10});
-    //Thursday 24/10/2023
-    await db.sessiontimes.create({sessiontime_movie: 'The Lord of the Rings', sessiontime_day:'Thursday 24/10/2023', sessiontime_time: '9:00', sessiontime_available_seats: 10});
-    await db.sessiontimes.create({sessiontime_movie: 'The Lord of the Rings', sessiontime_day:'Thursday 24/10/2023', sessiontime_time: '12:00', sessiontime_available_seats: 10});
-    await db.sessiontimes.create({sessiontime_movie: 'The Lord of the Rings', sessiontime_day:'Thursday 24/10/2023', sessiontime_time: '15:00', sessiontime_available_seats: 10});
-    //Friday 25/10/2023
-    await db.sessiontimes.create({sessiontime_movie: 'The Lord of the Rings', sessiontime_day:'Friday 25/10/2023', sessiontime_time: '9:00', sessiontime_available_seats: 10});
-    await db.sessiontimes.create({sessiontime_movie: 'The Lord of the Rings', sessiontime_day:'Friday 25/10/2023', sessiontime_time: '12:00', sessiontime_available_seats: 10});
-    await db.sessiontimes.create({sessiontime_movie: 'The Lord of the Rings', sessiontime_day:'Friday 25/10/2023', sessiontime_time: '15:00', sessiontime_available_seats: 10});
-    //Saturday 26/10/2023
-    await db.sessiontimes.create({sessiontime_movie: 'The Lord of the Rings', sessiontime_day:'Saturday 26/10/2023', sessiontime_time: '9:00', sessiontime_available_seats: 10});
-    await db.sessiontimes.create({sessiontime_movie: 'The Lord of the Rings', sessiontime_day:'Saturday 26/10/2023', sessiontime_time: '12:00', sessiontime_available_seats: 10});
-
+    await db.sessiontimes.create({sessiontime_movie: 'Avengers', sessiontime_day:'Sunday 27-10-2023', sessiontime_time: '9:00', sessiontime_available_seats: 10});
+    await db.sessiontimes.create({sessiontime_movie: 'Avengers', sessiontime_day:'Sunday 27-10-2023', sessiontime_time: '12:00', sessiontime_available_seats: 10});
+    await db.sessiontimes.create({sessiontime_movie: 'Avengers', sessiontime_day:'Sunday 27-10-2023', sessiontime_time: '15:00', sessiontime_available_seats: 10});
+    await db.sessiontimes.create({sessiontime_movie: 'Avengers', sessiontime_day:'Sunday 27-10-2023', sessiontime_time: '18:00', sessiontime_available_seats: 10});
   
 
 

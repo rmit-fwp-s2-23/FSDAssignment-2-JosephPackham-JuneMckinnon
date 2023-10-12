@@ -88,13 +88,11 @@ const LandingPage = (props) => {
     }
 
     const handleSessionTime = (sessionTime) => {
-        console.log('session time: ' , sessionTime);
-        console.log('props movie handleSessionTime: ' , props.movie);
+
         localStorage.setItem('movie' , props.movie);
-        props.setDay(sessionTime);
-        
-        
-        console.log('props day handleSessionTime: ' , props.day);
+        props.setDay(sessionTime.replace(/\//g, '-'));
+        localStorage.setItem('day' , sessionTime.replace(/\//g, '-'));
+ 
         navigate('/ticket');
 
     }
@@ -123,7 +121,7 @@ const LandingPage = (props) => {
                             self.findIndex((t) => t.sessiontime_day === sessionTime.sessiontime_day) === index && sessionTime.sessiontime_day !== "Sample Day"
                         )
                         .map((sessionTime) => (
-                        <button className="session-time" onClick={() => handleSessionTime(sessionTime.sessiontime_day)}>{sessionTime.sessiontime_day}</button>
+                        <button className="session-time" onClick={() => handleSessionTime(sessionTime.sessiontime_day)}>{sessionTime.sessiontime_day.replace(/-/g, '/')}</button>
                         ))}
                     
                         </div>

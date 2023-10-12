@@ -19,14 +19,23 @@ exports.one = async (req, res) => {
 
 //select a session time by session tiem day and movie name
 exports.oneByDay = async (req, res) => {
-  const sessiontimes = await db.sessiontimes.findAll({
-    where: {
-      sessiontime_day: req.params.sessiontime_day,
-      sessiontime_movie: req.params.sessiontime_movie
-    }
-  });
+  try {
+    const sessiontimes = await db.sessiontimes.findAll({
+      where: {
+        sessiontime_day: req.params.sessiontime_day.replace(/\//g, '-'),
+        sessiontime_movie: req.params.sessiontime_movie
+      }
+    });
 
-  res.json(sessiontimes);
+    if (sessiontimes.length === 0) {
+      return res.status(404).json({ error: "Session times not found" });
+    }
+
+    res.json(sessiontimes);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Internal server error" });
+  }
 }
 
 //delete a session time by session time id
