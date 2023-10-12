@@ -1,0 +1,63 @@
+:root {
+    --primary: #BB86FC;
+    --background-verydark: #161028;
+    --background-dark: #18122B;
+    --background-med: #251e3b;
+    --background-light: #393053;
+}
+
+body {
+    user-select: none;
+    color: white;
+}
+
+.dash-bkg {
+    min-height: 35rem;
+    height: 65%;
+    aspect-ratio: 3 / 2;
+    background: var(--background-med);
+    box-shadow: 0 0.5rem 1rem #17131e;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.flex-col {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.dash-toggles {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    width: 100%;
+}
+
+#dash-toggle {
+    height: 3rem;
+    aspect-ratio: 3 / 1;
+    background: var(--background-med);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: font-size ease 0.1s, letter-spacing ease 0.1s;
+    font-weight: 700;
+}
+
+.inactive:active {
+    filter:brightness(70%);
+    letter-spacing: -0.1rem;
+}
+
+.inactive {
+    filter: brightness(80%);
+}
+
+.active {
+    filter: brightness(100%);
+    font-size: 1.2em;
+    letter-spacing: 0.1em;
+}

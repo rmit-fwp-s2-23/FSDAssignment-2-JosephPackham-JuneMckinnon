@@ -1,0 +1,101 @@
+:root {
+    --primary: #BB86FC;
+    --background-verydark: #161028;
+    --background-dark: #18122B;
+    --background-med: #251e3b;
+    --background-light: #393053;
+}
+
+body {
+    user-select: none;
+}
+
+.login-button {
+    background: var(--primary);
+    border: none;
+    padding: 0.75rem 2rem;
+    font-weight: 700;
+    color: var(--background-med);
+    letter-spacing: 0.05rem;
+    border-radius: 0.5rem;
+    transition: transform 0.2s ease;
+}
+
+.login-button:hover {
+    transform: scale(1.1);
+    filter: brightness(1.05);
+}
+
+.login-button:active {
+    transform: scale(1.05);
+    filter: brightness(0.95);
+}
+
+.flex-between {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 50%;
+    margin-top: 1vh;
+}
+
+.login-bkg {
+    background-color: var(--background-dark);
+    background-image:  radial-gradient(var(--background-light) 1.75px, transparent 1.75px), radial-gradient(var(--background-light) 1.75px, var(--background-dark) 1.75px);
+    background-size: 70px 70px;
+    background-position: 0 0,35px 35px;
+
+    width: 100vw;
+    height: 100vh;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.login-form {
+    height: 30vh;
+    min-height: 20rem;
+    aspect-ratio: 3 / 2;
+    background: var(--background-med);
+    color: white;
+
+    border-radius: 0.5rem;
+    box-shadow: 0 0.5rem 1rem var(--background-verydark);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+#login-title {
+    font-size: 3.5em;
+    font-weight: 700;
+    user-select: none;
+    letter-spacing: 0.1rem;
+    margin-bottom: 1vh;
+}
+
+.login-input {
+    width: 50%;
+    padding: 10px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 0.5rem;
+    background: var(--background-light);
+    border-color: var(--background-light);
+    border-width: 0.2rem;
+    color: white;
+    transition: border-color 0.2s ease;
+}
+
+.login-input:focus {
+    border-color: var(--primary); /* Change to a color of your choice */
+    outline: none;
+}
+
+.login-input::placeholder {
+    color: #999;
+}
