@@ -83,7 +83,7 @@ const LandingPage = (props) => {
                     </div>
                 </div>
                 <div className = "contain-right">
-                    <div id = "movie-times">
+                    {/* <div id = "movie-times">
                         <div className = "header">Session Times</div>
                         <div className = "session-day">Wednesday 23/08/2023</div>
                         <div className = "session-times">
@@ -120,7 +120,7 @@ const LandingPage = (props) => {
                             <div className = "session-time">15:00</div>
                             <div className = "session-time">18:00</div>
                         </div>
-                    </div>
+                    </div> */}
                 </div>
             </div>
             <div className = "flex-center">

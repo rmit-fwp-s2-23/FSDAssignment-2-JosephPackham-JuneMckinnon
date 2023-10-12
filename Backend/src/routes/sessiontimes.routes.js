@@ -17,6 +17,9 @@ module.exports = (express, app) => {
     //update a sessiontime in the database
     router.put("/:id", controller.update);
 
+    //select a sessiontime by session time day and movie name
+    router.get("/:sessiontime_movie/:sessiontime_day", controller.oneByDay);
+
     // Add routes to server.
     app.use("/api/sessiontimes", router);
 

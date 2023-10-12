@@ -10,7 +10,19 @@ exports.all = async (req, res) => {
 exports.one = async (req, res) => {
   const sessiontimes = await db.sessiontimes.findAll({
     where: {
-      movie: req.params.movie
+      movie: req.params.sessiontime_movie
+    }
+  });
+
+  res.json(sessiontimes);
+}
+
+//select a session time by session tiem day and movie name
+exports.oneByDay = async (req, res) => {
+  const sessiontimes = await db.sessiontimes.findAll({
+    where: {
+      sessiontime_day: req.params.sessiontime_day,
+      sessiontime_movie: req.params.sessiontime_movie
     }
   });
 
@@ -29,10 +41,10 @@ exports.delete = async (req, res) => {
 exports.update = async (req, res) => {
   const sessiontimes = await db.sessiontimes.findByPk(req.params.id);
   sessiontimes.sessiontime_movie = req.body.sessiontime_movie;
-  sessiontimes.sessiontime_date = req.body.sessiontime_date;
+  sessiontimes.sessiontime_day = req.body.sessiontime_day;
   sessiontimes.sessiontime_time = req.body.sessiontime_time;
   sessiontimes.sessiontime_available_seats = req.body.sessiontime_available_seats;
-  sessiontimes.sessiontime_total_seats = req.body.sessiontime_total_seats;
+  
 
   await sessiontimes.save();
 
@@ -46,7 +58,7 @@ exports.create = async (req, res) => {
     sessiontime_date: req.body.sessiontime_date,
     sessiontime_time: req.body.sessiontime_time,
     sessiontime_available_seats: req.body.sessiontime_available_seats,
-    sessiontime_total_seats: req.body.sessiontime_total_seats
+    
   });
 
   res.json(sessiontimes);
