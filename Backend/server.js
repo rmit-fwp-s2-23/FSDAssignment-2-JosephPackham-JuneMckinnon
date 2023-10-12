@@ -1,6 +1,8 @@
 const express = require("express");
 const cors = require("cors");
 const db = require("./src/database");
+const graphql = require("./src/graphql");
+const { graphqlHTTP } = require("express-graphql");
 
 // Database will be sync'ed in the background.
 db.sync();
@@ -17,6 +19,15 @@ app.use(cors());
 app.get("/", (req, res) => {
   res.json({ message: "Hello World!" });
 });
+
+app.use(
+  "/graphql",
+  graphqlHTTP({
+    schema: graphql.schema,
+    rootValue: graphql.root,
+    graphiql: true
+  })
+);
 
 // Add user routes.
 require("./src/routes/user.routes.js")(express, app);
