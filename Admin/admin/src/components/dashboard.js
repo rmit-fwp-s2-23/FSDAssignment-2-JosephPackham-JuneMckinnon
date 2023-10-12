@@ -1,17 +1,28 @@
-import React, { useState, createContext } from "react";
+import React, { useState, createContext, useEffect } from "react";
 import Movies from "./movies";
 import EditMovie from "./editmovie";
 import "../css/dash.css";
+import { getUsers } from "../data/repository";
 
 export const TabContext = createContext();
 
 const Dashboard = () => {
     const [tab, setTab] = useState("movies");
+    const [users, setUsers] = useState(null);
     const tabSwitch = (curTab) => {
         if (curTab !== tab) {
             setTab(curTab);
         }
     }
+    useEffect(() => {
+        loadUsers();
+    }, []);
+    
+    const loadUsers = async () => {
+        const currentUsers = await getUsers();
+        setUsers(currentUsers);
+    }
+    
     return (
         <TabContext.Provider value = {setTab}>
             <div className = "flex-col">
@@ -23,7 +34,8 @@ const Dashboard = () => {
                 <div className = "dash-bkg">
                     {tab === "movies" && <Movies />}
                     {tab === "edit" && <EditMovie />}
-                    {tab === "users" && <div>users</div>}
+                    {/* {users?.map(user => <div key = {user.name}>{user.name}</div>)} */}
+                    {tab === "users" && <div>{users?.map(user => <div key = {user.name}>{user.name}</div>)}</div>}
                     {tab === "stats" && <div>stats</div>}
                 </div>
             </div>
