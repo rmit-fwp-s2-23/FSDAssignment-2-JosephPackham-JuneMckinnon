@@ -21,5 +21,9 @@ sequelize.define("user", {
     type: DataTypes.DATE,
     allowNull: false
 
+  },
+  blocked: {
+    type: DataTypes.BOOLEAN,
+    allowNull: false
   }
 });
