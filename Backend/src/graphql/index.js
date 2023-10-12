@@ -95,16 +95,25 @@ graphql.root = {
 				success: false,
 				message: "User not found"
 			}
-		} else if (await argon2.verify(user.password_hash, args.password) === false) {
+		}
+
+		if (await argon2.verify(user.password_hash, args.password) === false) {
 			return {
 				success: false,
 				message: "Incorrect password"
 			}
-		} else {
+		}
+
+		if (user.admin === false) {
 			return {
-				success: true,
-				message: "Login Success"
+				success: false,
+				message: "You are not an admin"
 			}
+		}
+
+		return {
+			success: true,
+			message: "Login Success"
 		}
 
 	}
