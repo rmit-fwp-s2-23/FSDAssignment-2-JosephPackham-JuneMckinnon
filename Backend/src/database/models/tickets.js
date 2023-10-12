@@ -26,7 +26,7 @@ module.exports = (sequelize, DataTypes) =>
             allowNull: false
         },
         ticket_session: {
-            type: DataTypes.STRING(100),
+            type: DataTypes.INTEGER,
             allowNull: false,
             ForeignKey: true
             
