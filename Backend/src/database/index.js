@@ -15,8 +15,8 @@ db.user = require('./models/user.js')(db.sequelize, DataTypes);
 db.reviews = require('./models/reviews.js')(db.sequelize, DataTypes);
 db.tickets = require('./models/tickets.js')(db.sequelize, DataTypes);
 
-db.reviews.belongsTo(db.user, {foreignKey: {name: 'author_email', allowNull: false}});
-db.tickets.belongsTo(db.user, {foreignKey: {name: 'author_email', allowNull: false}});
+db.reviews.belongsTo(db.user, { foreignKey: { name: 'author_email', allowNull: false } });
+db.tickets.belongsTo(db.user, { foreignKey: { name: 'author_email', allowNull: false } });
 
 
 
@@ -29,7 +29,7 @@ db.sync = async () => {
 };
 
 async function seedData() {   
-  const count = await db.user.count();
+  const count = await db.tickets.count();
   if(count > 0)
     return;
   const argon2 = require('argon2');

@@ -1,6 +1,6 @@
 //Ticket Reservation table in database
 
-module.exports = (sequelize, DataTypes) => {
+module.exports = (sequelize, DataTypes) => 
     sequelize.define("ticket", {
         ticket_id: {
             type: DataTypes.INTEGER,
@@ -25,9 +25,8 @@ module.exports = (sequelize, DataTypes) => {
             allowNull: false
         },
         ticket_session: {
-            type: DataTypes.DATE,
+            type: DataTypes.STRING(100),
             allowNull: false
         }
     });
-}
 
