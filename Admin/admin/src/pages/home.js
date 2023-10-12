@@ -1,8 +1,12 @@
-import React from 'react'; //import react to use react components
+import React from 'react';
+import "../css/home.css"
+import Dashboard from '../components/dashboard.js';
 
 const Home = () => {
     return (
-        <div>Home</div>
+        <div className = "home-bkg">
+            <Dashboard />
+        </div>
     );
 }
 

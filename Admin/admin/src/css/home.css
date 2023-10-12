@@ -1,0 +1,26 @@
+:root {
+    --primary: #BB86FC;
+    --background-verydark: #161028;
+    --background-dark: #18122B;
+    --background-med: #251e3b;
+    --background-light: #393053;
+}
+
+body {
+    user-select: none;
+    color: white;
+}
+
+.home-bkg {
+    background-color: var(--background-dark);
+    background-image:  radial-gradient(var(--background-light) 1.75px, transparent 1.75px), radial-gradient(var(--background-light) 1.75px, var(--background-dark) 1.75px);
+    background-size: 70px 70px;
+    background-position: 0 0,35px 35px;
+
+    width: 100vw;
+    height: 100vh;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
