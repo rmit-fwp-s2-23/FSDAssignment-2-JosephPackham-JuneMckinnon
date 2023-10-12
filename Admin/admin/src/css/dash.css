@@ -16,6 +16,10 @@ body {
     height: 65%;
     aspect-ratio: 3 / 2;
     background: var(--background-med);
+    box-shadow: 0 0.5rem 1rem #17131e;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .flex-col {

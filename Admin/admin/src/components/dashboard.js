@@ -1,29 +1,37 @@
-import React, { useState } from "react";
+import React, { useState, createContext } from "react";
+import Movies from "./movies";
+import EditMovie from "./editmovie";
 import "../css/dash.css";
 
+export const TabContext = createContext();
+
 const Dashboard = () => {
-    const [tab, setTab] = useState(true); // true = movies, false = users
+    const [tab, setTab] = useState("movies");
     const tabSwitch = (curTab) => {
-        if (curTab !== "movie" && tab !== false) {
-            setTab(!tab);
-        } else if (curTab !== "user" && tab !== true) {
-            setTab(!tab);
+        if (curTab !== tab) {
+            setTab(curTab);
         }
     }
     return (
-        <div className = "flex-col">
-            <div className = "dash-toggles">
-                <div id = "dash-toggle" className = {tab ? 'active' : 'inactive'} onClick = {() => tabSwitch("movie")}>Movies</div>
-                <div id = "dash-toggle" className = {tab ? 'inactive' : 'active'} onClick = {() => tabSwitch("user")}>Users</div>
+        <TabContext.Provider value = {setTab}>
+            <div className = "flex-col">
+                <div className = "dash-toggles">
+                    <div id = "dash-toggle" className = {tab === "movies" ? 'active' : tab === "edit" ? 'active' : 'inactive'} onClick = {() => tabSwitch("movies")}>Movies</div>
+                    <div id = "dash-toggle" className = {tab === "users" ? 'active' : 'inactive'} onClick = {() => tabSwitch("users")}>Users</div>
+                </div>
+                <div className = "dash-bkg">
+                    {tab === "users" ? (
+                        <div>users</div>
+                        ) : (
+                        tab === "movies" ? (
+                            <Movies />
+                        ) : (
+                            <EditMovie />
+                        )
+                    )}
+                </div>
             </div>
-            <div className = "dash-bkg">
-                {tab ? (
-                    <div>movies</div>
-                ) : (
-                    <div>users</div>
-                )}
-            </div>
-        </div>
+        </TabContext.Provider>
     )
 }
 
