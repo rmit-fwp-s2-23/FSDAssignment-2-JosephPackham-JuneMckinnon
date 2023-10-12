@@ -25,5 +25,8 @@ sequelize.define("user", {
   blocked: {
     type: DataTypes.BOOLEAN,
     allowNull: false
+  },
+  admin: {
+    type: DataTypes.BOOLEAN
   }
 });

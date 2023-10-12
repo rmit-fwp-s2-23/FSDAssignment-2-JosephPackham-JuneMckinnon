@@ -43,8 +43,8 @@ exports.create = async (req, res) => {
     password_hash: hash,
     email: req.body.email,
     joined: new Date(),
-    blocked: false
-
+    blocked: false,
+    admin: false
   });
 
   res.json(user);
