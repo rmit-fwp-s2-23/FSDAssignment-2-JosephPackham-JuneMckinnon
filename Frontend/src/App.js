@@ -9,15 +9,17 @@ import Footer from './components/footer.js';
 const App = () => { 
     //get user data from local storage and set user state to logged in user
     const [user, setUser] = useState( JSON.parse(localStorage.getItem('loggedUser'))); 
-    //set movie title for reviews
+    //set movie title for reviews and ticket reservation
     const [movie, setMovie] = useState(localStorage.getItem('movie'));
+    //set day for ticket reservation
+    const [day, setDay] = useState();
     return (
         //return page with header, footer and routing
         <BrowserRouter>
         {/* use user as prop data for header and routing */}
             <Navbar user={user} setUser={setUser}  />
             <div className='page'> 
-                <Routing user={user} setUser={setUser} movie={movie} setMovie={setMovie} />
+                <Routing user={user} setUser={setUser} movie={movie} setMovie={setMovie} day={day} setDay={setDay} />
             </div>
             <Footer />
         </BrowserRouter>

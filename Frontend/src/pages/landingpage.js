@@ -10,6 +10,8 @@ import avengers from '../images/avengersendgame_lob_crd_05.jpg';
 import avengers_bkg from '../images/avengers/avengers-bkg.jpeg';
 import lotr from '../images/lordoftherings.jpg'
 import lotr_bkg from '../images/lotr/lotr-bkg.jpeg';
+import { getAllMovies, getMovie, getAllSessionTimes, getSessionTime, getSessionTimeByDay } from '../data/repository';
+import { all } from 'axios';
 
 //this is the landing page
 
@@ -17,17 +19,34 @@ const LandingPage = (props) => {
     const navigate = useNavigate();
 
     const [imgSrc, setImgSrc] = useState(barbie);
-    const movie = "Barbie"
+    const movie = "Barbie";
+    const [sessionTimes, setSessionTimes] = useState([]);
+    
+
+    
+
     
     
     const { setMovie } = props;
 
     useEffect(() => {
-      setMovie(movie);
-    }, [movie, setMovie]);
+        async function fetchData() {
+            const response = await getAllSessionTimes();
+            setSessionTimes(response);
+
+            setMovie("Barbie");           
+
+            
+        }
+        fetchData();
+    }, []);
+
+        
     
    
     const changeImg = (movie) => {
+        
+        //TODO: this cant be a switch case, could have it just pass in the value and have it get the movie by name from the database?
         switch (movie) {
             case "barbie":
                 setImgSrc(barbie);
@@ -49,7 +68,7 @@ const LandingPage = (props) => {
                 break;
             case "lotr":
                 setImgSrc(lotr);
-                props.setMovie("LOTR");
+                props.setMovie("The Lord of the Rings");
                 
                 document.getElementById('movie-title').innerText = "LOTR";
                 break;
@@ -68,6 +87,18 @@ const LandingPage = (props) => {
         navigate('/reviews');
     }
 
+    const handleSessionTime = (sessionTime) => {
+        console.log('session time: ' , sessionTime);
+        console.log('props movie handleSessionTime: ' , props.movie);
+        localStorage.setItem('movie' , props.movie);
+        props.setDay(sessionTime);
+        
+        
+        console.log('props day handleSessionTime: ' , props.day);
+        navigate('/ticket');
+
+    }
+
 
     return (
         <div className  = 'page'>
@@ -83,7 +114,27 @@ const LandingPage = (props) => {
                     </div>
                 </div>
                 <div className = "contain-right">
-                    <div id = "movie-times">
+                <div id="sessiontimes">
+                    <div className="header">Session Times</div>
+                    <div className="session-times">
+                    {sessionTimes
+                        .filter(
+                        (sessionTime, index, self) =>
+                            self.findIndex((t) => t.sessiontime_day === sessionTime.sessiontime_day) === index && sessionTime.sessiontime_day !== "Sample Day"
+                        )
+                        .map((sessionTime) => (
+                        <button className="session-time" onClick={() => handleSessionTime(sessionTime.sessiontime_day)}>{sessionTime.sessiontime_day}</button>
+                        ))}
+                    
+                        </div>
+                
+                    </div>
+
+                    
+                    
+                    {/* Session Times */}
+                    
+                    {/* <div id = "movie-times">
                         <div className = "header">Session Times</div>
                         <div className = "session-day">Wednesday 23/08/2023</div>
                         <div className = "session-times">
@@ -120,7 +171,7 @@ const LandingPage = (props) => {
                             <div className = "session-time">15:00</div>
                             <div className = "session-time">18:00</div>
                         </div>
-                    </div>
+                    </div> */}
                 </div>
             </div>
             <div className = "flex-center">

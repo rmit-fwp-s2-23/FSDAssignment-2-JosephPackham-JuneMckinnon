@@ -10,11 +10,12 @@ import AvengersReviews from "../pages/reviewpages/avengersreviews";
 import Barbiereviews from "../pages/reviewpages/barbiereviews";
 import LotrReviews from "../pages/reviewpages/lotrreviews";
 import Reviews from "../pages/reviewpages/reviews";
+import TicketReservation from "../pages/ticketreservation";
 
 const Routing = (props) => { 
     return(
         <Routes> {/* Routes component contains all the routes for the app */}
-            <Route path="/" element={<LandingPage user = {props.user} movie = {props.movie} setMovie = {props.setMovie}/>} /> {/* if path is /, render LandingPage component */}
+            <Route path="/" element={<LandingPage user = {props.user} movie = {props.movie} setMovie = {props.setMovie} day = {props.day} setDay = {props.setDay}/>}/> {/* if path is /, render LandingPage component */}
             <Route path = "/signin" element = {<SignIn user = {props.user} setUser = {props.setUser}/>}/> {/* if path is /signin, render SignIn component */}
             <Route path="/signup" element={<SignUp user = {props.user} setUser = {props.setUser}/>} /> {/* if path is /signup, render SignUp component */}
             <Route path="/userprofile" element={<UserProfile user = {props.user} setUser = {props.setUser}/>} /> {/* if path is /userprofile, render UserProfile component */}
@@ -25,6 +26,7 @@ const Routing = (props) => {
             <Route path  = "/barbiereview" element = {<Barbiereviews user = {props.user} setUser = {props.setUser}/>}/> {/* if path is /review, render Review component */}
             <Route path  = "/lotrreview" element = {<LotrReviews user = {props.user} setUser = {props.setUser}/>}/> {/* if path is /review, render Review component */}
             <Route path  = "/reviews" element = {<Reviews user = {props.user} setUser = {props.setUser} movie = {props.movie} setMovie = {props.setMovie}/>}/> {/* if path is /review, render Review component */}
+            <Route path = "/ticket" element = {<TicketReservation user = {props.user} setUser = {props.setUser} movie = {props.movie} setMovie = {props.setMovie} day = {props.day} setDay = {props.setDay}/>}/> {/* if path is /ticket, render TicketReservation component */}
         </Routes>
         );
     };
