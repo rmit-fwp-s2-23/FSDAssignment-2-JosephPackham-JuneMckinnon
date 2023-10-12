@@ -9,7 +9,8 @@ module.exports = (sequelize, DataTypes) =>
         },
         movie: {
             type: DataTypes.STRING(32),
-            allowNull: false
+            allowNull: false,
+            ForeignKey: true
         },
         author_name: {
             type: DataTypes.STRING(32),
@@ -26,7 +27,9 @@ module.exports = (sequelize, DataTypes) =>
         },
         ticket_session: {
             type: DataTypes.STRING(100),
-            allowNull: false
+            allowNull: false,
+            ForeignKey: true
+            
         }
     });
 
