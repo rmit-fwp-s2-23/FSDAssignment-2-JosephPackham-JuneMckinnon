@@ -6,6 +6,22 @@ exports.all = async (req, res) => {
   res.json(sessiontimes);
 };
 
+//select a session time by session time id
+exports.oneById = async (req, res) => {
+  try {
+    const sessiontime = await db.sessiontimes.findByPk(req.params.id);
+
+    if (!sessiontime) {
+      return res.status(404).json({ error: "Session time not found" });
+    }
+
+    res.json(sessiontime);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Internal server error" });
+  }
+};
+
 //select session time by movie name
 exports.one = async (req, res) => {
   const sessiontimes = await db.sessiontimes.findAll({
@@ -19,14 +35,23 @@ exports.one = async (req, res) => {
 
 //select a session time by session tiem day and movie name
 exports.oneByDay = async (req, res) => {
-  const sessiontimes = await db.sessiontimes.findAll({
-    where: {
-      sessiontime_day: req.params.sessiontime_day,
-      sessiontime_movie: req.params.sessiontime_movie
-    }
-  });
+  try {
+    const sessiontimes = await db.sessiontimes.findAll({
+      where: {
+        sessiontime_day: req.params.sessiontime_day,
+        sessiontime_movie: req.params.sessiontime_movie
+      }
+    });
 
-  res.json(sessiontimes);
+    if (sessiontimes.length === 0) {
+      return res.status(404).json({ error: "Session times not found" });
+    }
+
+    res.json(sessiontimes);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Internal server error" });
+  }
 }
 
 //delete a session time by session time id
@@ -51,6 +76,24 @@ exports.update = async (req, res) => {
   res.json(sessiontimes);
 }
 
+exports.updateAvailableSeats = async (req, res) => {
+  try {
+    const sessiontime = await db.sessiontimes.findByPk(req.params.id);
+    console.log(req.body.sessiontime_available_seats);
+
+    if (!sessiontime) {
+      return res.status(404).json({ error: "Session time not found" });
+    }
+
+    await sessiontime.update({ sessiontime_available_seats: req.body.sessiontime_available_seats });
+
+    res.json(sessiontime);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Internal server error" });
+  }
+};
+
 //create a session time in the database
 exports.create = async (req, res) => {
   const sessiontimes = await db.sessiontimes.create({
@@ -63,3 +106,5 @@ exports.create = async (req, res) => {
 
   res.json(sessiontimes);
 };
+
+
