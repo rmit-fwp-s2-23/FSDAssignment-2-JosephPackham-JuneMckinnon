@@ -48,7 +48,7 @@ const UserList = () => {
                 button.classList.add("admin-button");
                 button.innerText = "Admin?";
 
-                response = await setAdmin(email, true);
+                response = await setAdmin(email, false);
                 console.log(response);
                 break;
             default:
