@@ -110,6 +110,13 @@ graphql.root = {
 			}
 		}
 
+		if (user.blocked === true) {
+			return {
+				success: false,
+				message: "Blocked users cannot sign in"
+			}
+		}
+
 		if (user.admin === false) {
 			return {
 				success: false,
@@ -140,6 +147,14 @@ graphql.root = {
 				return {
 					success: false,
 					message: "There needs to be 1 admin account"
+				}
+			}
+
+			// if user is blocked they cannot be admin
+			if (user.blocked === true) {
+				return {
+					success: false,
+					message: "A blocked user cannot be admin"
 				}
 			}
 
