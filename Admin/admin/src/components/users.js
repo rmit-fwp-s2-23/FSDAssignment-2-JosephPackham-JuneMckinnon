@@ -36,12 +36,17 @@ const UserList = () => {
                 console.log(response);
                 break;
             case "admin-button":
-                button.classList.remove("admin-button");
-                button.classList.add("admin-toggled");
-                button.innerText = "Admin";
-
                 response = await setAdmin(email, true);
                 console.log(response);
+
+                if (response.success === true) {
+                    button.classList.remove("admin-button");
+                    button.classList.add("admin-toggled");
+                    button.innerText = "Admin";
+                } else {
+                    alert(response.message);
+                }
+                
                 break;
             case "admin-toggled":
                 response = await setAdmin(email, false);
@@ -51,6 +56,8 @@ const UserList = () => {
                     button.classList.remove("admin-toggled");
                     button.classList.add("admin-button");
                     button.innerText = "Admin?";
+                } else {
+                    alert(response.message);
                 }
 
                 break;
