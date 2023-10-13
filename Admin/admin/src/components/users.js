@@ -20,12 +20,17 @@ const UserList = () => {
         const currentClass = Array.from(button.classList)[0];
         switch (currentClass) {
             case "block-button":
-                button.classList.remove("block-button");
-                button.classList.add("block-toggled");
-                button.innerText = "Blocked";
-
                 response = await setBlocked(email, true);
                 console.log(response);
+
+                if (response.success === true) {
+                    button.classList.remove("block-button");
+                    button.classList.add("block-toggled");
+                    button.innerText = "Blocked";
+                } else {
+                    alert(response.message);
+                }
+
                 break;
             case "block-toggled":
                 button.classList.remove("block-toggled");

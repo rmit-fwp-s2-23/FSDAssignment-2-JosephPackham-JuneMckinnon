@@ -12,20 +12,20 @@ graphql.schema = buildSchema(`
 	type User {
 		email: String!,
 		name: String!,
-		password_hash: String!,
-		joined: String!,
-		blocked: Boolean!,
-		admin: Boolean!
+		password_hash: String,
+		joined: String,
+		blocked: Boolean,
+		admin: Boolean
 	}
 
 	type Review {
-		review_id: Int!,
-		movie: String!,
-		author_name: String!,
-		author_email: String!,
-		review_rating: Int!,
-		review_text: String!,
-		review_date: String!
+		review_id: Int,
+		movie: String,
+		author_name: String,
+		author_email: String,
+		review_rating: Int,
+		review_text: String,
+		review_date: String
 	}
 
 	# The input type can be used for incoming data.
@@ -51,23 +51,23 @@ graphql.schema = buildSchema(`
 	# Queries (read-only operations).
 	type Query {
 		all_users: [User],
-		user(email: String!): User,
-		user_exists(email: String!): Boolean,
+		user(email: String): User,
+		user_exists(email: String): Boolean,
 		all_reviews: [Review],
-		reviews_by_user(email: String!): [Review]
+		reviews_by_user(email: String): [Review]
 	}
 
 	# Mutations (modify data in the underlying data-source, i.e., the database).
 	type Mutation {
-		create_user(input: UserInput!): User,
+		create_user(input: UserInput): User,
 		update_user(input: UserInput): User,
-		delete_user(email: String!): Boolean,
-		create_review(input: ReviewInput!): AuthResponse,
+		delete_user(email: String): Boolean,
+		create_review(input: ReviewInput): AuthResponse,
 		update_review(input: ReviewInput): Review,
-		delete_review(review_id: Int!): AuthResponse,
-		verify_user(email: String!, password: String!): AuthResponse,
-		set_admin(email: String!, admin: Boolean!): AuthResponse,
-		set_blocked(email: String!, blocked: Boolean!): AuthResponse
+		delete_review(review_id: Int): AuthResponse,
+		verify_user(email: String, password: String): AuthResponse,
+		set_admin(email: String, admin: Boolean): AuthResponse,
+		set_blocked(email: String, blocked: Boolean): AuthResponse
 	}
 
 	type AuthResponse {
@@ -275,6 +275,13 @@ graphql.root = {
 	set_blocked: async (args) => {
 		try {
 			const user = await db.user.findByPk(args.email);
+
+			if (user.admin === true) {
+				return {
+					success: false,
+					message: "You cannot block an admin"
+				}
+			}
 
 			user.blocked = args.blocked;
 			await user.save();
