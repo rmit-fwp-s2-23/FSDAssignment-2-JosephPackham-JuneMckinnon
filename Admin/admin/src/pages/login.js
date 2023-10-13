@@ -35,7 +35,7 @@ const Login = () => {
                 <div className = "flex-between">
                     <div>
                         <input id = "remember-me" type = "checkbox"></input>
-                        <label for = "remember-me">Remember Me</label>
+                        <label htmlFor = "remember-me">Remember Me</label>
                     </div>
                     <button className = "login-button" onClick = {handleLogin}>Login</button>
                 </div>

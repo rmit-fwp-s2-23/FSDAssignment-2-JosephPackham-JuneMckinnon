@@ -18,7 +18,7 @@ const Movies = () => {
     return (
         <div className = "movie-container">
             {movies.map(movie => 
-                <div className = "movie" onClick = {handleClick}>
+                <div key = {movie.name} className = "movie" onClick = {handleClick}>
                     <div className = "overlay">Edit</div>
                     <div className = "movie-poster">
                         <div className = "movie-name">{movie.name}</div>
