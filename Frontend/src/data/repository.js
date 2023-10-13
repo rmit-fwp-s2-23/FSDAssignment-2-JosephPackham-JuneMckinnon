@@ -191,14 +191,14 @@ async function getAllTickets() {
 
 // get ticket by movie name
 async function getTicket(movie) {
-    const response = await axios.get(API_HOST + `/api/tickets/${movie}`);
+    const response = await axios.get(API_HOST + `/api/tickets/movie/${movie}`);
 
     return response.data;
 }
 
 // get ticket by email
 async function getTicketByEmail(email) {
-    const response = await axios.get(API_HOST + `/api/tickets/${email}`);
+    const response = await axios.get(API_HOST + `/api/tickets/email/${email}`);
 
     return response.data;
 }
@@ -265,6 +265,7 @@ export {
     createTicket,
     deleteTicket,
     updateTicket,
+    
     
 
 };

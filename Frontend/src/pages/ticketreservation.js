@@ -75,17 +75,19 @@ const TicketReservation = (props) => {
 
 
     return (
-        <div className="page">
-            <h1>Session times for {movie} on {session_day.replace(/-/g, '/')}</h1>
-            <div >
+        <div className="ticketpage">
+            <div className="ticketpagecontent">
+            <h1 className="sessionpageHeading">Session times for {movie} on {session_day.replace(/-/g, '/')}</h1>
+            <div className = "SessionTimes">
                 {sessionTimes.map((sessiontime) => (
-                    <div>
-                        <h3>{sessiontime.sessiontime_time}</h3>
-                        <h3>{sessiontime.sessiontime_available_seats} seats available</h3>
-                        <button onClick={() => handleReservation(sessiontime.sessiontime_time, sessiontime.sessiontime_available_seats, sessiontime.sessiontime_id)}>Reserve</button>
+                    <div className="small-background" >
+                        <h2>Time: {sessiontime.sessiontime_time}</h2>
+                        <p>{sessiontime.sessiontime_available_seats} seats available</p>
+                        <button className = 'button' onClick={() => handleReservation(sessiontime.sessiontime_time, sessiontime.sessiontime_available_seats, sessiontime.sessiontime_id)}>Reserve</button>
                     </div>
                 ))}
                 </div>
+        </div>
         </div>
     );
 

@@ -9,16 +9,16 @@ module.exports = (express, app ) => {
     router.post("/", controller.create);
     
     //select a ticket by movie name
-    router.get("/:movie", controller.one);
+    router.get("movie/:movie", controller.one);
     
     //select a ticket by email
-    router.get("/:email", controller.email);
+    router.get("/email/:email", controller.email);
     
     //delete a ticket from the database
-    router.delete("/:id", controller.delete);
+    router.delete("/id/:id", controller.delete);
     
     //update a ticket in the database
-    router.put("/:id", controller.update);
+    router.put("/update/:id", controller.update);
     
     // Add routes to server.
     app.use("/api/tickets", router);
