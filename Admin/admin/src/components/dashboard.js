@@ -1,26 +1,17 @@
-import React, { useState, createContext, useEffect } from "react";
+import React, { useState, createContext } from "react";
 import Movies from "./movies";
 import EditMovie from "./editmovie";
+import UserList from "./users";
 import "../css/dash.css";
-import { getUsers } from "../data/repository";
 
 export const TabContext = createContext();
 
 const Dashboard = () => {
     const [tab, setTab] = useState("movies");
-    const [users, setUsers] = useState(null);
     const tabSwitch = (curTab) => {
         if (curTab !== tab) {
             setTab(curTab);
         }
-    }
-    useEffect(() => {
-        loadUsers();
-    }, []);
-    
-    const loadUsers = async () => {
-        const currentUsers = await getUsers();
-        setUsers(currentUsers);
     }
     
     return (
@@ -35,7 +26,7 @@ const Dashboard = () => {
                     {tab === "movies" && <Movies />}
                     {tab === "edit" && <EditMovie />}
                     {/* {users?.map(user => <div key = {user.name}>{user.name}</div>)} */}
-                    {tab === "users" && <div>{users?.map(user => <div key = {user.name}>{user.name}</div>)}</div>}
+                    {tab === "users" && <UserList />}
                     {tab === "stats" && <div>stats</div>}
                 </div>
             </div>

@@ -9,7 +9,8 @@ async function getUsers() {
                 email,
                 name,
                 joined,
-                password_hash
+                blocked,
+                admin
             }
         }
     `;
@@ -37,6 +38,42 @@ async function loginUser(email, password) {
     return data.verify_user;
 }
 
+async function setAdmin(email, admin) {
+    const mutation = gql`
+        mutation SetAdmin($email: String, $admin: Boolean) {
+            set_admin(email: $email, admin: $admin) {
+                success
+                message
+            }
+        }
+    `;
+
+    const data = await request(GRAPH_QL_URL, mutation, {
+        email: email,
+        admin: admin
+    });
+
+    return data.set_admin;
+}
+
+async function setBlocked(email, blocked) {
+    const mutation = gql`
+        mutation SetBlocked($email: String, $blocked: Boolean) {
+            set_blocked(email: $email, blocked: $blocked) {
+                success
+                message
+            }
+        }
+    `;
+
+    const data = await request(GRAPH_QL_URL, mutation, {
+        email: email,
+        blocked: blocked
+    });
+
+    return data.set_blocked;
+}
+
 export {
-    getUsers, loginUser
+    getUsers, loginUser, setAdmin, setBlocked
 }

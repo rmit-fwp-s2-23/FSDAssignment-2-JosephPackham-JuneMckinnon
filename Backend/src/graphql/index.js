@@ -12,8 +12,10 @@ graphql.schema = buildSchema(`
 	type User {
 		email: String,
 		name: String,
-		password_hash: String
+		password_hash: String,
 		joined: String,
+		blocked: Boolean,
+		admin: Boolean
 	}
 
 	# The input type can be used for incoming data.
@@ -21,7 +23,9 @@ graphql.schema = buildSchema(`
 		email: String,
 		first_name: String,
 		last_name: String,
-		joined: String
+		joined: String,
+		blocked: Boolean,
+		admin: Boolean
 	}
 
 	# Queries (read-only operations).
@@ -36,7 +40,9 @@ graphql.schema = buildSchema(`
 		create_user(input: UserInput): User,
 		update_user(input: UserInput): User,
 		delete_user(email: String): Boolean,
-		verify_user(email: String, password: String): AuthResponse
+		verify_user(email: String, password: String): AuthResponse,
+		set_admin(email: String, admin: Boolean): AuthResponse,
+		set_blocked(email: String, blocked: Boolean): AuthResponse
 	}
 
 	type AuthResponse {
@@ -116,6 +122,42 @@ graphql.root = {
 			message: "Login Success"
 		}
 
+	},
+	set_admin: async (args) => {
+		try {
+			const user = await db.user.findByPk(args.email);
+
+			user.admin = args.admin;
+			await user.save();
+
+			return {
+				success: true,
+				message: "Admin status updated"
+			}
+		} catch (err) {
+			return {
+				success: false,
+				message: "An error has occurred"
+			}
+		}
+	},
+	set_blocked: async (args) => {
+		try {
+			const user = await db.user.findByPk(args.email);
+
+			user.blocked = args.blocked;
+			await user.save();
+
+			return {
+				success: true,
+				message: "User has been blocked"
+			}
+		} catch {
+			return {
+				success: false,
+				message: "An error has occured"
+			}
+		}
 	}
 };
 
