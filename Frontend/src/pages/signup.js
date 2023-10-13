@@ -104,21 +104,21 @@ const SignUp = (props) => {
         <div className="page">
             <div className = "content">
                 <div className = "background">
-                    <div id = "header">
+                    <div id = "header" data-testid = 'Heading'>
                         Welcome to Loop Cinemas!
                     </div>
                     <form onSubmit={e => handleSubmit(e)}>
                         <div>
-                            <input className = "input" type = "name" id = "name" placeholder = "Name"></input>
+                            <input data-testid = 'Name' className = "input" type = "name" id = "name" placeholder = "Name"></input>
                         </div>
                         <div>
-                            <input className = "input" type = "email" id = "email" placeholder = "Email"></input>
+                            <input data-testid = 'Email' className = "input" type = "email" id = "email" placeholder = "Email"></input>
                         </div>
                         <div>
-                            <input className = "input" type = "password" id = "password" placeholder = "Password"></input>
+                            <input data-testid = 'Password' className = "input" type = "password" id = "password" placeholder = "Password"></input>
                         </div>
                         <div className = "flex-center">
-                            <button className = "button" id = "signin" type = "submit">Sign In</button>
+                            <button data-testid = 'SignUp' className = "button" id = "signin" type = "submit">Sign In</button>
                         </div>
                         <div id = {'error'}></div>
                     </form>

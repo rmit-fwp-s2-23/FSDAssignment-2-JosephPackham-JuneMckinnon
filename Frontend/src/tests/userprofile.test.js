@@ -36,7 +36,7 @@ test('renders user profile with correct information', async () => {
     )
   
     // Wait for the component to fetch user data
-    await waitFor(() => screen.getByText(/June's Profile/i));
+    await screen.findByText(/June's Profile/i);
   
     // Assert that user information is displayed on the page
     expect(screen.getByText(/Username: June/i)).toBeInTheDocument();

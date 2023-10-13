@@ -12,5 +12,20 @@ export const handlers = [
                 joined: "10/10/2023"
             })
         )
-    })
+    }),
+    
+
+    rest.post('http://localhost:4000/api/users/', async (req, res, ctx) => {
+        return res(
+            ctx.status(200),
+            ctx.json({
+                name: "Test User",
+                email: "Test@Email.com",
+                password: "TestPassword",
+                joined: "01/01/2022"
+            })
+        )
+    } ),
+
+
 ]
