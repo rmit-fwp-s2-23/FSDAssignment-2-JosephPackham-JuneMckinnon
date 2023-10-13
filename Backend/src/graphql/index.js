@@ -10,12 +10,22 @@ graphql.schema = buildSchema(`
 	# The GraphQL types are declared first.
 
 	type User {
-		email: String,
-		name: String,
-		password_hash: String,
-		joined: String,
-		blocked: Boolean,
-		admin: Boolean
+		email: String!,
+		name: String!,
+		password_hash: String!,
+		joined: String!,
+		blocked: Boolean!,
+		admin: Boolean!
+	}
+
+	type Review {
+		review_id: Int!,
+		movie: String!,
+		author_name: String!,
+		author_email: String!,
+		review_rating: Int!,
+		review_text: String!,
+		review_date: String!
 	}
 
 	# The input type can be used for incoming data.
@@ -28,21 +38,36 @@ graphql.schema = buildSchema(`
 		admin: Boolean
 	}
 
+	input ReviewInput {
+		review_id: Int,
+		movie: String,
+		author_name: String,
+		author_email: String,
+		review_rating: Int,
+		review_text: String,
+		review_date: String
+	}
+
 	# Queries (read-only operations).
 	type Query {
 		all_users: [User],
-		user(email: String): User,
-		user_exists(email: String): Boolean
+		user(email: String!): User,
+		user_exists(email: String!): Boolean,
+		all_reviews: [Review],
+		reviews_by_user(email: String!): [Review]
 	}
 
 	# Mutations (modify data in the underlying data-source, i.e., the database).
 	type Mutation {
-		create_user(input: UserInput): User,
+		create_user(input: UserInput!): User,
 		update_user(input: UserInput): User,
-		delete_user(email: String): Boolean,
-		verify_user(email: String, password: String): AuthResponse,
-		set_admin(email: String, admin: Boolean): AuthResponse,
-		set_blocked(email: String, blocked: Boolean): AuthResponse
+		delete_user(email: String!): Boolean,
+		create_review(input: ReviewInput!): AuthResponse,
+		update_review(input: ReviewInput): Review,
+		delete_review(review_id: Int!): AuthResponse,
+		verify_user(email: String!, password: String!): AuthResponse,
+		set_admin(email: String!, admin: Boolean!): AuthResponse,
+		set_blocked(email: String!, blocked: Boolean!): AuthResponse
 	}
 
 	type AuthResponse {
@@ -65,6 +90,20 @@ graphql.root = {
 
 		return count === 1;
 	},
+	all_reviews: async () => {
+		return await db.review.findAll();
+	},
+	reviews_by_user: async (args) => {
+		const allReviews = await db.review.findAll();
+		let userReviews = [];
+		allReviews.forEach(review => {
+			if (review.author_email === args.email) {
+				userReviews.push(review);
+			}
+		});
+
+		return userReviews;
+	},
 
 	// Mutations.
 	create_user: async (args) => {
@@ -75,7 +114,6 @@ graphql.root = {
 	update_user: async (args) => {
 		const user = await db.user.findByPk(args.input.email);
 	
-		// Update owner fields.
 		user.name = args.input.name;
 		user.email = args.input.email;
 
@@ -92,6 +130,68 @@ graphql.root = {
 		await user.destroy();
 
 		return true;
+	},
+	create_review: async (args) => {
+		try {
+			const review = await db.review.create(args.input);
+
+			return {
+				success: true,
+				message: "Successfully created review"
+			}
+		} catch {
+			return {
+				success: false,
+				message: "Error in creation"
+			}
+		}
+	},
+	update_review: async (args) => {
+		try {
+			const review = await db.review.findByPk(args.input.review_id);
+	
+			review.movie = args.input.movie;
+			review.author_name = args.input.author_name;
+			review.author_email = args.input.author_email;
+			review.review_rating = args.input.review_rating;
+			review.review_text = args.input.review_text;
+
+			await review.save();
+
+			return {
+				success: true,
+				message: "Successfully updated review"
+			}
+		} catch {
+			return {
+				success: false,
+				message: "Error in updating"
+			}
+		}
+	},
+	delete_review: async (args) => {
+		try {
+			const review = await db.review.findByPk(args.review_id);
+	
+			if (review === null) {
+				return {
+					success: false,
+					message: "Review not found"
+				}
+			}
+	
+			await user.destroy();
+	
+			return {
+				success: true,
+				message: "Review deleted"
+			}
+		} catch {
+			return {
+				success: false,
+				message: "Error in deleting"
+			}
+		}
 	},
 	verify_user: async (args) => {
 		const user = await db.user.findByPk(args.email);
