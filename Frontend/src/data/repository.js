@@ -131,9 +131,23 @@ async function getAllSessionTimes() {
     return response.data;
 }
 
+// get session time by session time id
+async function getSessionTime(sessiontime_id) {
+    const response = await axios.get(API_HOST + `/api/sessiontimes/id/${sessiontime_id}`);
+
+    return response.data;
+}
+
 // get session time by movie name
-async function getSessionTime(sessiontime_movie) {
-    const response = await axios.get(API_HOST + `/api/sessiontimes/${sessiontime_movie}`);
+async function getSessionTimeByMovie(movie) {
+    const response = await axios.get(API_HOST + `/api/sessiontimes/movie/${movie}`);
+
+    return response.data;
+}
+
+// get session time by session time day and movie name
+async function getSessionTimeByDay(sessiontime_day, movie) {
+    const response = await axios.get(API_HOST + `/api/sessiontimes/day/${sessiontime_day}/${movie}`);
 
     return response.data;
 }
@@ -159,18 +173,13 @@ async function updateSessionTime(sessiontime_id, sessiontime) {
     return response.data;
 }
 
-// get session times by day and movie name
-async function getSessionTimeByDay(sessiontime_day, sessiontime_movie) {
-    const response = await axios.get(API_HOST + `/api/sessiontimes/${sessiontime_movie}/${sessiontime_day}`);
-
-    return response.data;
-}
-//update available seats
+// update available seats
 async function updateAvailableSeats(sessiontime_id, sessiontime_available_seats) {
-    const response = await axios.put(API_HOST + `/api/sessiontimes/${sessiontime_id}/${sessiontime_available_seats}`);
+    const response = await axios.put(API_HOST + `/api/sessiontimes/availableseats/${sessiontime_id}`, {sessiontime_available_seats});
 
     return response.data;
 }
+
 
 // --- Tickets ----------------------------------------------------------------------------------
 // get all tickets
@@ -243,17 +252,20 @@ export {
     updateMovie,
     getAllSessionTimes,
     getSessionTime,
+    getSessionTimeByMovie,
+    getSessionTimeByDay,
     createSessionTime,
     deleteSessionTime,
     updateSessionTime,
-    getSessionTimeByDay,
+    updateAvailableSeats,
+
     getAllTickets,
     getTicket,
     getTicketByEmail,
     createTicket,
     deleteTicket,
     updateTicket,
-    updateAvailableSeats
+    
 
 };
 

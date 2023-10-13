@@ -2,29 +2,34 @@ module.exports = (express, app) => {
     const controller = require("../controllers/sessiontimes.controller.js");
     const router = express.Router();
 
-    // Select all sessiontimes
+    //select all session times
     router.get("/", controller.all);
 
+    //select a session time by session time id
+    router.get("/id/:id", controller.oneById);
 
-    // Create a new sessiontime
-    router.post("/", controller.create);
+    //select a session time by movie name
+    router.get("/movie/:sessiontime_movie", controller.one);
 
-    //select a sessiontime by movie name
-    router.get("/:movie", controller.one);
+    //select a session time by session time day and movie name
+    router.get("/day/:sessiontime_day/:sessiontime_movie", controller.oneByDay);
 
-    //delete a sessiontime from the database
+    //delete a session time by session time id
     router.delete("/:id", controller.delete);
 
-    //update a sessiontime in the database
+    //update a session time in the database by session time id
     router.put("/:id", controller.update);
 
-    //select a sessiontime by session time day and movie name
-    router.get("/:sessiontime_movie/:sessiontime_day", controller.oneByDay);
+    //update available seats in the database by session time id
+    router.put("/availableseats/:id", controller.updateAvailableSeats);
 
-    //update available seats
-    router.put("/updateAvailableSeats/:id/:sessiontime_available_seats", controller.updateAvailableSeats);
+    //create a session time
+    router.post("/", controller.create);
 
-    // Add routes to server.
+    
+
     app.use("/api/sessiontimes", router);
+
+
 
 }

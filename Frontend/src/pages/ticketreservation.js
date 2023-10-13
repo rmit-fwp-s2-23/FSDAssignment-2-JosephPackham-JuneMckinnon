@@ -26,20 +26,23 @@ const TicketReservation = (props) => {
     }, []);
 
     //handle seat availability
-    const handleSeatAvailability = (available_seats, seats, id) => {
+    const handleSeatAvailability = async (available_seats, seats, id) => {
         if(seats > available_seats){
             alert("There are not enough seats available");
         }
         else{
             let newAvailableSeats = available_seats - seats;
-            console.log(newAvailableSeats);
-            updateAvailableSeats(id, newAvailableSeats);
+            console.log('Available seats: ' + available_seats + ' seats: ' + seats + ' new available seats: ' + newAvailableSeats);
+
+            await updateAvailableSeats(id, newAvailableSeats);
+            window.location.reload();
+            
         }
     }
 
     //handle reservation
-    const handleReservation = (time, available_seats,id, e) => {
-        e.preventDefault();
+    const handleReservation = (time, available_seats,id) => {
+        
         console.log("time: " + time + " available seats: " + available_seats + " id: " + id);
         let seats = prompt("How many seats would you like to reserve?");
         console.log(seats);
@@ -62,7 +65,7 @@ const TicketReservation = (props) => {
                     <div>
                         <h3>{sessiontime.sessiontime_time}</h3>
                         <h3>{sessiontime.sessiontime_available_seats} seats available</h3>
-                        <button onClick={(e) => handleReservation(sessiontime.sessiontime_time, sessiontime.sessiontime_available_seats, sessiontime.sessiontime_id, e)}>Reserve</button>
+                        <button onClick={() => handleReservation(sessiontime.sessiontime_time, sessiontime.sessiontime_available_seats, sessiontime.sessiontime_id)}>Reserve</button>
                     </div>
                 ))}
                 </div>
