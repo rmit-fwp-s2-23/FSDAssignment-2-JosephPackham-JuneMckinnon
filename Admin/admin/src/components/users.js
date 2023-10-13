@@ -58,26 +58,30 @@ const UserList = () => {
 
     return (
         <div className = "user-container">
-            {users?.map(user =>
-                <div key = {user.email} className = "user-row">
-                    <div className = "user-left">
-                        <div className = "user-icon"></div>
-                        <div className = "user-info">
-                            <div className = "info">Name: {user.name}</div>
-                            <div className = "info">Email: {user.email}</div>
-                            <div className = "info">Joined: {user.joined}</div>
+            <div className = "shadow-top"></div>
+                <div className = "user-list">
+                    {users?.map(user =>
+                        <div key = {user.email} className = "user-row">
+                            <div className = "user-left">
+                                <div className = "user-icon"></div>
+                                <div className = "user-info">
+                                    <div className = "info">Name: {user.name}</div>
+                                    <div className = "info">Email: {user.email}</div>
+                                    <div className = "info">Joined: {user.joined}</div>
+                                </div>
+                            </div>
+                            <div className = "user-toggles">
+                                <button key = {`block${user.email}`} className = {user.blocked ? "block-toggled" : "block-button"} id = "user-button" onClick = {(ev) => toggleButton(ev, user.email)}>
+                                    {user.blocked ? "Blocked" : "Block?"}
+                                </button>
+                                <button key = {`admin${user.email}`} className = {user.admin ? "admin-toggled" : "admin-button"} id = "user-button" onClick = {(ev) => toggleButton(ev, user.email)}>
+                                    {user.admin ? "Admin" : "Admin?"}
+                                </button>
+                            </div>
                         </div>
-                    </div>
-                    <div className = "user-toggles">
-                        <button key = {`block${user.email}`} className = {user.blocked ? "block-toggled" : "block-button"} id = "user-button" onClick = {(ev) => toggleButton(ev, user.email)}>
-                            {user.blocked ? "Blocked" : "Block?"}
-                        </button>
-                        <button key = {`admin${user.email}`} className = {user.admin ? "admin-toggled" : "admin-button"} id = "user-button" onClick = {(ev) => toggleButton(ev, user.email)}>
-                            {user.admin ? "Admin" : "Admin?"}
-                        </button>
-                    </div>
+                    )}
                 </div>
-            )}
+            <div className = "shadow-bottom"></div>
         </div>
     )
 }

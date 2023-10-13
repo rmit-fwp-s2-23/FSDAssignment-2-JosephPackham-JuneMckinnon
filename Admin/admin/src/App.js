@@ -1,13 +1,18 @@
-import React, {useState} from 'react'; //import react to use react components
+import React, { useState, createContext } from 'react'; //import react to use react components
 import {BrowserRouter} from "react-router-dom"; //import BrowserRouter to use routing
 import AdminRouting from "./Routing/routing.js";
-import "./index.css"
+import "./index.css";
+
+export const LoginContext = createContext();
 
 const App = () => {
+    const [loggedIn, setLoggedIn] = useState(false);
     return (
-        <BrowserRouter>
-            <AdminRouting />
-        </BrowserRouter>
+        <LoginContext.Provider value = {{loggedIn: loggedIn, setLoggedIn: setLoggedIn}}>
+            <BrowserRouter>
+                <AdminRouting />
+            </BrowserRouter>
+        </LoginContext.Provider>
     );
 };
 

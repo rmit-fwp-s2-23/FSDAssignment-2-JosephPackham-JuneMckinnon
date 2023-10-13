@@ -1,9 +1,11 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { useNavigate } from "react-router-dom";
 import { loginUser } from '../data/repository';
 import "../css/login.css";
+import { LoginContext } from '../App.js';
 
 const Login = () => {
+    const { setLoggedIn } = useContext(LoginContext);
 
     const navigate = useNavigate();
     const handleLogin = async () => {
@@ -17,6 +19,7 @@ const Login = () => {
         const loginData = await loginUser(email, password);
 
         if (loginData.success === true) {
+            setLoggedIn(true);
             navigate('/home');
         } else {
             alert("login failed: " + loginData.message);

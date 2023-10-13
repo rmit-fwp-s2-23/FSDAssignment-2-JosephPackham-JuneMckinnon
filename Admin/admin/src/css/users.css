@@ -15,12 +15,33 @@ body {
 }
 
 .user-container {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.user-list {
     overflow-y: scroll;
     height: 30rem;
     width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+
+.shadow-top {
+    width: 90%;
+    height: 1rem;
+    box-shadow: 0 0.5rem 0.5rem -0.3rem var(--background-dark);
+    z-index: 1;
+}
+
+.shadow-bottom {
+    width: 90%;
+    height: 1rem;
+    box-shadow: 0 -0.5rem 0.5rem -0.3rem var(--background-dark);
+    z-index: 1;
 }
 
 .user-row {
