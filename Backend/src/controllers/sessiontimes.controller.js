@@ -79,18 +79,13 @@ exports.update = async (req, res) => {
 exports.updateAvailableSeats = async (req, res) => {
   try {
     const sessiontime = await db.sessiontimes.findByPk(req.params.id);
+    console.log(req.body.sessiontime_available_seats);
 
     if (!sessiontime) {
       return res.status(404).json({ error: "Session time not found" });
     }
 
-    const sessiontime_available_seats = req.body.sessiontime_available_seats;
-
-    if (!sessiontime_available_seats) {
-      return res.status(400).json({ error: "Session time available seats is required" });
-    }
-
-    await sessiontime.update({ sessiontime_available_seats });
+    await sessiontime.update({ sessiontime_available_seats: req.body.sessiontime_available_seats });
 
     res.json(sessiontime);
   } catch (error) {

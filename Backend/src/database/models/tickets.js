@@ -25,8 +25,14 @@ module.exports = (sequelize, DataTypes) =>
             type: DataTypes.INTEGER,
             allowNull: false
         },
-        ticket_session: {
-            type: DataTypes.INTEGER,
+        ticket_day: {
+            type: DataTypes.STRING(32),
+            allowNull: false,
+            ForeignKey: true
+            
+        },
+        ticket_time: {
+            type: DataTypes.STRING(32),
             allowNull: false,
             ForeignKey: true
             

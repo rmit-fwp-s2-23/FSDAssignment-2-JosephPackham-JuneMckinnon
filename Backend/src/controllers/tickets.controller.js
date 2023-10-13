@@ -14,7 +14,8 @@ exports.create = async (req, res) => {
     author_name: req.body.author_name,
     author_email: req.body.author_email,
     ticket_quantity: req.body.ticket_quantity,
-    ticket_session: req.body.ticket_session
+    ticket_day: req.body.ticket_day,
+    ticket_time: req.body.ticket_time
   });
 
   res.json(tickets);
@@ -57,7 +58,9 @@ exports.update = async (req, res) => {
   tickets.author_name = req.body.author_name;
   tickets.author_email = req.body.author_email;
   tickets.ticket_quantity = req.body.ticket_quantity;
-  tickets.ticket_session = req.body.ticket_session;
+  tickets.ticket_day = req.body.ticket_day;
+  tickets.ticket_time = req.body.ticket_time;
+
 
   await tickets.save();
 
@@ -71,7 +74,8 @@ exports.update = async (req, res) => {
   tickets.author_name = req.body.author_name;
   tickets.author_email = req.body.author_email;
   tickets.ticket_quantity = req.body.ticket_quantity;
-  tickets.ticket_session = req.body.ticket_session;
+  tickets.ticket_day = req.body.ticket_day;
+  tickets.ticket_time = req.body.ticket_time;
 
   await tickets.save();
 

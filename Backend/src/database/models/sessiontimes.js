@@ -23,7 +23,12 @@ module.exports = (sequelize, DataTypes) =>
         },
         sessiontime_available_seats: {
             type: DataTypes.INTEGER,
-            allowNull: false
+            allowNull: false,
+            validate: {
+                min: -1000, 
+                notNull: true,
+                isInt: true,
+              },
         },
         
        
