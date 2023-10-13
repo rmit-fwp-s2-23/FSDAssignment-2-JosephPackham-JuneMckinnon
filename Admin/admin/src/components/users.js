@@ -44,12 +44,15 @@ const UserList = () => {
                 console.log(response);
                 break;
             case "admin-toggled":
-                button.classList.remove("admin-toggled");
-                button.classList.add("admin-button");
-                button.innerText = "Admin?";
-
                 response = await setAdmin(email, false);
                 console.log(response);
+
+                if (response.success === true) {
+                    button.classList.remove("admin-toggled");
+                    button.classList.add("admin-button");
+                    button.innerText = "Admin?";
+                }
+
                 break;
             default:
                 console.log("err");

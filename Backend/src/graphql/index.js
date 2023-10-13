@@ -126,6 +126,22 @@ graphql.root = {
 	set_admin: async (args) => {
 		try {
 			const user = await db.user.findByPk(args.email);
+			const allUsers = await db.user.findAll();
+
+			// check number of admins in database
+			let adminCount = 0;
+			for (let i = 0; i < allUsers.length; i++) {
+				if (allUsers[i].admin === true) {
+					adminCount++;
+				}
+			}
+			// if number of admins is 1 or less then you cannot remove admin
+			if (adminCount <= 1 && args.admin === false) {
+				return {
+					success: false,
+					message: "There needs to be 1 admin account"
+				}
+			}
 
 			user.admin = args.admin;
 			await user.save();
