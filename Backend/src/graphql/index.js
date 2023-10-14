@@ -28,6 +28,13 @@ graphql.schema = buildSchema(`
 		review_date: String
 	}
 
+	type Movie {
+		movie_name: String,
+		movie_image: String,
+		createdAt: String,
+		updatedAt: String
+	}
+
 	# The input type can be used for incoming data.
 	input UserInput {
 		email: String,
@@ -48,13 +55,20 @@ graphql.schema = buildSchema(`
 		review_date: String
 	}
 
+	input MovieInput {
+		movie_name: String,
+		movie_image: String
+	}
+
 	# Queries (read-only operations).
 	type Query {
 		all_users: [User],
 		user(email: String): User,
 		user_exists(email: String): Boolean,
 		all_reviews: [Review],
-		reviews_by_user(email: String): [Review]
+		reviews_by_user(email: String): [Review],
+		all_movies: [Movie],
+		movie(movie_name: String): Movie
 	}
 
 	# Mutations (modify data in the underlying data-source, i.e., the database).
@@ -67,7 +81,10 @@ graphql.schema = buildSchema(`
 		delete_review(review_id: Int): AuthResponse,
 		verify_user(email: String, password: String): AuthResponse,
 		set_admin(email: String, admin: Boolean): AuthResponse,
-		set_blocked(email: String, blocked: Boolean): AuthResponse
+		set_blocked(email: String, blocked: Boolean): AuthResponse,
+		create_movie(input: MovieInput): AuthResponse,
+		update_movie(input: MovieInput): AuthResponse,
+		delete_movie(input: MovieInput): AuthResponse
 	}
 
 	type AuthResponse {
@@ -91,10 +108,10 @@ graphql.root = {
 		return count === 1;
 	},
 	all_reviews: async () => {
-		return await db.review.findAll();
+		return await db.reviews.findAll();
 	},
 	reviews_by_user: async (args) => {
-		const allReviews = await db.review.findAll();
+		const allReviews = await db.reviews.findAll();
 		let userReviews = [];
 		allReviews.forEach(review => {
 			if (review.author_email === args.email) {
@@ -103,6 +120,9 @@ graphql.root = {
 		});
 
 		return userReviews;
+	},
+	all_movies: async () => {
+		return await db.movies.findAll();
 	},
 
 	// Mutations.
@@ -296,7 +316,56 @@ graphql.root = {
 				message: "An error has occured"
 			}
 		}
-	}
+	},
+	create_movie: async (args) => {
+		try {
+			const movie = await db.movie.create(args.input);
+			return {
+				success: true,
+				message: "Movie created"
+			}
+		} catch {
+			return {
+				success: false,
+				message: "An error has occurred in creation"
+			}
+		}
+	},
+	update_movie: async (args) => {
+		try {
+			const movie = await db.movie.findByPk(args.movie_name);
+
+			movie.movie_image = args.movie_image;
+			movie.save();
+
+			return {
+				success: true,
+				message: "Movie updated"
+			}
+		} catch {
+			return {
+				success: false,
+				message: "An error has occurred in update"
+			}
+		}
+	},
+	delete_movie: async (args) => {
+		try {
+			const movie = await db.movie.findByPk(args.movie_name);
+
+			await movie.destroy();
+
+			return {
+				success: true,
+				message: "Movie deleted"
+			}
+		} catch {
+			return {
+				success: false,
+				message: "Failed to delete movie"
+			}
+		}
+	},
 };
 
 module.exports = graphql;
