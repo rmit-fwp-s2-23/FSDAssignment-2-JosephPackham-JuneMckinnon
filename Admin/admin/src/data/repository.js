@@ -79,7 +79,12 @@ async function getMovies() {
         {
             all_movies {
                 movie_name,
-                movie_image
+                movie_image,
+                sessiontimes {
+                    sessiontime_time
+                    sessiontime_day
+                    sessiontime_available_seats
+                }
             }
         }
     `;

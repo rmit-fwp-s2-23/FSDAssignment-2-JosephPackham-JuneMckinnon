@@ -16,9 +16,10 @@ const Movies = () => {
         const retrieveMovies = async () => {
             const allMovies = await getMovies();
             setMovies(allMovies);
+            console.log(allMovies);
         }
         retrieveMovies();
-    })
+    }, [])
 
         
     return (

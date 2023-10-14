@@ -136,12 +136,11 @@ graphql.root = {
 	},
 	all_movies: async () => {
 		try {
-		  const moviesWithSessionTimes = await db.movies.findAll({ include: { model: db.sessiontimes, as: "sessiontimes"} });
-	  
-		  return moviesWithSessionTimes;
+		  	const movies = await db.movies.findAll({ include: { model: db.sessiontimes, as: "sessiontimes"} });
+		  	return movies;
 		} catch (error) {
-		  console.error(error);
-		  throw new Error('Error fetching movies with session times');
+		  	console.error(error);
+		  	throw new Error('Error fetching movies with session times');
 		}
 	  },
 
