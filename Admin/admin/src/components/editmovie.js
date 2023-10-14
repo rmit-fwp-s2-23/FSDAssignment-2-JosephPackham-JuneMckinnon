@@ -47,16 +47,31 @@ const EditMovie = () => {
 
     return (
         <div className = "edit-col">
-            <div>Editing: {movie.movie_name}</div>
+            <div onClick = {handleClick}>Editing: {movie.movie_name}</div>
             <br />
             <div className = "edit-container">
                 <div id = "edit-movie" className = "edit-items">
                     {Object.entries(movie).map(([key, value]) => 
                         key === "movie_name" ? null : (
-                            <div key={key} className="movie-entry">
-                                <div className="movie-key">{key}:</div>
-                                <input className="movie-val" type="text" defaultValue={value} onChange = {(ev) => handleInputChange(key, ev.target.value)} />
-                            </div>
+                            key === "sessiontimes" ? (
+                                <>
+                                    <div className = "movie-key">Session Times:</div>
+                                    <div key = {key} className = "session-container">
+                                        {value.map(session => 
+                                            <div key = {session.sessiontime_time} className = "session-entry">
+                                                <div>Time: {session.sessiontime_time}</div>
+                                                <div>Day: {session.sessiontime_day}</div>
+                                                <div>Seats Left: {session.sessiontime_available_seats}</div>
+                                            </div>
+                                        )}
+                                    </div>
+                                </>
+                            ) : (
+                                <div key={key} className="movie-entry">
+                                    <div className="movie-key">{key}:</div>
+                                    <input className="movie-val" type="text" defaultValue={value} onChange = {(ev) => handleInputChange(key, ev.target.value)} />
+                                </div>
+                            )
                         )
                     )}
                     <button className = "edit-save" onClick = {() => saveChanges()}>Save</button>
