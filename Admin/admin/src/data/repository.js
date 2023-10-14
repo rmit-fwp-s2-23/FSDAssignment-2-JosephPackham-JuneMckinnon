@@ -88,6 +88,26 @@ async function getMovies() {
     return data.all_movies;
 }
 
+async function updateMovie(movie_name, movie_image) {
+    const mutation = gql`
+        mutation UpdateMovie($input: MovieInput) {
+            update_movie(input: $input) {
+                success
+                message
+            }
+        }
+    `;
+  
+    const data = await request(GRAPH_QL_URL, mutation, {
+        input: {
+            movie_name: movie_name,
+            movie_image: movie_image
+        }
+    });
+  
+    return data.update_movie;
+}
+
 export {
-    getUsers, loginUser, setAdmin, setBlocked, getMovies
+    getUsers, loginUser, setAdmin, setBlocked, getMovies, updateMovie
 }

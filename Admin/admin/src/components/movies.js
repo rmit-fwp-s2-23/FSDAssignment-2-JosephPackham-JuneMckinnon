@@ -1,19 +1,30 @@
-import React, { useContext } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import "../css/movies.css";
 import { TabContext, MovieContext } from "./dashboard.js";
+import { getMovies } from "../data/repository.js";
 
 const Movies = () => {
     const setTab = useContext(TabContext)
-    const handleClick = () => {
+    const { setMovie } = useContext(MovieContext);
+    const handleClick = (movie) => {
+        setMovie(movie)
         setTab("edit")
     }
 
-    const { movies } = useContext(MovieContext);
+    const [movies, setMovies] = useState(null);
+    useEffect( () => {
+        const retrieveMovies = async () => {
+            const allMovies = await getMovies();
+            setMovies(allMovies);
+        }
+        retrieveMovies();
+    })
+
         
     return (
         <div className = "movie-container">
             {movies?.map(movie => 
-                <div key = {movie.movie_name} className = "movie" onClick = {handleClick}>
+                <div key = {movie.movie_name} className = "movie" onClick = {() => handleClick(movie)}>
                     <div className = "overlay">Edit</div>
                     <div className = "movie-poster">
                         <div className = "movie-name">{movie.movie_name}</div>

@@ -1,13 +1,11 @@
-import React, { useContext } from "react";
-import { TabContext } from "./dashboard.js"
+import React, { useContext, useState } from "react";
+import { TabContext, MovieContext } from "./dashboard.js"
 import "../css/edit.css";
+import { updateMovie } from "../data/repository.js";
 
 const EditMovie = () => {
-    const movie = {
-        name: "Barbie",
-        image: "https://url.com",
-        tickets: 10
-    }
+    const { movie } = useContext(MovieContext);
+    const [editedMovie, setEditedMovie] = useState(movie);
 
     const reviews = [
         {
@@ -35,18 +33,33 @@ const EditMovie = () => {
         setTab("movies")
     }
 
+    const handleInputChange = (key, value) => {
+        setEditedMovie(prevState => ({
+          ...prevState,
+          [key]: value,
+        }));
+      };
+
+    const saveChanges = async () => {
+        const response = await updateMovie(editedMovie.movie_name, editedMovie.movie_image);
+        console.log(response);
+    }
+
     return (
         <div className = "edit-col">
-            <div>Editing: {movie.name}</div>
+            <div>Editing: {movie.movie_name}</div>
             <br />
             <div className = "edit-container">
                 <div id = "edit-movie" className = "edit-items">
                     {Object.entries(movie).map(([key, value]) => 
-                        <div key = {key} className = "movie-entry">
-                            <div className = "movie-key">{key}:</div>
-                            <input className = "movie-val" type = "text" defaultValue = {value} />
-                        </div>
+                        key === "movie_name" ? null : (
+                            <div key={key} className="movie-entry">
+                                <div className="movie-key">{key}:</div>
+                                <input className="movie-val" type="text" defaultValue={value} onChange = {(ev) => handleInputChange(key, ev.target.value)} />
+                            </div>
+                        )
                     )}
+                    <button className = "edit-save" onClick = {() => saveChanges()}>Save</button>
                 </div>
                 <div id = "edit-review" className = "edit-items">
                     {reviews.map(review => 

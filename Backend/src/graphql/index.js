@@ -319,7 +319,7 @@ graphql.root = {
 	},
 	create_movie: async (args) => {
 		try {
-			const movie = await db.movie.create(args.input);
+			const movie = await db.movies.create(args.input);
 			return {
 				success: true,
 				message: "Movie created"
@@ -333,25 +333,25 @@ graphql.root = {
 	},
 	update_movie: async (args) => {
 		try {
-			const movie = await db.movie.findByPk(args.movie_name);
+			const movie = await db.movies.findByPk(args.input.movie_name);
 
-			movie.movie_image = args.movie_image;
+			movie.movie_image = args.input.movie_image;
 			movie.save();
 
 			return {
 				success: true,
 				message: "Movie updated"
 			}
-		} catch {
+		} catch (error) {
 			return {
 				success: false,
-				message: "An error has occurred in update"
+				message: error
 			}
 		}
 	},
 	delete_movie: async (args) => {
 		try {
-			const movie = await db.movie.findByPk(args.movie_name);
+			const movie = await db.movies.findByPk(args.movie_name);
 
 			await movie.destroy();
 

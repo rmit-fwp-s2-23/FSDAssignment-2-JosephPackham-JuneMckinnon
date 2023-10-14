@@ -5,6 +5,8 @@
     --background-med: #251e3b;
     --background-light: #393053;
     --background-lightest: #5e537f;
+    --red: #FF6961;
+    --blue: #5a73d0;
 }
 
 body {
@@ -60,6 +62,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: space-evenly;
+    flex-direction: column;
     width: 100%;
     margin: 1rem;
 }
@@ -71,13 +74,44 @@ body {
     justify-content: center;
     align-items: center;
     font-size: 1.4rem;
-    font-weight: 500;
+    font-weight: 700;
     letter-spacing: 0.08rem;
+    margin-bottom: 0.7rem;
 }
 
 .movie-val {
-    width: 60%;
-    border: none;
-    border-radius: 0.3rem;
+    width: 80%;
+    border-radius: 0.6rem;
+    border-width: 0.3rem;
+    border-color: var(--primary);
+    border-style: solid;
+    background: var(--background-light);
+    color: white;
+    letter-spacing: 0.05rem;
     height: 2rem;
+    padding: 1rem 1rem 1rem 1rem;
+    box-sizing: border-box;
+    box-shadow: 0 0.5rem 0.8rem -0.5rem var(--background-med);
+}
+
+.edit-save {
+    width: 20%;
+    aspect-ratio: 2 / 1;
+    border-width: 0.3rem;
+    border-style: solid;
+    border-color: var(--blue);
+    border-radius: 0.8rem;
+    background: var(--background-light);
+    color: white;
+    transition: transform 0.1s ease;
+}
+
+.edit-save:hover {
+    transform: scale(1.1);
+    filter: brightness(1.05);
+}
+
+.edit-save:active {
+    transform: scale(1.05);
+    filter: brightness(0.95);
 }

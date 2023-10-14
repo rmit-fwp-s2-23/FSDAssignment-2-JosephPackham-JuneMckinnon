@@ -1,32 +1,23 @@
-import React, { useState, createContext, useEffect } from "react";
+import React, { useState, createContext } from "react";
 import Movies from "./movies";
 import EditMovie from "./editmovie";
 import UserList from "./users";
 import "../css/dash.css";
-import { getMovies } from "../data/repository";
 
 export const TabContext = createContext();
 export const MovieContext = createContext();
 
 const Dashboard = () => {
+    const [movie, setMovie] = useState(null)
     const [tab, setTab] = useState("movies");
     const tabSwitch = (curTab) => {
         if (curTab !== tab) {
             setTab(curTab);
         }
     }
-
-    const [movies, setMovies] = useState(null);
-    useEffect( () => {
-        const retrieveMovies = async () => {
-            const allMovies = await getMovies();
-            setMovies(allMovies);
-        }
-        retrieveMovies();
-    })
     
     return (
-        <MovieContext.Provider value = {{movies, setMovies}} >
+        <MovieContext.Provider value = {{movie, setMovie}} >
             <TabContext.Provider value = {setTab}>
                 <div className = "flex-col">
                     <div className = "dash-toggles">
