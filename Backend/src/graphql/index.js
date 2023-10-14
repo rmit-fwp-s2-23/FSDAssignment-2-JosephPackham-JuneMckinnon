@@ -29,10 +29,16 @@ graphql.schema = buildSchema(`
 	}
 
 	type Movie {
-		movie_name: String,
-		movie_image: String,
-		createdAt: String,
-		updatedAt: String
+		movie_name: String
+		movie_image: String
+		sessiontimes: [SessionTime]
+	}
+	  
+	type SessionTime {
+		sessiontime_id: Int
+		sessiontime_time: String
+		sessiontime_day: String
+		sessiontime_available_seats: Int
 	}
 
 	# The input type can be used for incoming data.
@@ -57,8 +63,15 @@ graphql.schema = buildSchema(`
 
 	input MovieInput {
 		movie_name: String,
-		movie_image: String
+		movie_image: String,
+		session_times: [SessionTimeInput]
 	}
+
+	input SessionTimeInput {
+		sessiontime_time: String,
+		sessiontime_day: String,
+		sessiontime_available_seats: Int
+	  }
 
 	# Queries (read-only operations).
 	type Query {
@@ -122,8 +135,15 @@ graphql.root = {
 		return userReviews;
 	},
 	all_movies: async () => {
-		return await db.movies.findAll();
-	},
+		try {
+		  const moviesWithSessionTimes = await db.movies.findAll({ include: { model: db.sessiontimes, as: "sessiontimes"} });
+	  
+		  return moviesWithSessionTimes;
+		} catch (error) {
+		  console.error(error);
+		  throw new Error('Error fetching movies with session times');
+		}
+	  },
 
 	// Mutations.
 	create_user: async (args) => {
@@ -200,7 +220,7 @@ graphql.root = {
 				}
 			}
 	
-			await user.destroy();
+			await review.destroy();
 	
 			return {
 				success: true,

@@ -20,8 +20,8 @@ db.sessiontimes = require('./models/sessiontimes.js')(db.sequelize, DataTypes);
 db.reviews.belongsTo(db.user, { foreignKey: { name: 'author_email', allowNull: false } });
 db.tickets.belongsTo(db.user, { foreignKey: { name: 'author_email', allowNull: false } });
 db.tickets.belongsTo(db.sessiontimes, { foreignKey: { name: 'ticket_session', allowNull: false } });
-db.sessiontimes.belongsTo(db.movies, { foreignKey: { name: 'sessiontime_movie', allowNull: false } });
-
+db.movies.hasMany(db.sessiontimes, { foreignKey: 'sessiontime_movie' });
+db.sessiontimes.belongsTo(db.movies, { foreignKey: 'sessiontime_movie' });
 
 
 
