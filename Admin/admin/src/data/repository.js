@@ -74,6 +74,20 @@ async function setBlocked(email, blocked) {
     return data.set_blocked;
 }
 
+async function getMovies() {
+    const query = gql`
+        {
+            all_movies {
+                movie_name,
+                movie_image
+            }
+        }
+    `;
+
+    const data = await request(GRAPH_QL_URL, query);
+    return data.all_movies;
+}
+
 export {
-    getUsers, loginUser, setAdmin, setBlocked
+    getUsers, loginUser, setAdmin, setBlocked, getMovies
 }

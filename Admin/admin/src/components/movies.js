@@ -1,27 +1,22 @@
 import React, { useContext } from "react";
 import "../css/movies.css";
-import { TabContext } from "./dashboard.js";
+import { TabContext, MovieContext } from "./dashboard.js";
 
 const Movies = () => {
-    const movies = [
-        {name: "barbie"},
-        {name: "avengers"},
-        {name: "oppenheimer"},
-        {name: "lotr"},
-    ]
-
     const setTab = useContext(TabContext)
     const handleClick = () => {
         setTab("edit")
     }
+
+    const { movies } = useContext(MovieContext);
         
     return (
         <div className = "movie-container">
-            {movies.map(movie => 
-                <div key = {movie.name} className = "movie" onClick = {handleClick}>
+            {movies?.map(movie => 
+                <div key = {movie.movie_name} className = "movie" onClick = {handleClick}>
                     <div className = "overlay">Edit</div>
                     <div className = "movie-poster">
-                        <div className = "movie-name">{movie.name}</div>
+                        <div className = "movie-name">{movie.movie_name}</div>
                     </div>
                     <div className = "movie-stats">
                         <div>Ticket Sales Today:</div>
