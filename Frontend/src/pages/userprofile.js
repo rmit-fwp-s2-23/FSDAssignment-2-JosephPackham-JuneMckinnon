@@ -11,20 +11,20 @@ import { findUser, deleteUser, findUserByEmail, getTicketByEmail } from "../data
 
 const UserProfile = (props) => {
 
-    const [user, setUser] = useState({});
-    const [tickets, setTickets] = useState([]);
-    const [activeIndex, setActiveIndex] = useState(0);
+    const [user, setUser] = useState({}); // state for user data
+    const [tickets, setTickets] = useState([]); // state for user's ticket reservations
+    const [activeIndex, setActiveIndex] = useState(0); // state for the index of the currently displayed ticket reservation
 
 
 
     useEffect(() => {
         const getData = async () => {
             try {
-                const email = JSON.parse(localStorage.getItem("loggedUser")).email;
-                const fetchedUser = await findUserByEmail(email);
-                setUser(fetchedUser);
-                const tickets = await getTicketByEmail(email);
-                setTickets(tickets);
+                const email = JSON.parse(localStorage.getItem("loggedUser")).email; // get the email of the logged in user from local storage
+                const fetchedUser = await findUserByEmail(email); // fetch the user data from the server using the email
+                setUser(fetchedUser); // set the user state to the fetched user data
+                const tickets = await getTicketByEmail(email); // fetch the user's ticket reservations from the server using the email
+                setTickets(tickets); // set the ticket reservations state to the fetched ticket reservations
             } catch {
                 console.log("error fetching user, using test user instead")
                 const testUser = {
@@ -32,7 +32,7 @@ const UserProfile = (props) => {
                     email: "s3947118@student.rmit.edu.au",
                     joined: "10/10/23"
                 }
-                setUser(testUser);
+                setUser(testUser); // if there is an error fetching the user data, set the user state to a test user
             }
         }
 
@@ -60,11 +60,11 @@ const UserProfile = (props) => {
             }
         }
     }
-    const handlePrevClick = () => {
+    const handlePrevClick = () => { // when the "Prev" button is clicked, display the previous ticket reservation
         setActiveIndex((prevIndex) => (prevIndex === 0 ? tickets.length - 1 : prevIndex - 1));
       };
     
-      const handleNextClick = () => {
+      const handleNextClick = () => { // when the "Next" button is clicked, display the next ticket reservation
         setActiveIndex((prevIndex) => (prevIndex === tickets.length - 1 ? 0 : prevIndex + 1));
       };
     return (
@@ -94,7 +94,7 @@ const UserProfile = (props) => {
                         </div> 
                                       
                         </div>
-                        {tickets.length > 0 && (
+                        {tickets.length > 0 && ( // if the user has ticket reservations, display them
         <div className="ticket-container">
             <div id = "header">
                             Ticket Reservations

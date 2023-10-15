@@ -1,11 +1,11 @@
 const db = require("../database");
 
-// Select all posts from the database.
+// Select all reviews from the database.
 exports.all = async (req, res) => {
   const reviews = await db.reviews.findAll();
 
   // Can use eager loading to join tables if needed, for example:
-  // const posts = await db.post.findAll({ include: db.user });
+  // const reviews = await db.reviews.findAll({ include: db.user });
 
   // Learn more about eager loading here: https://sequelize.org/master/manual/eager-loading.html
 
@@ -28,7 +28,7 @@ exports.create = async (req, res) => {
   res.json(reviews);
 };
 
-//select review by movie name
+// Select reviews by movie name.
 exports.one = async (req, res) => {
   const reviews = await db.reviews.findAll({
     where: {
@@ -39,7 +39,7 @@ exports.one = async (req, res) => {
   res.json(reviews);
 }
 
-//delete a review by review_id 
+// Delete a review by ID.
 exports.delete = async (req, res) => {
   const reviews = await db.reviews.findByPk(req.params.id);
   await reviews.destroy();
@@ -47,7 +47,7 @@ exports.delete = async (req, res) => {
   res.json(reviews);
 }
 
-//update a review in the database by review_id
+// Update a review's information by ID.
 exports.update = async (req, res) => {
   const reviews = await db.reviews.findByPk(req.params.id);
   reviews.movie = req.body.movie;
@@ -60,19 +60,3 @@ exports.update = async (req, res) => {
 
   res.json(reviews);
 }
-
-//update a review in the database
-exports.update = async (req, res) => {
-  const reviews = await db.reviews.findByPk(req.params.id);
-  reviews.movie = req.body.movie;
-  reviews.author_name = req.body.author_name;
-  reviews.author_email = req.body.author_email;
-  reviews.review_rating = req.body.review_rating;
-  reviews.review_text = req.body.review_text;
-
-  await reviews.save();
-
-  res.json(reviews);
-}
-
-

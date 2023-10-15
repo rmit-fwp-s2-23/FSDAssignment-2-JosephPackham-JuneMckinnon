@@ -15,6 +15,7 @@ test('renders landing page with correct information', async () => {
   // Fetch the session times data and update the state
   const sessionTimes = await getAllSessionTimes();
   
+  // Assert that the session times data is defined and has at least one element
   expect(sessionTimes).toBeDefined();
   expect(sessionTimes.length).toBeGreaterThan(0);
   expect(sessionTimes[0].sessiontime_movie).toBeDefined();
@@ -26,7 +27,8 @@ test('renders landing page with correct information', async () => {
 
   // Fetch the movies data and update the state
   const movies = await getAllMovies();
-  console.log(movies);
+
+  // Assert that the movies data is defined and has at least one element
   expect(movies).toBeDefined();
   expect(movies.length).toBeGreaterThan(0);
   expect(movies[0].movie_name).toBeDefined();
@@ -34,12 +36,10 @@ test('renders landing page with correct information', async () => {
   expect(movies[0].movie_name).not.toBeNull();
   expect(movies[0].movie_image).not.toBeNull();
 
-  //set movie to the first movie in the movies array
+  // Set the movie state to the first movie in the movies array
   setMovie(movies[0]);
   const movie = movies[0];
  
-
-
   // Render the LandingPage component with the mock setMovie function and session times state
   render(
     <MemoryRouter>
@@ -47,6 +47,7 @@ test('renders landing page with correct information', async () => {
     </MemoryRouter>
   );
 
+  // Wait for the movie elements to be displayed on the page
   await waitFor(() => {
     const movieElements = screen.getAllByTestId('movie');
     expect(movieElements.length).toBe(movies.length);
@@ -59,13 +60,9 @@ test('renders landing page with correct information', async () => {
   expect(screen.getByTestId('ReviewButton')).toBeInTheDocument();
   expect(screen.getByTestId('SessionTimesHeading')).toBeInTheDocument();
   expect(screen.getByTestId('SessionTimes')).toBeInTheDocument();
-
-  
-
-
 });
 
-//after all, close server
+// After all tests are run, close the server
 afterAll(() => {
   server.close();
 });

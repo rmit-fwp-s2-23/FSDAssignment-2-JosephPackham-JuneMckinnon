@@ -1,4 +1,4 @@
-module.exports = (sequelize, DataTypes) =>
+module.exports = (sequelize, DataTypes) => //Movie table in database
     sequelize.define("movie", {
         movie_name: {
             type: DataTypes.STRING(32),

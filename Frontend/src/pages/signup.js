@@ -4,7 +4,6 @@ import { useNavigate } from "react-router";
 import { createUser, getAllUsers, findUser} from "../data/repository";
 
 
-// TODO: add in validation for strong password - just need to do special characters, password already has validation for length and number
 
 
 const SignUp = (props) => {
@@ -79,23 +78,7 @@ const SignUp = (props) => {
             localStorage.setItem('loggedUser' , JSON.stringify(loggedUser)); //set loggedUser in local storage to new user
             props.setUser({name: createdUser.name, email: createdUser.email, joined: createdUser.joined }); //set user state to new user
             navigate('/');
-            // createUser(user).then((response) => {
-            //     
-            // })
 
-            
-            
-            // let registered = JSON.parse(localStorage.getItem('users')); //get all registered users from local storage
-            // if(registered=== null){ //if there are no registered users, create an empty array
-            //     registered = []
-            // };
-
-            // registered.push(user); //add new user to array of registered users
-            // localStorage.setItem('users', JSON.stringify(registered)); //set local storage to new array of registered users
-            // localStorage.setItem('loggedUser' , JSON.stringify(user)); //set loggedUser in local storage to new user
-            // props.setUser({name: user.name, password: user.password, email: user.email, joined: user.joined }); //set user state to new user
-            // navigate('/'); //navigate to landing page
-            // alert('Account created successfully!'); //alert user that account was created
             
         };
 

@@ -8,6 +8,7 @@ body {
 
     background-color: rgb(13, 14, 21);
     color: white;
+    max-width:100%
 }
   
 code {
@@ -35,6 +36,7 @@ code {
     font-size: 4vh;
     font-weight: 450;
     letter-spacing: 1px;
+    max-width: 30vh;
 }
 
 button {
