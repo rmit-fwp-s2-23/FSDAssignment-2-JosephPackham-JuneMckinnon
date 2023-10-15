@@ -43,9 +43,6 @@
   "devDependencies": {
     "msw": "^1.3.2",
     "vitest": "^0.34.6"
-  },
-  "jest": {
-    "transform": {},
-    "transformIgnorePatterns": []
   }
+
 }

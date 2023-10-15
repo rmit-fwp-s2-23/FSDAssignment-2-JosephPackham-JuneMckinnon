@@ -52,31 +52,38 @@ export const handlers = [
         )
     }),
 
-    // rest.get('http://localhost:4000/api/tickets/email/:email', async (req, res, ctx) => {
-        
-    //     return res(
-    //         ctx.status(200),
-    //         ctx.json({
-    //             ticket_id: 1,
-    //             movie: "Test Movie",
-    //             author_name: "Test User",
-    //             author_email: "june@email.com",
-    //             ticket_quantity: 1,
-    //             ticket_day: "01/01/2022",
-    //             ticket_time: "12:00",
-    //         },
-    //         {
-    //             ticket_id: 1,
-    //             movie: "Test Movie",
-    //             author_name: "Test User",
-    //             author_email: "june@email.com",
-    //             ticket_quantity: 1,
-    //             ticket_day: "01/01/2022",
-    //             ticket_time: "12:00",
-    //         })
-    //         )
-    //     } ),
+    //get reviews by movie
+    rest.get('http://localhost:4000/api/reviews/:movie', async (req, res, ctx) => {
+        return res(
+            ctx.status(200),
+            ctx.json(
+                [
+                    {
+                        review_id: 1,
+                        movie: 'Test Movie',
+                        author_name: 'Test User',
+                        author_email: 'test@example.com',
+                        review_rating: 4,
+                        review_text: 'Test review text',
+                        review_date: '2022-01-01T00:00:00.000Z',
+                      },
+                      {
+                        review_id: 2,
+                        movie: 'Test Movie',
+                        author_name: 'Test User 2',
+                        author_email: 'test2@example.com',
+                        review_rating: 3,
+                        review_text: 'Test review text 2',
+                        review_date: '2022-01-02T00:00:00.000Z',
+                      }
+                    ]
+            )
+        )
+    }
+    ),
+
     
+
 
 
 ]

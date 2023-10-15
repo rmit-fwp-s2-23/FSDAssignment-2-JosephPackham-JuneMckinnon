@@ -13,7 +13,8 @@ const Reviews = (props) => {
         const getReviews = async () => {
             const reviews = await getReviewsByMovie(props.movie);
             setReviews(reviews);
-            console.log(reviews);
+            
+            
         }
         getReviews();
     }, [props.movie])
@@ -32,8 +33,9 @@ const Reviews = (props) => {
         
     }
 
-    const handleDelete = async (review_id, e) => {
+    const handleDelete = async (review_id,email, e) => {
         e.preventDefault();
+        if (props.user.email === email) {
         try {
             await deleteReview(review_id);
             // refresh the reviews list
@@ -42,13 +44,13 @@ const Reviews = (props) => {
             console.error(error);
         }
 
+            } else{
+                alert('You can only delete your own reviews');
             }
+        }
 
     const handleEdit = async (review, e) => {
         e.preventDefault();
-
-        console.log(review.author_email);
-        console.log(props.user.email);
         if (review.author_email === props.user.email){
             let edit = prompt('Edit your review', review.review_text);
             if(edit === null){
@@ -128,14 +130,14 @@ const Reviews = (props) => {
                 <div className = "form-background" id = "review-bkg">
                     <div className = 'review-container'>
                     {reviews.map((review) => (
-                        <div className='review'>
+                        <div className='review' data-testid='review' key={review.review_id}>
                             <p className='name'> {review.author_name}</p>
                             <p className='date'> {review.review_date.split("T")[0]}</p>
                             <hr></hr>
                             <p><b>Rating:</b> {review.review_rating}/5</p>
                             <p className='reviewcontent'> {review.review_text} </p>
                             <button id='review-button' onClick={e => handleEdit(review, e)}>Edit</button>
-                            <button id='review-button' onClick={e => handleDelete(review.review_id, e)}>Delete</button>
+                            <button id='review-button' onClick={e => handleDelete(review.review_id, review.author_email, e)}>Delete</button>
                         </div>
 
 
