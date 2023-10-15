@@ -13,6 +13,9 @@ const UserProfile = (props) => {
 
     const [user, setUser] = useState({});
     const [tickets, setTickets] = useState([]);
+    const [activeIndex, setActiveIndex] = useState(0);
+
+
 
     useEffect(() => {
         const getData = async () => {
@@ -57,7 +60,13 @@ const UserProfile = (props) => {
             }
         }
     }
-
+    const handlePrevClick = () => {
+      setActiveIndex((prevIndex) => prevIndex === 0 ? tickets.length - 1 : prevIndex - 1);
+    };
+  
+    const handleNextClick = () => {
+      setActiveIndex((prevIndex) => prevIndex === tickets.length - 1 ? 0 : prevIndex + 1);
+    };
     return (
         <div className = "page">
             <div className = "content">
@@ -85,17 +94,18 @@ const UserProfile = (props) => {
                         </div>                
                         </div>
                         <div className="ticket-list">
-                            {/* map tickets */}
-                            {tickets.map((ticket, index) => (
-                                <div key={index} className="ticket">
-                                <h3 className = "ticketmovie">{ticket.movie}</h3>
-                                <div className="details">
-                                    <p className="quantity">{ticket.ticket_quantity} seats</p>
-                                    <p className="day">{ticket.ticket_day}</p>
-                                    <p className="time">{ticket.ticket_time}</p>
-                                </div>
-                                </div>
-                            ))}
+                            <div className="ticket">
+                            <h3 className="ticketmovie">{tickets[activeIndex].movie}</h3>
+                            <div className="details">
+                                <p className="quantity">{tickets[activeIndex].ticket_quantity} seats</p>
+                                <p className="day">{tickets[activeIndex].ticket_day}</p>
+                                <p className="time">{tickets[activeIndex].ticket_time}</p>
+                            </div>
+                            </div>
+                        </div>
+                            <div className="navigation">
+                                <button onClick={handlePrevClick}>Prev</button>
+                                <button onClick={handleNextClick}>Next</button>
                             </div>
 
             </div>

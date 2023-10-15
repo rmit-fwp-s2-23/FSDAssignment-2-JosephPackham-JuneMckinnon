@@ -62,17 +62,21 @@
     flex-direction: column;
     align-items: center;
     margin-left: 20vh;
+    flex-wrap: wrap-reverse;
+    max-width: 800px;
+    justify-content: center;
   }
   
   .ticket {
-    display: flex;
-    flex-direction: column;
+    flex: 1;
     align-items: center;
     margin-bottom: 20px;
     padding: 20px;
     background-color: #1d1c1c;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    max-width: 800px;
+    max-height: 200px;
   }
   
   .ticketmovie {
@@ -99,4 +103,33 @@
   
   .time {
     font-size: 18px;
+  }
+
+  .navigation {
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .navigation button {
+    background-color: #0077ff;
+    color: #fff;
+    border: none;
+    border-radius: 0.25rem;
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%23fff"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12l4.58-4.59z"/></svg>');
+    background-repeat: no-repeat;
+    background-position: center;
+  }
+  
+  .navigation button.prev {
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%23fff"><path d="M14.59 16.59L13.17 15.17 8.59 19.76 10 21.17 14.59 16.59zM16.59 7.41L15.17 6 10.59 10.59 12 12 16.59 7.41z"/></svg>');
+  }
+  
+  .navigation button.next {
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%23fff"><path d="M9.41 7.41L8 6l-6 6 6 6 1.41-1.41L4.83 12l4.58-4.59z"/></svg>');
   }
