@@ -71,8 +71,13 @@ const SignUp = (props) => {
         }
         else{
             const createdUser = await createUser(user);
-            localStorage.setItem('loggedUser' , JSON.stringify(createdUser)); //set loggedUser in local storage to new user
-            props.setUser({name: user.name, password: user.password, email: user.email, joined: user.joined }); //set user state to new user
+            const loggedUser = {
+              name: createdUser.name,
+              email: createdUser.email,
+              joined: createdUser.joined,
+            }
+            localStorage.setItem('loggedUser' , JSON.stringify(loggedUser)); //set loggedUser in local storage to new user
+            props.setUser({name: createdUser.name, email: createdUser.email, joined: createdUser.joined }); //set user state to new user
             navigate('/');
             // createUser(user).then((response) => {
             //     
@@ -104,21 +109,21 @@ const SignUp = (props) => {
         <div className="page">
             <div className = "content">
                 <div className = "background">
-                    <div id = "header">
+                    <div id = "header" data-testid = 'Heading'>
                         Welcome to Loop Cinemas!
                     </div>
                     <form onSubmit={e => handleSubmit(e)}>
                         <div>
-                            <input className = "input" type = "name" id = "name" placeholder = "Name"></input>
+                            <input data-testid = 'Name' className = "input" type = "name" id = "name" placeholder = "Name"></input>
                         </div>
                         <div>
-                            <input className = "input" type = "email" id = "email" placeholder = "Email"></input>
+                            <input data-testid = 'Email' className = "input" type = "email" id = "email" placeholder = "Email"></input>
                         </div>
                         <div>
-                            <input className = "input" type = "password" id = "password" placeholder = "Password"></input>
+                            <input data-testid = 'Password' className = "input" type = "password" id = "password" placeholder = "Password"></input>
                         </div>
                         <div className = "flex-center">
-                            <button className = "button" id = "signin" type = "submit">Sign In</button>
+                            <button data-testid = 'SignUp' className = "button" id = "signin" type = "submit">Sign In</button>
                         </div>
                         <div id = {'error'}></div>
                     </form>

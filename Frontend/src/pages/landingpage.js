@@ -99,22 +99,22 @@ const LandingPage = (props) => {
 
 
     return (
-        <div className  = 'page'>
+        <div className  = 'page' data-testid = "LandingPage">
             {/* shows a grid of movies with buttons underneath for session times and reviews */}
             <div className = "movie-container" id = "movie-container">
                 <div className = "contain-left">
-                    <div id = "movie-title">
+                    <div id = "movie-title" data-testid = "MovieTitle">
                         Barbie
                     </div>
-                    <img src = {imgSrc} alt = "barbie" id = "movie-poster" />
-                    <div className = "handle-review" onClick = {handleReview}>
+                    <img src = {imgSrc} alt = "barbie" id = "movie-poster" data-testid = "MoviePoster"></img>
+                    <div className = "handle-review" onClick = {handleReview} data-testid = "ReviewButton">
                         Leave a Review
                     </div>
                 </div>
                 <div className = "contain-right">
                 <div id="sessiontimes">
-                    <div className="header">Session Times</div>
-                    <div className="session-times">
+                    <div className="header" data-testid = "SessionTimesHeading">Session Times</div>
+                    <div className="session-times" data-testid = "SessionTimes">
                     {sessionTimes
                         .filter(
                         (sessionTime, index, self) =>

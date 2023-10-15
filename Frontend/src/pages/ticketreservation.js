@@ -29,8 +29,10 @@ const TicketReservation = (props) => {
 
     //handle seat availability
     const handleSeatAvailability = async (available_seats, seats, id) => {
+        
         if(seats > available_seats){
             alert("There are not enough seats available");
+            return;
         }
         else{
             let newAvailableSeats = available_seats - seats;
@@ -38,36 +40,52 @@ const TicketReservation = (props) => {
 
             await updateAvailableSeats(id, newAvailableSeats);
             window.location.reload();
+            return;
             
         }
     }
 
     //handle reservation
     const handleReservation = async (time, available_seats,id) => {
+        if (props.user === null){
+            alert("Please sign in to reserve a ticket");
+            return;
+        }
+        else if (available_seats === 0){
+            alert("Sorry this session is fully booked");
+            return;
+        }
         
-        console.log("time: " + time + " available seats: " + available_seats + " id: " + id);
+        
         let seats = prompt("How many seats would you like to reserve?");
         if(!seats){
             alert("Please enter a number");
+            
         }
         else{
-            handleSeatAvailability(available_seats, seats, id);
-
-            const ticket = {
+            const seatAvailability = await handleSeatAvailability(available_seats, seats, id);
+            if (!seatAvailability){
+                return;
+            } else {
+                const ticket = {
                 movie: movie,
                 author_name: props.user.name,
                 author_email: props.user.email,
                 ticket_quantity: seats,
                 ticket_day: props.day,
-                ticket_time: time
-                
-            }
-
-            //add reservation to database
+                ticket_time: time}
+                //add reservation to database
             await createTicket(ticket);
 
 
             alert("You have reserved " + seats + " seats for " + time);
+            
+
+            }
+
+            
+
+            
         }
     }
 
