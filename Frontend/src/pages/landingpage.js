@@ -90,7 +90,7 @@ const LandingPage = (props) => {
               {movies.map((movie) => (
                 <div className="movie" onClick={() => changeImg(movie)}>
                   <img className='poster' src={movie.movie_image} alt={movie.movie_name} />
-                  
+                  <div className = "moviename">{movie.movie_name}</div>
                 </div>
               ))}
             </div>
