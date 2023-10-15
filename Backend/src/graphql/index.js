@@ -42,6 +42,17 @@ graphql.schema = buildSchema(`
 		sessiontime_available_seats: Int
 	}
 
+	type Ticket {
+		ticket_id: Int,
+		movie: String,
+		author_name: String,
+		author_email: String,
+		ticket_quantity: Int,
+		ticket_day: Int,
+		ticket_time: Int,
+		createdAt: String
+	}
+
 	# The input type can be used for incoming data.
 	input UserInput {
 		email: String,
@@ -73,7 +84,16 @@ graphql.schema = buildSchema(`
 		sessiontime_time: String,
 		sessiontime_day: String,
 		sessiontime_available_seats: Int
-	  }
+	}
+
+	input TicketInput {
+		ticket_id: Int,
+		movie: String,
+		author_name: String,
+		author_email: String,
+		ticket_quantity: Int,
+		createdAt: String
+	}
 
 	# Queries (read-only operations).
 	type Query {
@@ -83,7 +103,8 @@ graphql.schema = buildSchema(`
 		all_reviews(movie: String): [Review],
 		reviews_by_user(email: String): [Review],
 		all_movies: [Movie],
-		movie(movie_name: String): Movie
+		movie(movie_name: String): Movie,
+		all_tickets: [Ticket]
 	}
 
 	# Mutations (modify data in the underlying data-source, i.e., the database).
@@ -150,7 +171,16 @@ graphql.root = {
 		  	console.error(error);
 		  	throw new Error('Error fetching movies with session times');
 		}
-	  },
+	},
+	all_tickets: async () => {
+		try {
+			return await db.tickets.findAll();
+		} catch (error) {
+			console.error(error);
+			throw new Error('Error fetching tickets');
+		}
+	},
+
 
 	// Mutations.
 	create_user: async (args) => {
