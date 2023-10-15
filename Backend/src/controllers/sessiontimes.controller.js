@@ -1,12 +1,12 @@
 const db = require("../database");
 
-//select all session times
+// Select all session times from the database.
 exports.all = async (req, res) => {
   const sessiontimes = await db.sessiontimes.findAll();
   res.json(sessiontimes);
 };
 
-//select a session time by session time id
+// Select a session time by session time ID.
 exports.oneById = async (req, res) => {
   try {
     const sessiontime = await db.sessiontimes.findByPk(req.params.id);
@@ -22,7 +22,7 @@ exports.oneById = async (req, res) => {
   }
 };
 
-//select session time by movie name
+// Select session times by movie name.
 exports.one = async (req, res) => {
   const sessiontimes = await db.sessiontimes.findAll({
     where: {
@@ -33,7 +33,7 @@ exports.one = async (req, res) => {
   res.json(sessiontimes);
 }
 
-//select a session time by session tiem day and movie name
+// Select a session time by session time day and movie name.
 exports.oneByDay = async (req, res) => {
   try {
     const sessiontimes = await db.sessiontimes.findAll({
@@ -54,7 +54,7 @@ exports.oneByDay = async (req, res) => {
   }
 }
 
-//delete a session time by session time id
+// Delete a session time by session time ID.
 exports.delete = async (req, res) => {
   const sessiontimes = await db.sessiontimes.findByPk(req.params.id);
   await sessiontimes.destroy();
@@ -62,7 +62,7 @@ exports.delete = async (req, res) => {
   res.json(sessiontimes);
 }
 
-//update a session time in the database by session time id
+// Update a session time in the database by session time ID.
 exports.update = async (req, res) => {
   const sessiontimes = await db.sessiontimes.findByPk(req.params.id);
   sessiontimes.sessiontime_movie = req.body.sessiontime_movie;
@@ -76,10 +76,10 @@ exports.update = async (req, res) => {
   res.json(sessiontimes);
 }
 
+// Update the available seats for a session time by session time ID.
 exports.updateAvailableSeats = async (req, res) => {
   try {
     const sessiontime = await db.sessiontimes.findByPk(req.params.id);
-    console.log(req.body.sessiontime_available_seats);
 
     if (!sessiontime) {
       return res.status(404).json({ error: "Session time not found" });
@@ -94,7 +94,7 @@ exports.updateAvailableSeats = async (req, res) => {
   }
 };
 
-//create a session time in the database
+// Create a session time in the database.
 exports.create = async (req, res) => {
   const sessiontimes = await db.sessiontimes.create({
     sessiontime_movie: req.body.sessiontime_movie,
@@ -106,5 +106,3 @@ exports.create = async (req, res) => {
 
   res.json(sessiontimes);
 };
-
-
