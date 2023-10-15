@@ -82,7 +82,7 @@ const UserList = () => {
                                 <div className = "user-info">
                                     <div className = "info">Name: {user.name}</div>
                                     <div className = "info">Email: {user.email}</div>
-                                    <div className = "info">Joined: {user.joined}</div>
+                                    <div className = "info">Joined: {user.joined.slice(0, 10)}</div>
                                 </div>
                             </div>
                             <div className = "user-toggles">

@@ -4,11 +4,10 @@ import { BarChart, Bar, XAxis, YAxis, Tooltip, Legend, ResponsiveContainer, Refe
 import { reviewCountByMovie } from "../data/repository";
 import { MoviesContext } from "./dashboard";
 
-const StatsPage = () => {
+const AverageReviews = () => {
     const { movies } = useContext(MoviesContext);
     const [reviewData, setReviewData] = useState([]);
 
-    // average number of reviews
     useEffect(() => {
         const fetchReviewData = async () => {
             const reviewDataPromises = movies.map(async (movie) => {
@@ -29,32 +28,61 @@ const StatsPage = () => {
 
     const totalCount = reviewData.reduce((sum, movie) => sum + movie.count, 0);
     const averageCount = totalCount / reviewData.length;
-    console.log(averageCount);
+    return (
+        <ResponsiveContainer width = {1000} height = "100%">
+            <BarChart data={reviewData} margin = {{left: 50, top: 50, bottom: 10, right: 20}}>
+                <XAxis dataKey="name" axisLine = {{ stroke  : "white" }} tick = {{ fill: "white" }} tickLine = {{ stroke: "white" }} />
+                <YAxis axisLine = {{ stroke: "white" }} tick = {{ fill: "white" }} tickLine = {{ stroke: "white" }} />
+                <Tooltip />
+                <Legend />
+                <Bar dataKey="count" fill="#8884d8" />
+                <ReferenceLine y = {averageCount} stroke = "#BB86FC" strokeWidth = "3">
+                <Label
+                    value={`Average: ${averageCount.toFixed(2)}`}
+                    position="left"
+                    fill="white"  // Set the color of the label
+                />
+                </ReferenceLine>
+            </BarChart>
+        </ResponsiveContainer>
+    )
+}
 
+const TicketsSold = () => {
+    // 1 - Get all tickets
+    // 2 - Count tickets based on day
+    // 3 - Create 
+}
+
+const StatsPage = () => {
+    const [graph, setGraph] = useState("average_reviews");
+
+    const changeGraph = (e) => {
+        setGraph(e.target.id);
+    }
 
     return (
         <div className = "stats-page">
-            <ResponsiveContainer width = "80%" height = "80%">
-                <BarChart
-                width = {500}
-                height = {100}
-                data={reviewData}
-                >
-                    <XAxis dataKey="name" />
-                    <YAxis />
-                    <Tooltip />
-                    <Legend />
-                    <Bar dataKey="count" fill="#8884d8" />
-                    <ReferenceLine y = {averageCount} stroke = "#BB86FC" strokeWidth = "3">
-                    <Label
-                        value={`Average: ${averageCount.toFixed(2)}`}
-                        position="left"
-                        fill="white"  // Set the color of the label
-                    />
-
-                    </ReferenceLine>
-                </BarChart>
-            </ResponsiveContainer>
+            <div className = "graph-buttons">
+                <button 
+                    className = {graph === "average_reviews" ? "graph-toggled" : "graph-button"} 
+                    onClick = {(e) => changeGraph(e)}
+                    id = "average_reviews"
+                >Average Reviews</button>
+                <button 
+                    className = {graph === "tickets_sold" ? "graph-toggled" : "graph-button"} 
+                    onClick = {(e) => changeGraph(e)}
+                    id = "tickets_sold"
+                >Tickets Sold Today</button>
+                <button 
+                    className = {graph === "page_views" ? "graph-toggled" : "graph-button"} 
+                    onClick = {(e) => changeGraph(e)}
+                    id = "page_views"
+                >Movie Page Views</button>
+            </div>
+            <div className = "graph-container">
+                <AverageReviews />
+            </div>
         </div>
     )
 }

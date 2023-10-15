@@ -10,11 +10,60 @@
 }
 
 .stats-page {
-    width: 100%;
+    max-width: 48rem;
     height: 30rem;
     background-color: var(--background-light);
     margin: 2rem;
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
+}
+
+.graph-button {
+    border-color: var(--blue);
+    border-width: 0.4rem;
+    border-style: solid;
+    border-radius: 0.6rem;
+    padding: 0.5rem 1.5rem;
+    background: var(--background-light);
+    color: var(--blue);
+    font-weight: 700;
+    letter-spacing: 0.07rem;
+    transition: transform 0.1s ease;
+}
+
+.graph-button:hover, .graph-toggled:hover {
+    transform: scale(1.1);
+}
+
+.graph-button:active, .graph-toggled:active {
+    transform: scale(1.05);
+}
+
+.graph-buttons {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 90%;
+    margin-top: 1rem;
+}
+
+.graph-toggled {
+    border-color: var(--primary);
+    border-width: 0.4rem;
+    border-style: solid;
+    border-radius: 0.6rem;
+    padding: 0.5rem 1.5rem;
+    background: var(--background-light);
+    color: var(--primary);
+    font-weight: 700;
+    letter-spacing: 0.07rem;
+    transition: transform 0.1s ease;
+}
+
+.graph-container {
+    width: 100%;
+    height: 100%;
+    overflow-x: scroll;
 }

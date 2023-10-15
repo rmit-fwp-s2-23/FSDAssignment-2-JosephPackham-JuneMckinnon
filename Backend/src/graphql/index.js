@@ -1,7 +1,6 @@
 const { buildSchema } = require("graphql");
 const db = require("../database");
 const argon2 = require("argon2");
-const { GraphQLDate } = require('graphql-scalars');
 
 const graphql = { };
 
@@ -135,7 +134,11 @@ graphql.schema = buildSchema(`
 graphql.root = {
 	// Queries.
 	all_users: async () => {
-		return await db.user.findAll();
+		const users = await db.user.findAll();
+		return users.map(user => ({
+			...user.dataValues,
+			joined: user.joined.toISOString()
+		}));
 	},
 	user: async (args) => {
 		return await db.user.findByPk(args.email);
