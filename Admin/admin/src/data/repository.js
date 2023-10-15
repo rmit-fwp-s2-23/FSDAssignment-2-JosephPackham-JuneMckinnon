@@ -203,9 +203,34 @@ async function getTickets() {
     return data.all_tickets;
 }
 
+async function createMovie(movie, sessiontimes) {
+    const mutation = gql`
+        mutation CreateMovie($input: MovieInput) {
+            create_movie(input: $input) {
+                success
+                message
+            }
+        }
+    `;
+
+    const data = request(GRAPH_QL_URL, mutation, {
+        input: {
+            movie_name: movie.movie_name,
+            movie_image: movie.movie_image,
+            session_times: sessiontimes.map(session => ({
+                sessiontime_time: session.sessiontime_time,
+                sessiontime_day: session.sessiontime_day,
+                sessiontime_available_seats: session.sessiontime_available_seats,
+            })),
+          },
+    });
+
+    return data.create_movie;
+}
+
 export {
     getUsers, loginUser, setAdmin, setBlocked, 
-    getMovies, updateMovie, 
+    getMovies, updateMovie, createMovie,
     getReviewsByMovie, deleteReviewById, reviewCountByMovie,
     updateSessionById,
     getTickets
