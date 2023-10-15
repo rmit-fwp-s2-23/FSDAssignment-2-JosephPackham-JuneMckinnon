@@ -104,7 +104,7 @@ graphql.schema = buildSchema(`
 		reviews_by_user(email: String): [Review],
 		all_movies: [Movie],
 		movie(movie_name: String): Movie,
-		all_tickets: [Ticket]
+		all_tickets(movie_name: String): [Ticket]
 	}
 
 	# Mutations (modify data in the underlying data-source, i.e., the database).
@@ -172,9 +172,9 @@ graphql.root = {
 		  	throw new Error('Error fetching movies with session times');
 		}
 	},
-	all_tickets: async () => {
+	all_tickets: async (args) => {
 		try {
-			return await db.tickets.findAll();
+			return await db.tickets.findAll({ where: {movie: args.movie_name}});
 		} catch (error) {
 			console.error(error);
 			throw new Error('Error fetching tickets');
