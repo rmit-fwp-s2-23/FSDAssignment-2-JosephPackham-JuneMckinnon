@@ -24,14 +24,14 @@ const Login = () => {
     const navigate = useNavigate();
     const submitHandler = async (e) => {
         e.preventDefault(); // prevent page from reloading
+        console.log(state.email, state.password);
 
-        dispatcher({ type: 'IS_LOADING' }); // set status to loading
         const loginData = await loginUser(state.email, state.password); // attempt login
 
         // test if login was successful
         if (loginData.success === true) { 
             // change states and navigate to home
-            dispatcher({ type: 'IS_NOT_LOADING' });
+            dispatcher({ type: 'NOT_LOADING' });
             dispatcher({ type: 'LOGGED_IN' });
             navigate('/home');
         } else {
