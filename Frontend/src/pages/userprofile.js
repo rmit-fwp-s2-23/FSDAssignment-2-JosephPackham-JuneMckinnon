@@ -25,6 +25,7 @@ const UserProfile = (props) => {
                 setUser(fetchedUser); // set the user state to the fetched user data
                 const tickets = await getTicketByEmail(email); // fetch the user's ticket reservations from the server using the email
                 setTickets(tickets); // set the ticket reservations state to the fetched ticket reservations
+                
             } catch {
                 console.log("error fetching user, using test user instead")
                 const testUser = {
@@ -84,7 +85,7 @@ const UserProfile = (props) => {
                             Email: {user.email}
                         </div>
                         <div className = "small-background">
-                            Joined: {user.joined.split('T')[0]}
+                            Joined: {user.joined}
                         </div>
                         <div className = "button-container">
                             <button className="button" id = 'edit' onClick = {handleEdit}>Edit</button>
