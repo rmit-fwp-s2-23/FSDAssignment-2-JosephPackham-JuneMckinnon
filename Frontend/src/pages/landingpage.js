@@ -25,33 +25,33 @@ const LandingPage = (props) => { //props are passed in from app.js
   
     
   
-    useEffect(() => {
-      async function fetchData() {
-        const AllsessionTimes = await getAllSessionTimes();
-        const allMovies = await getAllMovies();
-        const filteredMovies = allMovies.filter((movie) => movie.movie_name !== "Movie1"); // exclude movie with movie_name "Movie1"
-        const sessionTimes = await getSessionTimeByMovie(filteredMovies[1].movie_name);
-        setSessionTimes(sessionTimes);
-        setMovies(filteredMovies);
-        setMovie(filteredMovies[1].movie_name);
-        setImgSrc(filteredMovies[1].movie_image);
+    useEffect(() => { //useEffect is used to fetch data from the database
+      async function fetchData() { //async function to fetch data
+        const AllsessionTimes = await getAllSessionTimes(); //get all session times
+        const allMovies = await getAllMovies(); //get all movies
+        const filteredMovies = allMovies.filter((movie) => movie.movie_name !== "Movie1"); // exclude movie with movie_name "Movie1" -- test movie
+        const sessionTimes = await getSessionTimeByMovie(filteredMovies[1].movie_name);// get session times for the first movie in the filtered movies array
+        setSessionTimes(sessionTimes); //set session times state
+        setMovies(filteredMovies); //set movies state
+        setMovie(filteredMovies[1].movie_name); //set movie state
+        setImgSrc(filteredMovies[1].movie_image); //set imgSrc state
       }
-      fetchData();
-    }, []);
+      fetchData(); //call the async function
+    }, []); //empty array means useEffect will only run once
 
-    let sessionTimesByMovie = [];
+    let sessionTimesByMovie = []; //create empty array to store session times for the selected movie
   
-    const changeImg = async (movie) => {
+    const changeImg = async (movie) => { //change the image when a movie is clicked
       
-      setImgSrc(movie.movie_image);
-      setMovie(movie.movie_name);
+      setImgSrc(movie.movie_image); //set imgSrc state
+      setMovie(movie.movie_name);  //set movie state
 
         // fetch session times for the selected movie
       const response = await getSessionTimeByMovie(movie.movie_name);
-      sessionTimesByMovie = response;
+      sessionTimesByMovie = response; //set sessionTimesByMovie to the response
 
       // update the session times state
-      setSessionTimes(sessionTimesByMovie);
+      setSessionTimes(sessionTimesByMovie); 
       console.log(sessionTimesByMovie);
 
       
@@ -61,15 +61,15 @@ const LandingPage = (props) => { //props are passed in from app.js
     };
   
     const handleReview = () => {
-      localStorage.setItem('movie', props.movie);
-      navigate('/reviews');
+      localStorage.setItem('movie', props.movie); //set movie in local storage to the selected movie
+      navigate('/reviews'); //navigate to reviews page
     };
   
-    const handleSessionTime = (sessionTime) => {
-      localStorage.setItem('movie', props.movie);
-      props.setDay(sessionTime.replace(/\//g, '-'));
-      localStorage.setItem('day', sessionTime.replace(/\//g, '-'));
-      navigate('/ticket');
+    const handleSessionTime = (sessionTime) => { //handle session time
+      localStorage.setItem('movie', props.movie); //set movie in local storage to the selected movie
+      props.setDay(sessionTime.replace(/\//g, '-')); //set day state to the selected session time
+      localStorage.setItem('day', sessionTime.replace(/\//g, '-')); //set day in local storage to the selected session time
+      navigate('/ticket'); //navigate to ticket reservation page
     };
 
   
@@ -93,23 +93,23 @@ const LandingPage = (props) => { //props are passed in from app.js
                   {/* display session times and filter out duplicate days */}
   {sessionTimes
     .filter(
-      (sessionTime, index, self) =>
-        index ===
-        self.findIndex((t) => t.sessiontime_day === sessionTime.sessiontime_day)
+      (sessionTime, index, self) => //filter out duplicate days
+        index === 
+        self.findIndex((t) => t.sessiontime_day === sessionTime.sessiontime_day) 
     )
-    .map((sessionTime) => {
-      const [day, date] = sessionTime.sessiontime_day.split(" ");
-      const formattedDate = date.replace(/-/g, "/");
+    .map((sessionTime) => { //map through session times
+      const [day, date] = sessionTime.sessiontime_day.split(" "); //split the session time day into day and date
+      const formattedDate = date.replace(/-/g, "/"); //replace - with /
       return (
         <div
-          key={sessionTime.sessiontime_id}
+          key={sessionTime.sessiontime_id} //set key to session time id
           className="session-time"
-          onClick={() => handleSessionTime(sessionTime.sessiontime_day)}
+          onClick={() => handleSessionTime(sessionTime.sessiontime_day)} //handle session time
         >
-        <div className="session-day">{sessionTime.sessiontime_day.split(" ")[0]}</div>
+        <div className="session-day">{sessionTime.sessiontime_day.split(" ")[0]}</div> {/* split the session time day into day and date */}
         <br></br>
    
-        <div className="session-day">{sessionTime.sessiontime_day.split(" ")[1].replace(/-/g, "/")}</div>
+        <div className="session-day">{sessionTime.sessiontime_day.split(" ")[1].replace(/-/g, "/")}</div> {/* split the session time day into day and date */}
         </div>
       );
     })}
