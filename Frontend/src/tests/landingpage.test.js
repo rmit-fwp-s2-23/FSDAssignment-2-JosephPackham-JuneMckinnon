@@ -2,7 +2,7 @@ import { MemoryRouter } from 'react-router-dom';
 import LandingPage from '../pages/landingpage';
 import React, { useState, useEffect } from 'react';
 import { server } from './mocks/server.js';
-import { render, screen, waitFor } from '@testing-library/react';
+import { render, screen, waitFor , within} from '@testing-library/react';
 import '@testing-library/jest-dom';
 import { getAllSessionTimes, getAllMovies } from '../data/repository';
 
@@ -34,19 +34,23 @@ test('renders landing page with correct information', async () => {
   expect(movies[0].movie_name).not.toBeNull();
   expect(movies[0].movie_image).not.toBeNull();
 
+  //set movie to the first movie in the movies array
+  setMovie(movies[0]);
+  const movie = movies[0];
+ 
 
-  //wait for the movies to be rendered
-  await waitFor(() => {
-    const movieElements = screen.getAllByTestId('movie');
-    expect(movieElements.length).toBe(movies.length);
-  });
 
   // Render the LandingPage component with the mock setMovie function and session times state
   render(
     <MemoryRouter>
-      <LandingPage setMovie={setMovie} sessionTimes={sessionTimes} />
+      <LandingPage setMovie={setMovie} sessionTimes={sessionTimes} movie={movie.movie_name} />
     </MemoryRouter>
   );
+
+  await waitFor(() => {
+    const movieElements = screen.getAllByTestId('movie');
+    expect(movieElements.length).toBe(movies.length);
+  });
 
   // Assert that the correct information is displayed on the page
   expect(screen.getByTestId('LandingPage')).toBeInTheDocument();
