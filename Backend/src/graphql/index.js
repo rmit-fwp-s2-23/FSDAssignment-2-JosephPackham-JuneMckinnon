@@ -283,6 +283,7 @@ graphql.root = {
 		}
 	},
 	verify_user: async (args) => {
+		console.log(args.email)
 		const user = await db.user.findByPk(args.email);
   
 		if(!user) {

@@ -8,10 +8,10 @@ export const LoginContext = createContext();
 const App = () => {
     const loginReducer = (prevState, action) => {
         switch (action.type) {
-            case 'USERNAME':
+            case 'EMAIL':
                 return {
                     ...prevState,
-                    username: action.payload,
+                    email: action.payload,
                 };
             case 'PASSWORD':
                 return {
@@ -52,7 +52,7 @@ const App = () => {
     };
     
     const initialState = {
-        username: '',
+        email: '',
         password: '',
         isLoggedIn: false,
         isLoading: false,

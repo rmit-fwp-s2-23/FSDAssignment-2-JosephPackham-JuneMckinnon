@@ -8,7 +8,8 @@ const Login = () => {
     const { state, dispatcher } = useContext(LoginContext);
 
     const usernameHandler = (e) => {
-        dispatcher({ type: 'USERNAME', payload: e.target.value });
+        dispatcher({ type: 'EMAIL', payload: e.target.value });
+        console.log(e.target.value)
     };
     
     const passwordHandler = (e) => {
@@ -20,7 +21,8 @@ const Login = () => {
         e.preventDefault();
 
         dispatcher({ type: 'IS_LOADING' });
-        const loginData = await loginUser(state.username, state.password);
+        console.log(state.email)
+        const loginData = await loginUser(state.email, state.password);
 
         if (loginData.success === true) {
             dispatcher({ type: 'IS_NOT_LOADING' });
