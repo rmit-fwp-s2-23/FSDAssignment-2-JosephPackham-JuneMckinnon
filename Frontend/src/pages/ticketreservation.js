@@ -40,14 +40,15 @@ const TicketReservation = (props) => {
             console.log('Available seats: ' + available_seats + ' seats: ' + seats + ' new available seats: ' + newAvailableSeats);
 
             await updateAvailableSeats(id, newAvailableSeats);
-            window.location.reload();
+            
             return true;
             
         }
     }
 
     //handle reservation
-    const handleReservation = async (time, available_seats,id) => {
+    const handleReservation = async (time, available_seats,id,e) => {
+        
         if (props.user === null){
             alert("Please sign in to reserve a ticket");
             return;
@@ -63,12 +64,18 @@ const TicketReservation = (props) => {
             alert("Please enter a number");
             
         }
+        //else if seats is not a number alert user 
+        else if (isNaN(seats)){
+            alert("Invalid input, please enter a number");
+            return;
+        }
         else{
             const seatAvailability = await handleSeatAvailability(available_seats, seats, id);
             if (seatAvailability === false){
                 alert("There are not enough seats available");
                 return;
             } else {
+                
                 const ticket = {
                 movie: movie,
                 author_name: props.user.name,
@@ -77,10 +84,16 @@ const TicketReservation = (props) => {
                 ticket_day: props.day,
                 ticket_time: time}
                 //add reservation to database
-            await createTicket(ticket);
+            
+                  //add reservation to database
+                  await createTicket(ticket).then(() => {
+                    alert("Ticket reserved for " + movie + " on " + session_day.replace(/-/g, '/') + " at " + time + " for " + seats + " seats");
+                    window.location.reload();
+                    
+                    });
+                  return;
 
-
-            alert("You have reserved " + seats + " seats for " + time);
+            
             
 
             }
@@ -103,7 +116,7 @@ const TicketReservation = (props) => {
                     <div className="small-background" >
                         <h2>Time: {sessiontime.sessiontime_time}</h2>
                         <p>{sessiontime.sessiontime_available_seats} seats available</p>
-                        <button className = 'button' onClick={() => handleReservation(sessiontime.sessiontime_time, sessiontime.sessiontime_available_seats, sessiontime.sessiontime_id)}>Reserve</button>
+                        <button className = 'button' onClick={(e) => handleReservation(sessiontime.sessiontime_time, sessiontime.sessiontime_available_seats, sessiontime.sessiontime_id,e)}>Reserve</button>
                     </div>
                 ))}
                 </div>
