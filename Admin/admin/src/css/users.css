@@ -1,0 +1,126 @@
+:root {
+    --primary: #BB86FC;
+    --background-verydark: #161028;
+    --background-dark: #18122B;
+    --background-med: #251e3b;
+    --background-light: #393053;
+    --background-lightest: #5e537f;
+    --red: #FF6961;
+    --blue: #5a73d0;
+}
+
+body {
+    user-select: none;
+    color: white;
+}
+
+.user-container {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.user-list {
+    overflow-y: scroll;
+    height: 30rem;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.shadow-top {
+    width: 90%;
+    height: 1rem;
+    box-shadow: 0 0.5rem 0.5rem -0.3rem var(--background-dark);
+    z-index: 1;
+}
+
+.shadow-bottom {
+    width: 90%;
+    height: 1rem;
+    box-shadow: 0 -0.5rem 0.5rem -0.3rem var(--background-dark);
+    z-index: 1;
+}
+
+.user-row {
+    width: 90%;
+    height: 7rem;
+    background-color: var(--background-med);
+    box-shadow: 0 0.5rem 1rem var(--background-dark);
+    box-sizing: border-box;
+    margin: 1rem;
+    padding: 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center
+}
+
+.user-icon {
+    height: 3rem;
+    aspect-ratio: 1 / 1;
+    background: var(--primary);
+    margin-right: 1rem;
+}
+
+.user-left {
+    display: flex;
+    align-items: center;
+}
+
+.user-up {
+    display: flex;
+}
+
+.info {
+    margin-right: 2rem;
+}
+
+#user-button {
+    width: 7rem;
+    height: 3rem;
+    margin-left: 1rem;
+    border-radius: 0.5rem;
+    border-width: 0.25rem;
+    border-style: solid;
+    box-shadow: none;
+    font-weight: 900;
+    transition: transform 0.1s ease, filter 0.1s ease;
+}
+
+#user-button:hover {
+    transform: scale(1.1);
+    filter: brightness(1.1);
+}
+
+#user-button:active {
+    transform: scale(1.05);
+    filter: brightness(0.95);
+}
+
+.block-button {
+    border-color: var(--red);
+    color: var(--red);
+    background: var(--background-light)
+}
+
+.block-toggled {
+    border-color: var(--red);
+    color: white;
+    background: var(--red);
+    font-size: 1rem;
+}
+
+.admin-button {
+    border-color: var(--blue);
+    color: var(--blue);
+    background: var(--background-light);
+}
+
+.admin-toggled {
+    border-color: var(--blue);
+    color: white;
+    background: var(--blue);
+    font-size: 1rem;
+}
