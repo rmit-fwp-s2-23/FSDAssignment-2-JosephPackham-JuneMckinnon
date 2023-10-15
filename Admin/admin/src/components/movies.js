@@ -24,7 +24,7 @@ const Movies = () => {
             {movies?.map(movie => 
                 <div key = {movie.movie_name} className = "movie" onClick = {() => handleClick(movie)}>
                     <div className = "overlay">Edit</div>
-                    <div className = "movie-poster">
+                    <div className = "movie-poster" style={{ backgroundImage: `url(${movie.movie_image})` }}>
                         <div className = "movie-name">{movie.movie_name}</div>
                     </div>
                 </div>

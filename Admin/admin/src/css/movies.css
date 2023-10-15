@@ -76,6 +76,7 @@ body {
     display: flex;
     justify-content: flex-end;
     align-items: flex-end;
+    background-size:cover;
 }
 
 .movie-stats {
@@ -87,4 +88,7 @@ body {
     letter-spacing: 0.1em;
     font-weight: 700;
     text-transform: capitalize;
+    background:rgba(0, 0, 0, 0.7);
+    border-radius: 0.5rem 0 0 0;
+    padding-left: 0.5rem;
 }
