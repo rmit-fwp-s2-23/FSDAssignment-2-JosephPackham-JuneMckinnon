@@ -1,37 +1,37 @@
 const {Sequelize, DataTypes} = require('sequelize');
 const config = require('./config.js');
 
-
+// Create a new object for the database.
 const db = {
   Op: Sequelize.Op // set Sequelize.Op to Sequelize.Op
 }; 
 
+// Connect to the database using the configuration settings.
 db.sequelize = new Sequelize(config.DB, config.USER, config.PASSWORD, {
   host: config.HOST,
   dialect: config.DIALECT
 });
 
+// Define the models for the database.
 db.user = require('./models/user.js')(db.sequelize, DataTypes);
 db.reviews = require('./models/reviews.js')(db.sequelize, DataTypes);
 db.tickets = require('./models/tickets.js')(db.sequelize, DataTypes);
 db.movies = require('./models/movies.js')(db.sequelize, DataTypes);
 db.sessiontimes = require('./models/sessiontimes.js')(db.sequelize, DataTypes);
 
+// Define the relationships between the models.
 db.reviews.belongsTo(db.user, { foreignKey: { name: 'author_email', allowNull: false } });
 db.tickets.belongsTo(db.user, { foreignKey: { name: 'author_email', allowNull: false } });
 db.sessiontimes.belongsTo(db.movies, { foreignKey: { name: 'sessiontime_movie', allowNull: false } });
 
-
-
-
-
-
+// Define a function to synchronize the database and seed it with data.
 db.sync = async () => {
   await db.sequelize.sync();
   await seedData();
   await seedAssignmentData();
 };
 
+// Define a function to seed the database with data.
 async function seedData() {   
   const count = await db.reviews.count();
   if(count > 0)
@@ -49,6 +49,7 @@ async function seedData() {
    await db.sessiontimes.create({sessiontime_movie: 'Movie1', sessiontime_day:'Sample Day', sessiontime_time: '9:30', sessiontime_available_seats: 5,})
   
   await db.tickets.create({movie: 'Movie1', author_name: 'User1', author_email: 'User@Email.com', ticket_quantity: 5, ticket_day: 'Sample Day', ticket_time: '9:30'});
+}
 
  
 
