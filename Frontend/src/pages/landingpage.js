@@ -91,28 +91,36 @@ const LandingPage = (props) => { //props are passed in from app.js
               <div className="header" data-testid="SessionTimesHeading">Session Times</div>
               <div className="session-times" data-testid="SessionTimes">
                   {/* display session times and filter out duplicate days */}
-  {sessionTimes
-    .filter(
-      (sessionTime, index, self) => //filter out duplicate days
-        index === 
-        self.findIndex((t) => t.sessiontime_day === sessionTime.sessiontime_day) 
-    )
-    .map((sessionTime) => { //map through session times
-      const [day, date] = sessionTime.sessiontime_day.split(" "); //split the session time day into day and date
-      const formattedDate = date.replace(/-/g, "/"); //replace - with /
-      return (
-        <div
-          key={sessionTime.sessiontime_id} //set key to session time id
-          className="session-time"
-          onClick={() => handleSessionTime(sessionTime.sessiontime_day)} //handle session time
-        >
-        <div className="session-day">{sessionTime.sessiontime_day.split(" ")[0]}</div> {/* split the session time day into day and date */}
-        <br></br>
-   
-        <div className="session-day">{sessionTime.sessiontime_day.split(" ")[1].replace(/-/g, "/")}</div> {/* split the session time day into day and date */}
-        </div>
-      );
-    })}
+                  {sessionTimes.length === 0 ? (
+  <div className="no-session-times" data-testid="NoSessionTimes">
+    No session times available
+  </div>
+) : (
+  <div className="session-times" data-testid="SessionTimes">
+    {/* display session times and filter out duplicate days */}
+    {sessionTimes
+      .filter(
+        (sessionTime, index, self) => //filter out duplicate days
+          index === 
+          self.findIndex((t) => t.sessiontime_day === sessionTime.sessiontime_day) 
+      )
+      .map((sessionTime) => { //map through session times
+        const [day, date] = sessionTime.sessiontime_day.split(" "); //split the session time day into day and date
+        const formattedDate = date.replace(/-/g, "/"); //replace - with /
+        return (
+          <div
+            key={sessionTime.sessiontime_id} //set key to session time id
+            className="session-time"
+            onClick={() => handleSessionTime(sessionTime.sessiontime_day)} //handle session time
+          >
+            <div className="session-day">{sessionTime.sessiontime_day.split(" ")[0]}</div> {/* split the session time day into day and date */}
+            <br></br>
+            <div className="session-day">{sessionTime.sessiontime_day.split(" ")[1].replace(/-/g, "/")}</div> {/* split the session time day into day and date */}
+          </div>
+        );
+      })}
+  </div>
+)}
 
               </div>
             </div>
