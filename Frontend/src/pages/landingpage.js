@@ -21,7 +21,7 @@ const LandingPage = (props) => {
     const [imgSrc, setImgSrc] = useState(movie);
     const [sessionTimes, setSessionTimes] = useState([]);
     const [movies, setMovies] = useState([]);
-    console.log(imgSrc);
+
   
     
   
@@ -39,12 +39,10 @@ const LandingPage = (props) => {
     }, []);
   
     const changeImg = (movie) => {
-      console.log(movie);
+      
       setImgSrc(movie.movie_image);
       setMovie(movie.movie_name);
-      
-      
-      
+
     };
   
     const handleReview = () => {
@@ -81,14 +79,14 @@ const LandingPage = (props) => {
                     (sessionTime, index, self) =>
                       self.findIndex((t) => t.sessiontime_day === sessionTime.sessiontime_day) === index && sessionTime.sessiontime_day !== "Sample Day"
                   )
-                  .map((sessionTime) => (
-                    <button className="session-time" onClick={() => handleSessionTime(sessionTime.sessiontime_day)}>{sessionTime.sessiontime_day.replace(/-/g, '/')}</button>
+                  .map((sessionTime ) => (
+                    <button key={sessionTime.sessiontime_id} className="session-time" onClick={() => handleSessionTime(sessionTime.sessiontime_day)}>{sessionTime.sessiontime_day.replace(/-/g, '/')}</button>
                   ))}
               </div>
             </div>
-            < div id="movies" className='movie-list-container'>
+            <div id="movies" className='movie-list-container' data-testid="movies-container">
               {movies.map((movie) => (
-                <div className="movie" onClick={() => changeImg(movie)}>
+                <div key = {movie.movie_name} data-testid="movie" className="movie" onClick={() => changeImg(movie)} >
                   <img className='poster' src={movie.movie_image} alt={movie.movie_name} />
                   <div className = "moviename">{movie.movie_name}</div>
                 </div>

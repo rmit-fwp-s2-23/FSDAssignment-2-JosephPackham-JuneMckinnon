@@ -5,11 +5,12 @@ import { useNavigate} from "react-router";
 import { getSessionTimeByDay, updateSessionTime, updateAvailableSeats, createTicket } from "../data/repository";
 import '../css/ticketreservation.css'
 
+//Ticket reservation page
 
 const TicketReservation = (props) => {
     
-    const movie = props.movie;
-    const navigate = useNavigate();
+    const movie = props.movie; //get movie from props
+    const navigate = useNavigate(); //used to navigate to different pages
     const session_day = props.day;
     
 
@@ -40,7 +41,7 @@ const TicketReservation = (props) => {
 
             await updateAvailableSeats(id, newAvailableSeats);
             window.location.reload();
-            return;
+            return true;
             
         }
     }
@@ -64,7 +65,8 @@ const TicketReservation = (props) => {
         }
         else{
             const seatAvailability = await handleSeatAvailability(available_seats, seats, id);
-            if (!seatAvailability){
+            if (seatAvailability === false){
+                alert("There are not enough seats available");
                 return;
             } else {
                 const ticket = {

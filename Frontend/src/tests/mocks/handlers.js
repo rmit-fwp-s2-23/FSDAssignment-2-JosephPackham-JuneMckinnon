@@ -52,6 +52,27 @@ export const handlers = [
         )
     }),
 
+    //get all movies
+    rest.get('http://localhost:4000/api/movies', async (req, res, ctx) => {
+        return res(
+            ctx.status(200),
+            ctx.json(
+                [
+                    {
+                        movie_id: 1,
+                        movie_name: "Test Movie",
+                        movie_image: "Test Image"
+                    },
+                    {
+                        movie_id: 2,
+                        movie_name: "Test Movie 2",
+                        movie_image: "Test Image 2"
+                    },
+                ]
+            )
+        )
+    }),
+
     //get reviews by movie
     rest.get('http://localhost:4000/api/reviews/:movie', async (req, res, ctx) => {
         return res(
