@@ -5,11 +5,6 @@ module.exports = (sequelize, DataTypes) => //Sessiontimes table in database
             autoIncrement: true,
             primaryKey: true
         },
-        sessiontime_movie: {
-            type: DataTypes.STRING(100),
-            allowNull: false,
-            ForeignKey: true
-        },
         
         sessiontime_time: {
             type: DataTypes.STRING(100),

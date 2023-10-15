@@ -1,5 +1,3 @@
-//Ticket Reservation table in database
-
 module.exports = (sequelize, DataTypes) => 
     sequelize.define("ticket", {
         ticket_id: {
@@ -29,13 +27,11 @@ module.exports = (sequelize, DataTypes) =>
             type: DataTypes.STRING(32),
             allowNull: false,
             ForeignKey: true
-            
         },
         ticket_time: {
             type: DataTypes.STRING(32),
             allowNull: false,
             ForeignKey: true
-            
+
         }
     });
-
