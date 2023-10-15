@@ -203,7 +203,7 @@ async function getTickets() {
     return data.all_tickets;
 }
 
-async function createMovie(movie, sessiontimes) {
+async function createMovie(movie_name, movie_image, sessiontimes) {
     const mutation = gql`
         mutation CreateMovie($input: MovieInput) {
             create_movie(input: $input) {
@@ -213,16 +213,12 @@ async function createMovie(movie, sessiontimes) {
         }
     `;
 
-    const data = request(GRAPH_QL_URL, mutation, {
+    const data = await request(GRAPH_QL_URL, mutation, {
         input: {
-            movie_name: movie.movie_name,
-            movie_image: movie.movie_image,
-            session_times: sessiontimes.map(session => ({
-                sessiontime_time: session.sessiontime_time,
-                sessiontime_day: session.sessiontime_day,
-                sessiontime_available_seats: session.sessiontime_available_seats,
-            })),
-          },
+            movie_name: movie_name,
+            movie_image: movie_image,
+            session_times: sessiontimes
+        },
     });
 
     return data.create_movie;

@@ -388,12 +388,45 @@ graphql.root = {
 	},
 	create_movie: async (args) => {
 		try {
-			const movie = await db.movies.create(args.input);
+			const movieInput = {
+				movie_name: args.input.movie_name,
+				movie_image: args.input.movie_image
+			}
+			await db.movies.create(movieInput);
+
+			const createSessionTimePromises = args.input.session_times.map(async (session) => {
+				try {
+					const sessionTimeInput = {
+						sessiontime_movie: args.input.movie_name,
+						sessiontime_time: session.sessiontime_time,
+						sessiontime_day: session.sessiontime_day,
+						sessiontime_available_seats: session.sessiontime_available_seats
+					}
+
+					console.log("sessiontimes: ", sessionTimeInput);
+
+					await db.sessiontimes.create(sessionTimeInput);
+
+					return {
+						success: true,
+						message: "Successfully created sessiontime"
+					}
+				} catch {
+					return {
+						success: false,
+						message: "Error creating session"
+					}
+				}
+			})
+
+			await Promise.all(createSessionTimePromises);
+
 			return {
 				success: true,
 				message: "Movie created"
 			}
-		} catch {
+		} catch (error) {
+			console.log(error)
 			return {
 				success: false,
 				message: "An error has occurred in creation"

@@ -42,8 +42,16 @@ const CreateMovie = () => {
         dispatcher({ type: 'IMAGE', payload: e.target.value });
     }
 
-    const handleCreate = (e) => {
+    const handleCreate = async (e) => {
         console.log(state.movie_name, state.movie_image, state.sessiontimes)
+        try {
+            const response = await createMovie(state.movie_name, state.movie_image, state.sessiontimes);
+            console.log(response);
+            alert(response.message);
+        } catch (error) {
+            alert("something went wrong");
+            console.log(error);
+        }
     }
 
     const createSession = (e) => {
@@ -51,7 +59,7 @@ const CreateMovie = () => {
         const session = {
             sessiontime_time: e.target[0].value,
             sessiontime_day: e.target[1].value,
-            sessiontime_available_seats: e.target[2].value
+            sessiontime_available_seats: parseInt(e.target[2].value)
         }
         dispatcher({ type: 'SESSION', payload: session });
     }
