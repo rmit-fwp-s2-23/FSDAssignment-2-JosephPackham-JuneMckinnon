@@ -107,7 +107,7 @@
 
 .movie {
     width: 10vw;
-    height: 25vh;
+    height: 35vh;
     margin-top: 0px;
     transition: margin-top ease 0.2s;
     box-shadow: 0vw 0vw 4vw rgb(20, 20, 20);
@@ -118,6 +118,9 @@
     scroll-snap-align: start;
     margin-right: 16px;
     padding: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     
 }
 
@@ -139,6 +142,7 @@
     background-size: cover;
     background-position: center;
     border-radius: 0.5rem 0.5rem 0rem 0rem;
+    padding-bottom: 5%;
 }
 
 
@@ -192,7 +196,7 @@
   }
 
   .moviename {
-    width: 5vw;
+    width: 10vw;
     height: 5vh;
     background-color: rgba(100, 100, 100, 0.3);
     display: flex;
