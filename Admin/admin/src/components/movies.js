@@ -3,15 +3,18 @@ import "../css/movies.css";
 import { TabContext, MoviesContext, MovieContext } from "./dashboard.js";
 
 const Movies = () => {
+    // retrieve states and functions from contexts
     const setTab = useContext(TabContext)
     const { movies } = useContext(MoviesContext);
     const { setMovie } = useContext(MovieContext);
 
+    // set tab to edit
     const handleClick = (movie) => {
         setMovie(movie);
         setTab("edit");
     }
 
+    // set tab to create
     const createMovie = () => {
         setTab("create");
     }

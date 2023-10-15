@@ -1,7 +1,9 @@
+// imports
 import React, { useReducer } from "react";
 import "../css/create.css";
 import { createMovie } from "../data/repository";
 
+// new reducer for storing all movie data including sessiontimes
 const createReducer = (prevState, action) => {
     switch (action.type) {
         case 'NAME':
@@ -24,43 +26,53 @@ const createReducer = (prevState, action) => {
     }
 };
 
+// initialise the state variables
 const initialState = {
     movie_name: '',
     movie_image: '',
     sessiontimes: [],
 };
 
-
 const CreateMovie = () => {
+    // retrieve reducer from context
     const [state, dispatcher] = useReducer(createReducer, initialState);
 
+    // when movie name input is changed update state
     const handleName = (e) => {
         dispatcher({ type: 'NAME', payload: e.target.value });
     }
     
+    // when movie image input is changed update state
     const handleImage = (e) => {
         dispatcher({ type: 'IMAGE', payload: e.target.value });
     }
 
+    // when create is clicked, create the movie in the database
     const handleCreate = async (e) => {
-        console.log(state.movie_name, state.movie_image, state.sessiontimes)
         try {
+            // get a response from the backend
             const response = await createMovie(state.movie_name, state.movie_image, state.sessiontimes);
-            console.log(response);
+            
+            // alert the user of the response
             alert(response.message);
         } catch (error) {
-            alert("something went wrong");
-            console.log(error);
+            // if something went wrong alert the user
+            alert("Error:", error);
         }
     }
 
+    // when create session button is clicked, add a new session to the state
     const createSession = (e) => {
-        e.preventDefault();
+        e.preventDefault(); // prevent page reload
+
+        // construct new session from inputs
         const session = {
             sessiontime_time: e.target[0].value,
             sessiontime_day: e.target[1].value,
-            sessiontime_available_seats: parseInt(e.target[2].value)
+            sessiontime_available_seats: parseInt(e.target[2].value) // important to parse as int
         }
+
+        // update state
         dispatcher({ type: 'SESSION', payload: session });
     }
 

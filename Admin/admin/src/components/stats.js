@@ -1,3 +1,4 @@
+// imports
 import React, { useContext, useEffect, useState } from "react";
 import "../css/stats.css";
 import { BarChart, Bar, XAxis, YAxis, Tooltip, Legend, ResponsiveContainer, ReferenceLine, Label, LineChart, Line } from 'recharts';
@@ -5,9 +6,13 @@ import { reviewCountByMovie, getTickets } from "../data/repository";
 import { MoviesContext } from "./dashboard";
 
 const AverageReviews = () => {
+    // retrieve movies from context
     const { movies } = useContext(MoviesContext);
+
+    // define state for data for the chart
     const [reviewData, setReviewData] = useState([]);
 
+    // on load of component, fill state with {movie name, amount of reviews}
     useEffect(() => {
         const fetchReviewData = async () => {
             const reviewDataPromises = movies.map(async (movie) => {
@@ -26,8 +31,10 @@ const AverageReviews = () => {
         fetchReviewData();
     }, [movies]);
 
+    // get average
     const totalCount = reviewData.reduce((sum, movie) => sum + movie.count, 0);
     const averageCount = totalCount / reviewData.length;
+    
     return (
         <ResponsiveContainer width = {1000} height = "100%">
             <BarChart data={reviewData} margin = {{left: 50, top: 50, bottom: 10, right: 20}}>

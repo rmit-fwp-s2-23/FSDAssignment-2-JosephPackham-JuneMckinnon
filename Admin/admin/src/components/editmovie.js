@@ -1,22 +1,28 @@
+// imports
 import React, { useContext, useState, useEffect } from "react";
 import { TabContext, MovieContext } from "./dashboard.js"
 import "../css/edit.css";
 import { updateMovie, getReviewsByMovie, deleteReviewById, updateSessionById } from "../data/repository.js";
 
 const EditMovie = () => {
+    // retrieve selected movie from context (chosen from movies.js)
     const { movie } = useContext(MovieContext);
-    const [editedMovie, setEditedMovie] = useState(movie);
-    const [editedSessions, setEditedSessions] = useState({});
-    const [reviews, setReviews] = useState(null);
 
+    // define states
+    const [editedMovie, setEditedMovie] = useState(movie); // currently edited movie
+    const [editedSessions, setEditedSessions] = useState({}); // currrently edited sessions
+    const [reviews, setReviews] = useState(null); // reviews from database
+
+    // get all reviews and sessions on first load
     useEffect(() => {
         const getReviewsAndSessions = async () => {
+            // retrive reviews and store in state
             const retrievedReviews = await getReviewsByMovie(movie.movie_name);
             setReviews(retrievedReviews);
 
+            // gather all sessions from the movie and store in state
             const sessionData = {};
             for (const session of movie.sessiontimes) {
-                // Assuming sessiontime_id is unique, you can use it as the key
                 sessionData[session.sessiontime_id] = {
                     time: session.sessiontime_time,
                     day: session.sessiontime_day,
@@ -28,11 +34,13 @@ const EditMovie = () => {
         getReviewsAndSessions();
     }, [movie.movie_name, movie.sessiontimes])
 
+    // change tab if clicked
     const setTab = useContext(TabContext);
     const handleClick = () => {
         setTab("movies")
     }
 
+    // when value input is updated, update movie in state
     const handleMovieChange = (key, value) => {
         setEditedMovie(prevState => ({
             ...prevState,
@@ -40,6 +48,7 @@ const EditMovie = () => {
         }));
     };
 
+    // when session is updated, update session in state
     const handleSessionChange = (sessionId, field, value) => {
         setEditedSessions((prevValues) => ({
             ...prevValues,

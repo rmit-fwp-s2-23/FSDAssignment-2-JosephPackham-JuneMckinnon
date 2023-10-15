@@ -1,3 +1,4 @@
+// imports
 import React, { useState, createContext, useEffect } from "react";
 import Movies from "./movies";
 import EditMovie from "./editmovie";
@@ -7,25 +8,29 @@ import CreateMovie from "./createmovie";
 import "../css/dash.css";
 import { getMovies } from "../data/repository.js";
 
-export const TabContext = createContext();
-export const MovieContext = createContext();
-export const MoviesContext = createContext();
+// create contexts for components
+export const TabContext = createContext(); // keeps track of current tab (to navigate between tabs)
+export const MovieContext = createContext(); // keeps track of selected movie (for movies and editmovie)
+export const MoviesContext = createContext(); // stores all movies from the database
 
 const Dashboard = () => {
+    // define states
     const [movie, setMovie] = useState(null);
     const [tab, setTab] = useState("movies");
+    const [movies, setMovies] = useState(null);
+
+    // when called switch tab to selected tab
     const tabSwitch = (curTab) => {
-        if (curTab !== tab) {
+        if (curTab !== tab) { // make sure current tab isn't the selected tab
             setTab(curTab);
         }
     }
-
-    const [movies, setMovies] = useState(null);
+    
+    // on first load, retrieve all movies
     useEffect( () => {
         const retrieveMovies = async () => {
             const allMovies = await getMovies();
             setMovies(allMovies);
-            console.log(allMovies);
         }
         retrieveMovies();
     }, [])

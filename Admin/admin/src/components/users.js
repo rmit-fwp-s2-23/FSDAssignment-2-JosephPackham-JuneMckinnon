@@ -1,23 +1,32 @@
+// imports
 import React, { useEffect, useState } from "react";
 import { getUsers, setAdmin, setBlocked } from "../data/repository";
 import "../css/users.css"
 
 const UserList = () => {
+    // define state for all users
     const [users, setUsers] = useState(null);
 
+    // on component load set all users
     useEffect(() => {
         loadUsers();
     }, []);
     
+    // retrieve all users
     const loadUsers = async () => {
         const currentUsers = await getUsers();
         setUsers(currentUsers);
     }
 
+    // this function onclick changes the button's class depending on the button, admin or block
     const toggleButton = async (ev, email) => {
-        const button = ev.target;
+        const button = ev.target; // retrieve button
         let response;
+
+        // get the button's current class
         const currentClass = Array.from(button.classList)[0];
+
+        // depending on class, change to different class / text
         switch (currentClass) {
             case "block-button":
                 response = await setBlocked(email, true);

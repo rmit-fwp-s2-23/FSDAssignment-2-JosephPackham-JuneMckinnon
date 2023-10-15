@@ -1,28 +1,35 @@
-import React, { createContext, useReducer } from 'react'; //import react to use react components
-import {BrowserRouter} from "react-router-dom"; //import BrowserRouter to use routing
+// imports
+import React, { createContext, useReducer } from 'react';
+import {BrowserRouter} from "react-router-dom";
 import AdminRouting from "./Routing/routing.js";
 import "./index.css";
 
+// logincontext keeps track of logged in state
 export const LoginContext = createContext();
 
 const App = () => {
+    // loginreducer runs login, keeping track of variables, functions and states
     const loginReducer = (prevState, action) => {
         switch (action.type) {
+            // set email
             case 'EMAIL':
                 return {
                     ...prevState,
                     email: action.payload,
                 };
+            // set password
             case 'PASSWORD':
                 return {
                     ...prevState,
                     password: action.payload,
                 };
+            // currently logging in
             case 'LOGGED_IN':
                 return {
                     ...prevState,
                     isLoggedIn: true,
                 };
+            // log out
             case 'LOGGED_OUT':
                 return {
                     ...prevState,
@@ -30,16 +37,19 @@ const App = () => {
                     username: '',
                     password: '',
                 };
+            // currently waiting on logging in
             case 'LOADING':
                 return {
                     ...prevState,
                     isLoading: true,
                 };
+            // not waiting on log in
             case 'NOT_LOADING':
                 return {
                     ...prevState,
                     isLoading: false,
                 };
+            // error has occured in log in
             case 'ERROR':
                 return {
                     ...prevState,
@@ -51,6 +61,7 @@ const App = () => {
         }
     };
     
+    // define default values for reducer
     const initialState = {
         email: '',
         password: '',
