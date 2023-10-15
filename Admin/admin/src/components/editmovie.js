@@ -77,7 +77,10 @@ const EditMovie = () => {
 
     return (
         <div className = "edit-col">
-            <div onClick = {handleClick}>Editing: {movie.movie_name}</div>
+            <div className = "movie-title">
+                <div onClick = {handleClick}>Back</div>
+                <div className = "title">Editing: {movie.movie_name}</div>
+            </div>
             <br />
             <div className = "edit-container">
                 <div id = "edit-movie" className = "edit-items">

@@ -92,3 +92,10 @@ body {
     border-radius: 0.5rem 0 0 0;
     padding-left: 0.5rem;
 }
+
+.movie-title {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+    font-weight: 700;
+}
