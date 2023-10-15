@@ -1,8 +1,8 @@
 import React from 'react';
-import '../../css/reviews.css';
+import '../css/reviews.css';
 import { useState } from 'react';
 import { useEffect } from 'react';
-import { createReview, getReviewsByMovie, deleteReview, updateReview } from '../../data/repository';
+import { createReview, getReviewsByMovie, deleteReview, updateReview } from '../data/repository';
 
 
 

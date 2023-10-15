@@ -27,6 +27,31 @@ export const handlers = [
         )
     } ),
 
+    //get all sessiontimes
+    rest.get('http://localhost:4000/api/sessiontimes', async (req, res, ctx) => {
+        return res(
+            ctx.status(200),
+            ctx.json(
+                [
+                    {
+                        sessiontime_id: 1,
+                        sessiontime_movie: "Test Movie",
+                        sessiontime_day: "01/01/2022",
+                        sessiontime_time: "12:00",
+                        sessiontime_available_seats: 10
+                    },
+                    {
+                        sessiontime_id: 2,
+                        sessiontime_movie: "Test Movie",
+                        sessiontime_day: "01/01/2022",
+                        sessiontime_time: "13:00",
+                        sessiontime_available_seats: 10
+                    },
+                ]
+            )
+        )
+    }),
+
     // rest.get('http://localhost:4000/api/tickets/email/:email', async (req, res, ctx) => {
         
     //     return res(
