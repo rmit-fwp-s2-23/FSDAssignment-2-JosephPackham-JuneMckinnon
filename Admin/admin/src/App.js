@@ -1,4 +1,4 @@
-import React, { useState, createContext } from 'react'; //import react to use react components
+import React, { createContext, useReducer } from 'react'; //import react to use react components
 import {BrowserRouter} from "react-router-dom"; //import BrowserRouter to use routing
 import AdminRouting from "./Routing/routing.js";
 import "./index.css";
@@ -6,9 +6,62 @@ import "./index.css";
 export const LoginContext = createContext();
 
 const App = () => {
-    const [loggedIn, setLoggedIn] = useState(false);
+    const loginReducer = (prevState, action) => {
+        switch (action.type) {
+            case 'USERNAME':
+                return {
+                    ...prevState,
+                    username: action.payload,
+                };
+            case 'PASSWORD':
+                return {
+                    ...prevState,
+                    password: action.payload,
+                };
+            case 'LOGGED_IN':
+                return {
+                    ...prevState,
+                    isLoggedIn: true,
+                };
+            case 'LOGGED_OUT':
+                return {
+                    ...prevState,
+                    isLoggedIn: false,
+                    username: '',
+                    password: '',
+                };
+            case 'LOADING':
+                return {
+                    ...prevState,
+                    isLoading: true,
+                };
+            case 'NOT_LOADING':
+                return {
+                    ...prevState,
+                    isLoading: false,
+                };
+            case 'ERROR':
+                return {
+                    ...prevState,
+                    isError: true,
+                    isLoading: false,
+                };
+            default:
+                break;
+        }
+    };
+    
+    const initialState = {
+        username: '',
+        password: '',
+        isLoggedIn: false,
+        isLoading: false,
+        isError: false,
+    };
+
+    const [state, dispatcher] = useReducer(loginReducer, initialState);
     return (
-        <LoginContext.Provider value = {{loggedIn: loggedIn, setLoggedIn: setLoggedIn}}>
+        <LoginContext.Provider value = {{ state, dispatcher }}>
             <BrowserRouter>
                 <AdminRouting />
             </BrowserRouter>
