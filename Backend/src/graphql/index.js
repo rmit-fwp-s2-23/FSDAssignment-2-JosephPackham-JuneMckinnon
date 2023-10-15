@@ -102,6 +102,7 @@ graphql.schema = buildSchema(`
 		user_exists(email: String): Boolean,
 		all_reviews(movie: String): [Review],
 		reviews_by_user(email: String): [Review],
+		reviews_count(movie: String): Int,
 		all_movies: [Movie],
 		movie(movie_name: String): Movie,
 		all_tickets(movie_name: String): [Ticket]
@@ -162,6 +163,10 @@ graphql.root = {
 		});
 
 		return userReviews;
+	},
+	reviews_count: async (args) => {
+		const allReviews = await db.reviews.findAll({ where: {movie: args.movie} });
+		return allReviews.length;
 	},
 	all_movies: async () => {
 		try {

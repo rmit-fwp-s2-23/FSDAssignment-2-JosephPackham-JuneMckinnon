@@ -81,7 +81,7 @@ const EditMovie = () => {
                                         {value.map(session => 
                                             <div key = {session.sessiontime_id} className = "session-entry">
                                                 <div className = "input-container">
-                                                    <label for = "time">Time: </label>
+                                                    <label htmlFor = "time">Time: </label>
                                                     <input 
                                                         id = "time" 
                                                         className = "session-input" 
@@ -90,7 +90,7 @@ const EditMovie = () => {
                                                     ></input>
                                                 </div>
                                                 <div className = "input-container">
-                                                    <label for = "day">Day: </label>
+                                                    <label htmlFor = "day">Day: </label>
                                                     <input 
                                                         id = "day" 
                                                         className = "session-input" 
@@ -99,7 +99,7 @@ const EditMovie = () => {
                                                     ></input>
                                                 </div>
                                                 <div className = "input-container">
-                                                    <label for = "seats">Seats: </label>
+                                                    <label htmlFor = "seats">Seats: </label>
                                                     <input 
                                                         id = "seats" 
                                                         className = "session-input" 

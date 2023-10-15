@@ -38,6 +38,7 @@
   },
   "devDependencies": {
     "graphql-request": "^6.1.0",
-    "react-router-dom": "^6.16.0"
+    "react-router-dom": "^6.16.0",
+    "recharts": "^2.8.0"
   }
 }

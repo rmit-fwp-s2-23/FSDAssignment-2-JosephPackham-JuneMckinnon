@@ -1,26 +1,15 @@
-import React, { useContext, useState, useEffect } from "react";
+import React, { useContext } from "react";
 import "../css/movies.css";
-import { TabContext, MovieContext } from "./dashboard.js";
-import { getMovies } from "../data/repository.js";
+import { TabContext, MoviesContext, MovieContext } from "./dashboard.js";
 
 const Movies = () => {
     const setTab = useContext(TabContext)
+    const { movies } = useContext(MoviesContext);
     const { setMovie } = useContext(MovieContext);
     const handleClick = (movie) => {
         setMovie(movie)
         setTab("edit")
     }
-
-    const [movies, setMovies] = useState(null);
-    useEffect( () => {
-        const retrieveMovies = async () => {
-            const allMovies = await getMovies();
-            setMovies(allMovies);
-            console.log(allMovies);
-        }
-        retrieveMovies();
-    }, [])
-
         
     return (
         <div className = "movie-container">

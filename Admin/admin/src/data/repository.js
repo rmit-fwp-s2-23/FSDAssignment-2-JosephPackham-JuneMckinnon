@@ -174,9 +174,23 @@ async function updateSessionById(id, time, day, seats) {
     return data.update_sessiontime;
 }
 
+async function reviewCountByMovie(movie_name) {
+    const query = gql`
+        query GetCount($movie: String) {
+            reviews_count(movie: $movie)
+        }
+    `;
+
+    const data = await request(GRAPH_QL_URL, query, {
+        movie: movie_name
+    });
+
+    return data.reviews_count;
+}
+
 export {
     getUsers, loginUser, setAdmin, setBlocked, 
     getMovies, updateMovie, 
-    getReviewsByMovie, deleteReviewById, 
+    getReviewsByMovie, deleteReviewById, reviewCountByMovie,
     updateSessionById
 }
