@@ -220,6 +220,7 @@ graphql.root = {
 
 	// Mutations ==========================================================================================
 	create_user: async (args) => {
+		// create a user
 		const user = await db.user.create(args.input);
 
 		return user;
