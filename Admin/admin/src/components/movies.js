@@ -6,9 +6,14 @@ const Movies = () => {
     const setTab = useContext(TabContext)
     const { movies } = useContext(MoviesContext);
     const { setMovie } = useContext(MovieContext);
+
     const handleClick = (movie) => {
-        setMovie(movie)
-        setTab("edit")
+        setMovie(movie);
+        setTab("edit");
+    }
+
+    const createMovie = () => {
+        setTab("create");
     }
         
     return (
@@ -27,6 +32,10 @@ const Movies = () => {
                     </div>
                 </div>
             )}
+            <div key = "create-movie" className = "movie" onClick = {() => createMovie()}>
+                    <div className = "overlay"><h1>+</h1></div>
+                    <h1>+</h1>
+                </div>
         </div>
     )
 }

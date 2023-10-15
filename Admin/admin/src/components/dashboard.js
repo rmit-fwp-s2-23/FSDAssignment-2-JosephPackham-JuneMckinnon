@@ -3,6 +3,7 @@ import Movies from "./movies";
 import EditMovie from "./editmovie";
 import UserList from "./users";
 import StatsPage from "./stats";
+import CreateMovie from "./createmovie";
 import "../css/dash.css";
 import { getMovies } from "../data/repository.js";
 
@@ -35,16 +36,16 @@ const Dashboard = () => {
                 <TabContext.Provider value = {setTab}>
                     <div className = "flex-col">
                         <div className = "dash-toggles">
-                            <div id = "dash-toggle" className = {tab === "movies" ? 'active' : tab === "edit" ? 'active' : 'inactive'} onClick = {() => tabSwitch("movies")}>Movies</div>
+                            <div id = "dash-toggle" className = {tab === "movies" ? 'active' : tab === "edit" ? 'active' : tab === "create" ? 'active' : 'inactive'} onClick = {() => tabSwitch("movies")}>Movies</div>
                             <div id = "dash-toggle" className = {tab === "users" ? 'active' : 'inactive'} onClick = {() => tabSwitch("users")}>Users</div>
                             <div id = "dash-toggle" className = {tab === "stats" ? 'active' : 'inactive'} onClick = {() => tabSwitch("stats")}>Stats</div>
                         </div>
                         <div className = "dash-bkg">
                             {tab === "movies" && <Movies />}
                             {tab === "edit" && <EditMovie />}
-                            {/* {users?.map(user => <div key = {user.name}>{user.name}</div>)} */}
                             {tab === "users" && <UserList />}
                             {tab === "stats" && <StatsPage />}
+                            {tab === "create" && <CreateMovie />}
                         </div>
                     </div>
                 </TabContext.Provider>
