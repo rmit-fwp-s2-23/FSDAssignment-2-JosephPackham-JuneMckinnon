@@ -49,12 +49,8 @@ async function seedData() {
    await db.sessiontimes.create({sessiontime_movie: 'Movie1', sessiontime_day:'Sample Day', sessiontime_time: '9:30', sessiontime_available_seats: 5,})
   
   await db.tickets.create({movie: 'Movie1', author_name: 'User1', author_email: 'User@Email.com', ticket_quantity: 5, ticket_day: 'Sample Day', ticket_time: '9:30'});
-}
-
- 
-
-  
 };
+
 //This is sample data for the assignment, This was the data hardcoded in assignment one
 async function seedAssignmentData() {
     const count = await db.sessiontimes.count();
