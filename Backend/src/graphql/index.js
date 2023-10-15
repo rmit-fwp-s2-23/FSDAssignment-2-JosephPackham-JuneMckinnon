@@ -1,6 +1,7 @@
 const { buildSchema } = require("graphql");
 const db = require("../database");
 const argon2 = require("argon2");
+const { GraphQLDate } = require('graphql-scalars');
 
 const graphql = { };
 
@@ -78,7 +79,7 @@ graphql.schema = buildSchema(`
 		all_users: [User],
 		user(email: String): User,
 		user_exists(email: String): Boolean,
-		all_reviews: [Review],
+		all_reviews(movie: String): [Review],
 		reviews_by_user(email: String): [Review],
 		all_movies: [Movie],
 		movie(movie_name: String): Movie
@@ -120,8 +121,13 @@ graphql.root = {
 
 		return count === 1;
 	},
-	all_reviews: async () => {
-		return await db.reviews.findAll();
+	all_reviews: async (args) => {
+		const reviews = await db.reviews.findAll({ where: {movie: args.movie} });
+
+		return reviews.map(review => ({
+			...review.dataValues,
+			review_date: review.review_date.toISOString()
+		}));
 	},
 	reviews_by_user: async (args) => {
 		const allReviews = await db.reviews.findAll();

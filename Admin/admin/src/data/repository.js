@@ -113,6 +113,41 @@ async function updateMovie(movie_name, movie_image) {
     return data.update_movie;
 }
 
+async function getReviewsByMovie(movie_name) {
+    const query = gql`
+      query GetReviews($movieName: String!) {
+        all_reviews(movie: $movieName) {
+          author_name
+          review_rating
+          review_text
+          review_date
+        }
+      }
+    `;
+  
+    const variables = { movieName: movie_name }; // Define the variable here
+  
+    const data = await request(GRAPH_QL_URL, query, variables);
+    return data.all_reviews;
+}
+
+async function deleteReviewById(review_id) {
+    const mutation = gql`
+        mutation DeleteReview($reviewID: Int) {
+            delete_review(review_id: $reviewID) {
+                success
+                message
+            }
+        }
+    `;
+
+    const data = await request(GRAPH_QL_URL, mutation, {
+        reviewID: review_id
+    });
+
+    return data.delete_review;
+}
+
 export {
-    getUsers, loginUser, setAdmin, setBlocked, getMovies, updateMovie
+    getUsers, loginUser, setAdmin, setBlocked, getMovies, updateMovie, getReviewsByMovie, deleteReviewById
 }

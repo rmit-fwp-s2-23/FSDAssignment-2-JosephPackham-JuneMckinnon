@@ -25,5 +25,8 @@
     "graphql": "^15.8.0",
     "mysql2": "^3.6.1",
     "sequelize": "^6.33.0"
+  },
+  "devDependencies": {
+    "graphql-scalars": "^1.22.4"
   }
 }

@@ -137,3 +137,28 @@ body {
     transform: scale(1.05);
     filter: brightness(0.95);
 }
+
+.delete-review {
+    width: 4rem;
+    height: 2rem;
+    margin-top: 0.5rem;
+    border-radius: 0.5rem;
+    border-width: 0.25rem;
+    border-style: solid;
+    box-shadow: none;
+    font-weight: 900;
+    transition: transform 0.1s ease, filter 0.1s ease;
+    border-color: var(--red);
+    color: var(--red);
+    background: var(--background-lightest)
+}
+
+.delete-review:hover {
+    transform: scale(1.1);
+    filter: brightness(1.1);
+}
+
+.delete-review:active {
+    transform: scale(1.05);
+    filter: brightness(0.9);
+}
