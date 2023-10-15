@@ -21,7 +21,7 @@ const LandingPage = (props) => {
     const [imgSrc, setImgSrc] = useState(movie);
     const [sessionTimes, setSessionTimes] = useState([]);
     const [movies, setMovies] = useState([]);
-    console.log(imgSrc);
+
   
     
   
@@ -39,7 +39,7 @@ const LandingPage = (props) => {
     }, []);
   
     const changeImg = (movie) => {
-      console.log(movie);
+      
       setImgSrc(movie.movie_image);
       setMovie(movie.movie_name);
       
@@ -86,9 +86,9 @@ const LandingPage = (props) => {
                   ))}
               </div>
             </div>
-            < div id="movies" className='movie-list-container'>
+            < div id="movies" className='movie-list-container' data-testid="movie">
               {movies.map((movie) => (
-                <div className="movie" onClick={() => changeImg(movie)}>
+                <div className="movie" onClick={() => changeImg(movie)} >
                   <img className='poster' src={movie.movie_image} alt={movie.movie_name} />
                   <div className = "moviename">{movie.movie_name}</div>
                 </div>

@@ -2,9 +2,9 @@ import { MemoryRouter } from 'react-router-dom';
 import LandingPage from '../pages/landingpage';
 import React, { useState, useEffect } from 'react';
 import { server } from './mocks/server.js';
-import { render, screen } from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
 import '@testing-library/jest-dom';
-import { getAllSessionTimes } from '../data/repository';
+import { getAllSessionTimes, getAllMovies } from '../data/repository';
 
 server.listen();
 
@@ -14,6 +14,7 @@ test('renders landing page with correct information', async () => {
 
   // Fetch the session times data and update the state
   const sessionTimes = await getAllSessionTimes();
+  
   expect(sessionTimes).toBeDefined();
   expect(sessionTimes.length).toBeGreaterThan(0);
   expect(sessionTimes[0].sessiontime_movie).toBeDefined();
@@ -22,6 +23,23 @@ test('renders landing page with correct information', async () => {
   expect(sessionTimes[0].sessiontime_movie).not.toBeNull();
   expect(sessionTimes[0].sessiontime_day).not.toBeNull();
   expect(sessionTimes[0].sessiontime_time).not.toBeNull();
+
+  // Fetch the movies data and update the state
+  const movies = await getAllMovies();
+  console.log(movies);
+  expect(movies).toBeDefined();
+  expect(movies.length).toBeGreaterThan(0);
+  expect(movies[0].movie_name).toBeDefined();
+  expect(movies[0].movie_image).toBeDefined();
+  expect(movies[0].movie_name).not.toBeNull();
+  expect(movies[0].movie_image).not.toBeNull();
+
+
+  //wait for the movies to be rendered
+  await waitFor(() => {
+    const movieElements = screen.getAllByTestId('movie');
+    expect(movieElements.length).toBe(movies.length);
+  });
 
   // Render the LandingPage component with the mock setMovie function and session times state
   render(
