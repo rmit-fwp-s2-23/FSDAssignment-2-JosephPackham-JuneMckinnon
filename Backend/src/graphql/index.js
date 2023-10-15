@@ -132,47 +132,68 @@ graphql.schema = buildSchema(`
 
 // The root provides a resolver function for each API endpoint.
 graphql.root = {
-	// Queries.
+	// Queries ===========================================================================
 	all_users: async () => {
+		// retrieve all users
 		const users = await db.user.findAll();
+
+		// return all users, modifying date since graphql doesn't have a data type
 		return users.map(user => ({
 			...user.dataValues,
 			joined: user.joined.toISOString()
 		}));
 	},
+
 	user: async (args) => {
+		// retrieve user by email
 		return await db.user.findByPk(args.email);
 	},
+
 	user_exists: async (args) => {
+		// count number of users in db where email is the input, (should only be 1 since email is a primary key)
 		const count = await db.user.count({ where: { email: args.email } });
 
+		// if 1 it returns true
 		return count === 1;
 	},
+
 	all_reviews: async (args) => {
+		// retrieve all reviews given the movie
 		const reviews = await db.reviews.findAll({ where: {movie: args.movie} });
 
+		// return all reviews, modifying date to correct format
 		return reviews.map(review => ({
 			...review.dataValues,
 			review_date: review.review_date.toISOString()
 		}));
 	},
+
 	reviews_by_user: async (args) => {
+		// retrieve all reviews
 		const allReviews = await db.reviews.findAll();
+
+		// iterate over all reviews to find matching condition
 		let userReviews = [];
 		allReviews.forEach(review => {
-			if (review.author_email === args.email) {
+			if (review.author_email === args.email) { // if email is the same as input
 				userReviews.push(review);
 			}
 		});
 
 		return userReviews;
 	},
+
 	reviews_count: async (args) => {
+		// retrieve all reviews
 		const allReviews = await db.reviews.findAll({ where: {movie: args.movie} });
+
+		// return length
 		return allReviews.length;
 	},
+
 	all_movies: async () => {
 		try {
+			// revieve all movies
 		  	const movies = await db.movies.findAll({ include: { model: db.sessiontimes, as: "sessiontimes"} });
 		  	return movies;
 		} catch (error) {
@@ -182,7 +203,10 @@ graphql.root = {
 	},
 	all_tickets: async (args) => {
 		try {
+			// retrieve all tickets
 			const tickets = await db.tickets.findAll();
+
+			// return tickets, modifying createdAt since it's a date
 			return tickets.map(ticket => ({
 				...ticket.dataValues,
 				createdAt: ticket.createdAt.toISOString()
@@ -194,7 +218,7 @@ graphql.root = {
 	},
 
 
-	// Mutations.
+	// Mutations ==========================================================================================
 	create_user: async (args) => {
 		const user = await db.user.create(args.input);
 
