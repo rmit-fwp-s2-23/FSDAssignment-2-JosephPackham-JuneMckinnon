@@ -8,21 +8,21 @@ exports.all = async (req, res) => {
   res.json(users);
 };
 
-// Select one user from the database.
+// Select one user from the database by ID.
 exports.one = async (req, res) => {
   const user = await db.user.findByPk(req.params.id);
 
   res.json(user);
 };
 
-//slect one user by email
+// Select one user from the database by email.
 exports.oneByEmail = async (req, res) => {
   const user = await db.user.findByPk(req.query.email);
 
   res.json(user);
 };
 
-// Select one user from the database if username and password are a match.
+// Select one user from the database if email and password are a match.
 exports.login = async (req, res) => {
   const user = await db.user.findByPk(req.query.email);
   
@@ -50,7 +50,7 @@ exports.create = async (req, res) => {
   res.json(user);
 };
 
-//delete a user from the database
+// Delete a user from the database by ID.
 exports.delete = async (req, res) => {
   try {
     const user = await db.user.findByPk(req.params.id);
@@ -68,7 +68,7 @@ exports.delete = async (req, res) => {
   }
 }
 
-//update a user in the database
+// Update a user in the database by email.
 exports.update = async (req, res) => {
   // fetch user from db
   const user = await db.user.findByPk(req.body.email);
@@ -92,5 +92,3 @@ exports.update = async (req, res) => {
     res.status(200).json({ message: "Successfully updated details" });
   }
 }
-
-
