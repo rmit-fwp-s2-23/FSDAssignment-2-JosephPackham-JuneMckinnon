@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import "../css/stats.css";
 import { BarChart, Bar, XAxis, YAxis, Tooltip, Legend, ResponsiveContainer, ReferenceLine, Label } from 'recharts';
-import { reviewCountByMovie } from "../data/repository";
+import { reviewCountByMovie, getTickets } from "../data/repository";
 import { MoviesContext } from "./dashboard";
 
 const AverageReviews = () => {
@@ -51,7 +51,20 @@ const AverageReviews = () => {
 const TicketsSold = () => {
     // 1 - Get all tickets
     // 2 - Count tickets based on day
-    // 3 - Create 
+    // 3 - Create line graph
+
+    const [tickets, setTickets] = useState([]);
+
+    useEffect(() => {
+        const retrieveTickets = async () => {
+            const retrievedTickets = await getTickets();
+            setTickets(retrievedTickets);
+            console.log(retrievedTickets)
+        }
+
+        retrieveTickets();
+    }, [])
+
 }
 
 const StatsPage = () => {
@@ -81,7 +94,8 @@ const StatsPage = () => {
                 >Movie Page Views</button>
             </div>
             <div className = "graph-container">
-                <AverageReviews />
+                {graph === "average_reviews" && <AverageReviews />}
+                {graph === "tickets_sold" && <TicketsSold />}
             </div>
         </div>
     )

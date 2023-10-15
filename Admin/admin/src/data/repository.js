@@ -188,9 +188,25 @@ async function reviewCountByMovie(movie_name) {
     return data.reviews_count;
 }
 
+async function getTickets() {
+    const query = gql`
+        {
+            all_tickets {
+                ticket_id,
+                movie,
+                createdAt
+            }
+        }
+    `;
+
+    const data = await request(GRAPH_QL_URL, query);
+    return data.all_tickets;
+}
+
 export {
     getUsers, loginUser, setAdmin, setBlocked, 
     getMovies, updateMovie, 
     getReviewsByMovie, deleteReviewById, reviewCountByMovie,
-    updateSessionById
+    updateSessionById,
+    getTickets
 }

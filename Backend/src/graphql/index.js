@@ -104,7 +104,7 @@ graphql.schema = buildSchema(`
 		reviews_count(movie: String): Int,
 		all_movies: [Movie],
 		movie(movie_name: String): Movie,
-		all_tickets(movie_name: String): [Ticket]
+		all_tickets: [Ticket]
 	}
 
 	# Mutations (modify data in the underlying data-source, i.e., the database).
@@ -182,7 +182,11 @@ graphql.root = {
 	},
 	all_tickets: async (args) => {
 		try {
-			return await db.tickets.findAll({ where: {movie: args.movie_name}});
+			const tickets = await db.tickets.findAll();
+			return tickets.map(ticket => ({
+				...ticket.dataValues,
+				createdAt: ticket.createdAt.toISOString()
+			}));
 		} catch (error) {
 			console.error(error);
 			throw new Error('Error fetching tickets');
