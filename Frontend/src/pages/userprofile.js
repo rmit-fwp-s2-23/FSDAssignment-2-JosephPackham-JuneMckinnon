@@ -61,14 +61,14 @@ const UserProfile = (props) => {
         }
     }
     const handlePrevClick = () => {
-      setActiveIndex((prevIndex) => prevIndex === 0 ? tickets.length - 1 : prevIndex - 1);
-    };
-  
-    const handleNextClick = () => {
-      setActiveIndex((prevIndex) => prevIndex === tickets.length - 1 ? 0 : prevIndex + 1);
-    };
+        setActiveIndex((prevIndex) => (prevIndex === 0 ? tickets.length - 1 : prevIndex - 1));
+      };
+    
+      const handleNextClick = () => {
+        setActiveIndex((prevIndex) => (prevIndex === tickets.length - 1 ? 0 : prevIndex + 1));
+      };
     return (
-        <div className = "page">
+        <div className = "userprofilepage">
             <div className = "content">
                 <div className = "background">
                     <div className = "user-profile">
@@ -91,23 +91,29 @@ const UserProfile = (props) => {
                             <button className="button" id = 'delete' onClick = {handleDelete}>Delete</button>
                         </div>
                         </div>
-                        </div>                
+                        </div> 
+                                      
                         </div>
-                        <div className="ticket-list">
-                            <div className="ticket">
-                            <h3 className="ticketmovie">{tickets[activeIndex].movie}</h3>
-                            <div className="details">
-                                <p className="quantity">{tickets[activeIndex].ticket_quantity} seats</p>
-                                <p className="day">{tickets[activeIndex].ticket_day}</p>
-                                <p className="time">{tickets[activeIndex].ticket_time}</p>
-                            </div>
-                            </div>
+                        {tickets.length > 0 && (
+        <div className="ticket-container">
+            <div id = "header">
+                            Ticket Reservations
                         </div>
-                            <div className="navigation">
-                                <button onClick={handlePrevClick}>Prev</button>
-                                <button onClick={handleNextClick}>Next</button>
-                            </div>
-
+                        <br></br>
+          <div className="ticket">
+            <h3 className="ticketmovie">{tickets[activeIndex].movie}</h3>
+            <div className="details">
+              <p className="quantity">{tickets[activeIndex].ticket_quantity} seats</p>
+              <p className="day">{tickets[activeIndex].ticket_day}</p>
+              <p className="time">{tickets[activeIndex].ticket_time}</p>
+            </div>
+          </div>
+          <div className="navigation">
+            <button className="prev" onClick={handlePrevClick}>Prev</button>
+            <button className="next" onClick={handleNextClick}>Next</button>
+          </div>
+        </div>
+      )}
             </div>
         </div>
         );

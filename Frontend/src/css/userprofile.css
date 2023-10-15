@@ -1,8 +1,7 @@
 .userprofilepage {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
+    
+
+    height: 120vh;
     background-color: #000000;
   }
   
@@ -14,8 +13,9 @@
     background-color: #fff;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-    padding: 40px;
+    
   }
+
 
 .input{
     background-color: #ffffff;
@@ -36,11 +36,24 @@
     background-color: rgba(105, 100, 120, 0.5);
     backdrop-filter: blur(1px);
     padding: 30px;
-    margin: 30px;
+    
     box-shadow: 0rem 0rem 1rem rgb(10, 10, 20);
     border-radius: 1rem;
+    
 
     
+}
+
+.background {
+  background-color: rgba(23, 24, 31);
+  
+  height: 70vh;
+  padding: 2vw;
+  box-shadow: 0vw 0vw 5vw rgb(20, 20, 20);
+  border-radius: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 
@@ -54,7 +67,9 @@
 
 .user-profile {
     flex: 1;
-    margin: 30px;
+    margin: 1rem;
+    padding: 1rem;
+    
   }
   
   .ticket-list {
@@ -65,14 +80,16 @@
     flex-wrap: wrap-reverse;
     max-width: 800px;
     justify-content: center;
+    margin: 50%
   }
   
   .ticket {
     flex: 1;
     align-items: center;
-    margin-bottom: 20px;
-    padding: 20px;
-    background-color: #1d1c1c;
+    margin: 10px;
+    margin-bottom: 15px;
+    padding: 30px;
+    background-color: rgba(23, 24, 31);
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
     max-width: 800px;
@@ -108,28 +125,23 @@
   .navigation {
     flex-shrink: 0;
     display: flex;
-    flex-direction: column;
-    justify-content: center;
+    flex-direction: row;
+    justify-content: space-evenly;
+    width: 100%;
   }
 
-  .navigation button {
-    background-color: #0077ff;
-    color: #fff;
-    border: none;
-    border-radius: 0.25rem;
-    padding: 0.5rem 1rem;
-    font-size: 1rem;
-    cursor: pointer;
-    transition: background-color 0.2s ease-in-out;
-    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%23fff"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12l4.58-4.59z"/></svg>');
-    background-repeat: no-repeat;
-    background-position: center;
-  }
+
   
-  .navigation button.prev {
-    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%23fff"><path d="M14.59 16.59L13.17 15.17 8.59 19.76 10 21.17 14.59 16.59zM16.59 7.41L15.17 6 10.59 10.59 12 12 16.59 7.41z"/></svg>');
-  }
-  
-  .navigation button.next {
-    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%23fff"><path d="M9.41 7.41L8 6l-6 6 6 6 1.41-1.41L4.83 12l4.58-4.59z"/></svg>');
+
+  .ticket-container {
+    display: flex;
+    flex-direction: column;
+    
+    
+    margin-left: 20vh;
+    flex-wrap: wrap-reverse;
+    max-width: 800px;
+    justify-content:center;
+    
+    
   }
