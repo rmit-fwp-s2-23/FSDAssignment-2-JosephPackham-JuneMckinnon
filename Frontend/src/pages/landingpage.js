@@ -32,7 +32,8 @@ const LandingPage = (props) => {
         const filteredMovies = allMovies.filter((movie) => movie.movie_name !== "Movie1"); // exclude movie with movie_name "Movie1"
         setSessionTimes(sessionTimes);
         setMovies(filteredMovies);
-        setMovie(filteredMovies[0].movie_name);
+        setMovie(filteredMovies[1].movie_name);
+        setImgSrc(filteredMovies[1].movie_image);
       }
       fetchData();
     }, []);
@@ -41,7 +42,7 @@ const LandingPage = (props) => {
       console.log(movie);
       setImgSrc(movie.movie_image);
       setMovie(movie.movie_name);
-      document.getElementById('movie-title').innerText = movie.movie_name;
+      
       
       
     };
@@ -63,7 +64,7 @@ const LandingPage = (props) => {
         <div className="movie-container" id="movie-container">
           <div className="contain-left">
             <div id="movie-title" data-testid="MovieTitle">
-              
+              {movie}
             </div>
             <img src={imgSrc} alt={movie.movie_name} id="movie-poster" data-testid="MoviePoster"></img>
             
@@ -85,7 +86,7 @@ const LandingPage = (props) => {
                   ))}
               </div>
             </div>
-            <div id="movies">
+            < div id="movies" className='movie-list-container'>
               {movies.map((movie) => (
                 <div className="movie" onClick={() => changeImg(movie)}>
                   <img className='poster' src={movie.movie_image} alt={movie.movie_name} />
