@@ -10,26 +10,27 @@ import avengers from '../images/avengersendgame_lob_crd_05.jpg';
 import avengers_bkg from '../images/avengers/avengers-bkg.jpeg';
 import lotr from '../images/lordoftherings.jpg'
 import lotr_bkg from '../images/lotr/lotr-bkg.jpeg';
-import { getAllMovies, getMovie, getAllSessionTimes, getSessionTime, getSessionTimeByDay } from '../data/repository';
+import { getAllMovies, getMovie, getAllSessionTimes, getSessionTime, getSessionTimeByDay, getSessionTimeByMovie } from '../data/repository';
 import { all } from 'axios';
 
 //this is the landing page
 
-const LandingPage = (props) => {
-    const navigate = useNavigate();
-    const { setMovie, movie } = props;
-    const [imgSrc, setImgSrc] = useState(movie);
-    const [sessionTimes, setSessionTimes] = useState([]);
-    const [movies, setMovies] = useState([]);
+const LandingPage = (props) => { //props are passed in from app.js
+    const navigate = useNavigate(); //used to navigate to different pages
+    const { setMovie, movie } = props; //get movie and setMovie from props
+    const [imgSrc, setImgSrc] = useState(movie); //set imgSrc to movie
+    const [sessionTimes, setSessionTimes] = useState([]); //set sessionTimes to empty array
+    const [movies, setMovies] = useState([]); //set movies to empty array -- this is the array of movies that will be displayed on the landing page, where as movie is the prop
 
   
     
   
     useEffect(() => {
       async function fetchData() {
-        const sessionTimes = await getAllSessionTimes();
+        const AllsessionTimes = await getAllSessionTimes();
         const allMovies = await getAllMovies();
         const filteredMovies = allMovies.filter((movie) => movie.movie_name !== "Movie1"); // exclude movie with movie_name "Movie1"
+        const sessionTimes = await getSessionTimeByMovie(filteredMovies[1].movie_name);
         setSessionTimes(sessionTimes);
         setMovies(filteredMovies);
         setMovie(filteredMovies[1].movie_name);
@@ -37,11 +38,25 @@ const LandingPage = (props) => {
       }
       fetchData();
     }, []);
+
+    let sessionTimesByMovie = [];
   
-    const changeImg = (movie) => {
+    const changeImg = async (movie) => {
       
       setImgSrc(movie.movie_image);
       setMovie(movie.movie_name);
+
+        // fetch session times for the selected movie
+      const response = await getSessionTimeByMovie(movie.movie_name);
+      sessionTimesByMovie = response;
+
+      // update the session times state
+      setSessionTimes(sessionTimesByMovie);
+      console.log(sessionTimesByMovie);
+
+      
+      
+      
 
     };
   
@@ -56,6 +71,7 @@ const LandingPage = (props) => {
       localStorage.setItem('day', sessionTime.replace(/\//g, '-'));
       navigate('/ticket');
     };
+
   
     return (
       <div className='page' data-testid="LandingPage">
@@ -74,17 +90,34 @@ const LandingPage = (props) => {
             <div id="sessiontimes">
               <div className="header" data-testid="SessionTimesHeading">Session Times</div>
               <div className="session-times" data-testid="SessionTimes">
-                {sessionTimes
-                  .filter(
-                    (sessionTime, index, self) =>
-                      self.findIndex((t) => t.sessiontime_day === sessionTime.sessiontime_day) === index && sessionTime.sessiontime_day !== "Sample Day"
-                  )
-                  .map((sessionTime ) => (
-                    <button key={sessionTime.sessiontime_id} className="session-time" onClick={() => handleSessionTime(sessionTime.sessiontime_day)}>{sessionTime.sessiontime_day.replace(/-/g, '/')}</button>
-                  ))}
+                  {/* display session times and filter out duplicate days */}
+  {sessionTimes
+    .filter(
+      (sessionTime, index, self) =>
+        index ===
+        self.findIndex((t) => t.sessiontime_day === sessionTime.sessiontime_day)
+    )
+    .map((sessionTime) => {
+      const [day, date] = sessionTime.sessiontime_day.split(" ");
+      const formattedDate = date.replace(/-/g, "/");
+      return (
+        <div
+          key={sessionTime.sessiontime_id}
+          className="session-time"
+          onClick={() => handleSessionTime(sessionTime.sessiontime_day)}
+        >
+        <div className="session-day">{sessionTime.sessiontime_day.split(" ")[0]}</div>
+        <br></br>
+   
+        <div className="session-day">{sessionTime.sessiontime_day.split(" ")[1].replace(/-/g, "/")}</div>
+        </div>
+      );
+    })}
+
               </div>
             </div>
             <div id="movies" className='movie-list-container' data-testid="movies-container">
+              
               {movies.map((movie) => (
                 <div key = {movie.movie_name} data-testid="movie" className="movie" onClick={() => changeImg(movie)} >
                   <img className='poster' src={movie.movie_image} alt={movie.movie_name} />

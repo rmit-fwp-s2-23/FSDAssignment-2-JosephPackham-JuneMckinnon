@@ -8,16 +8,16 @@ const EditProfile = (props) => {
     const navigate = useNavigate(); //used to navigate to different pages
     
 
-    const handleBack = (e) => {
+    const handleBack = (e) => { //when back button is clicked, navigate to user profile page
         navigate('/userprofile');
     }
 
-    const handleSubmit = async (e) => {
+    const handleSubmit = async (e) => { //when form is submitted, run handleSubmit function
         e.preventDefault() //prevents page from refreshing
 
         // create variables
         const error = document.getElementById('error'); //get error element
-        const email = JSON.parse(localStorage.getItem("loggedUser")).email;
+        const email = JSON.parse(localStorage.getItem("loggedUser")).email; //get email from local storage
         const updateData = { // this isn't a user but rather the information to update & the current password
             name: e.target[0].value,
             new_password: e.target[1].value,
