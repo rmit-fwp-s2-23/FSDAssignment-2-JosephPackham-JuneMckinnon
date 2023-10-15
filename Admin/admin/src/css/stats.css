@@ -10,7 +10,7 @@
 }
 
 .stats-page {
-    max-width: 48rem;
+    width: 48rem;
     height: 30rem;
     background-color: var(--background-light);
     margin: 2rem;

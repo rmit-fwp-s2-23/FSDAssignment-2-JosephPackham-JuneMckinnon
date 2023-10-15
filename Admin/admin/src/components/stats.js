@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import "../css/stats.css";
-import { BarChart, Bar, XAxis, YAxis, Tooltip, Legend, ResponsiveContainer, ReferenceLine, Label } from 'recharts';
+import { BarChart, Bar, XAxis, YAxis, Tooltip, Legend, ResponsiveContainer, ReferenceLine, Label, LineChart, Line } from 'recharts';
 import { reviewCountByMovie, getTickets } from "../data/repository";
 import { MoviesContext } from "./dashboard";
 
@@ -59,12 +59,35 @@ const TicketsSold = () => {
         const retrieveTickets = async () => {
             const retrievedTickets = await getTickets();
             setTickets(retrievedTickets);
-            console.log(retrievedTickets)
         }
-
+        
         retrieveTickets();
     }, [])
+    
+    const countedTickets = tickets.reduce((counts, ticket) => {
+        const date = ticket.createdAt.slice(0, 10);
+        
+        counts[date] = (counts[date] || 0) + 1;
+        
+        return counts;
+    }, {});
+    
+    const countedTicketsArray = Object.entries(countedTickets).map(([name, count]) => ({
+        name,
+        count
+    }));
 
+    return (
+        <ResponsiveContainer width = {1000} height = "100%">
+            <LineChart data = {countedTicketsArray} margin = {{left: 50, top: 50, bottom: 10, right: 20}}>
+                <XAxis dataKey="name" axisLine = {{ stroke  : "white" }} tick = {{ fill: "white" }} tickLine = {{ stroke: "white" }} />
+                <YAxis axisLine = {{ stroke: "white" }} tick = {{ fill: "white" }} tickLine = {{ stroke: "white" }} />
+                <Tooltip />
+                <Legend />
+                <Line type = "monotone" dataKey="count" fill="#8884d8" />
+            </LineChart>
+        </ResponsiveContainer>
+    )
 }
 
 const StatsPage = () => {
