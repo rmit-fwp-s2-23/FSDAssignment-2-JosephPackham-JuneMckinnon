@@ -8,10 +8,10 @@ import { createReview, getReviewsByMovie, deleteReview, updateReview } from '../
 
 const Reviews = (props) => {
 
-    const [reviews, setReviews] = useState([]);
-    useEffect(() => {
-        const getReviews = async () => {
-            const reviews = await getReviewsByMovie(props.movie);
+    const [reviews, setReviews] = useState([]); //set reviews state to empty array
+    useEffect(() => { //useEffect is used to fetch data from the database
+        const getReviews = async () => { //async function to fetch data
+            const reviews = await getReviewsByMovie(props.movie); //get all reviews for the selected movie
             setReviews(reviews);
             
             
