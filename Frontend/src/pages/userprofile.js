@@ -84,7 +84,7 @@ const UserProfile = (props) => {
                             Email: {user.email}
                         </div>
                         <div className = "small-background">
-                            Joined: {user.joined.split('T')[0]}
+                            Joined: {user.joined}
                         </div>
                         <div className = "button-container">
                             <button className="button" id = 'edit' onClick = {handleEdit}>Edit</button>

@@ -98,6 +98,13 @@ const LandingPage = (props) => { //props are passed in from app.js
 ) : (
   <div className="session-times" data-testid="SessionTimes">
     {/* display session times and filter out duplicate days */}
+    {sessionTimes.length === 0 ? (
+  <div className="no-session-times" data-testid="NoSessionTimes">
+    No session times available
+  </div>
+) : (
+  <div className="session-times" data-testid="SessionTimes">
+    {/* display session times and filter out duplicate days */}
     {sessionTimes
       .filter(
         (sessionTime, index, self) => //filter out duplicate days
@@ -119,6 +126,8 @@ const LandingPage = (props) => { //props are passed in from app.js
           </div>
         );
       })}
+  </div>
+)}
   </div>
 )}
 
