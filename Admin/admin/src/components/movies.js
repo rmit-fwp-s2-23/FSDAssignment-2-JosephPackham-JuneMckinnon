@@ -24,12 +24,6 @@ const Movies = () => {
                     <div className = "movie-poster">
                         <div className = "movie-name">{movie.movie_name}</div>
                     </div>
-                    <div className = "movie-stats">
-                        <div>Ticket Sales Today:</div>
-                        <div>No. of Reviews:</div>
-                        <div>Average Rating:</div>
-                        <div>Total Page Views:</div>
-                    </div>
                 </div>
             )}
             <div key = "create-movie" className = "movie" onClick = {() => createMovie()}>
