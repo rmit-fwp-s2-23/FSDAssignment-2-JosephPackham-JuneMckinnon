@@ -85,8 +85,61 @@ body {
 
 .session-entry {
     margin: 1rem;
-    text-align: left;
     width: 100%;
+    box-sizing: border-box;
+    border-radius: 0.5rem;
+    padding: 0.75rem 1rem;
+    background: var(--background-lightest);
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.input-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0.5rem 0rem;
+    width: 100%;
+}
+
+.session-input {
+    width: 69%;
+    background: var(--background-lightest);
+    border: none;
+    border-bottom: 0.3rem solid var(--blue);
+    color: white;
+    padding: 0.5rem 0.5rem 0.2rem 0.5rem;
+    outline: none;
+}
+
+.session-input:focus {
+    border-color: var(--primary);
+}
+
+.save-session {
+    border-style: solid;
+    border-color: var(--blue);
+    border-radius: 0.5rem;
+    border-width: 0.3rem;
+    background: var(--background-lightest);
+    color: white;
+    padding: 0.25rem 1rem;
+    margin-top: 0.5rem;
+    font-size: 1.1rem;
+    font-weight: 800;
+    letter-spacing: 0.05rem;
+    transition: transform 0.1s ease, filter 0.1s ease;
+}
+
+.save-session:hover {
+    transform: scale(1.1);
+    filter: brightness(1.05);
+}
+
+.save-session:active {
+    transform: scale(1.05);
+    filter: brightness(0.95);
 }
 
 .movie-key {
@@ -126,6 +179,7 @@ body {
     background: var(--background-light);
     color: white;
     transition: transform 0.1s ease;
+    margin-bottom: 1rem;
 }
 
 .edit-save:hover {

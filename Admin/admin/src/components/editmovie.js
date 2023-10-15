@@ -33,6 +33,10 @@ const EditMovie = () => {
         alert(response.message)
     }
 
+    const saveSession = async () => {
+
+    }
+
     const deleteReview = async (reviewID) => {
         const response = await deleteReviewById(reviewID);
         alert(response.message);
@@ -51,23 +55,35 @@ const EditMovie = () => {
                                     <div className = "movie-key">Session Times:</div>
                                     <div key = {key} className = "session-container">
                                         {value.map(session => 
-                                            <div key = {session.sessiontime_time} className = "session-entry">
-                                                <div>Time: {session.sessiontime_time}</div>
-                                                <div>Day: {session.sessiontime_day}</div>
-                                                <div>Seats Left: {session.sessiontime_available_seats}</div>
+                                            <div key = {session.sessiontime_id} className = "session-entry">
+                                                <div className = "input-container">
+                                                    <label for = "time">Time: </label>
+                                                    <input id = "time" className = "session-input" value = {session.sessiontime_time}></input>
+                                                </div>
+                                                <div className = "input-container">
+                                                    <label for = "day">Day: </label>
+                                                    <input id = "day" className = "session-input" value = {session.sessiontime_day}></input>
+                                                </div>
+                                                <div className = "input-container">
+                                                    <label for = "seats">Seats: </label>
+                                                    <input id = "seats" className = "session-input" value = {session.sessiontime_available_seats}></input>
+                                                </div>
+                                                <button className = "save-session" onClick = {() => saveSession(session.sessiontime_id)}>Save</button>
                                             </div>
                                         )}
                                     </div>
                                 </>
                             ) : (
-                                <div key={key} className="movie-entry">
-                                    <div className="movie-key">{key}:</div>
-                                    <input className="movie-val" type="text" defaultValue={value} onChange = {(ev) => handleInputChange(key, ev.target.value)} />
-                                </div>
+                                <>
+                                    <div key={key} className="movie-entry">
+                                        <div className="movie-key">{key}:</div>
+                                        <input className="movie-val" type="text" defaultValue={value} onChange = {(ev) => handleInputChange(key, ev.target.value)} />
+                                    </div>
+                                    <button className = "edit-save" onClick = {() => saveChanges()}>Save</button>
+                                </>
                             )
                         )
                     )}
-                    <button className = "edit-save" onClick = {() => saveChanges()}>Save</button>
                 </div>
                 <div id = "edit-review" className = "edit-items">
                     {reviews?.map(review => 

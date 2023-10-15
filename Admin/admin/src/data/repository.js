@@ -81,6 +81,7 @@ async function getMovies() {
                 movie_name,
                 movie_image,
                 sessiontimes {
+                    sessiontime_id
                     sessiontime_time
                     sessiontime_day
                     sessiontime_available_seats
