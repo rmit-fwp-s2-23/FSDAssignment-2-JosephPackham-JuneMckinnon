@@ -4,6 +4,7 @@
     --background-dark: #18122B;
     --background-med: #251e3b;
     --background-light: #393053;
+    --red: #FF6961;
 }
 
 body {
@@ -23,4 +24,32 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.logout {
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin-top: 2rem;
+    margin-right: 2rem;
+    border-radius: 0.6rem;
+    border-width: 0.3rem;
+    border-style: solid;
+    border-color: var(--red);
+    padding: 0.5rem 1rem;
+    background: none;
+    color: var(--red);
+    font-weight: 700;
+    letter-spacing: 0.05rem;
+    transition: transform 0.1s ease;
+}
+
+.logout:hover {
+    transform: scale(1.1);
+}
+
+.logout:active {
+    transform: scale(1.05);
+    background: var(--red);
+    color: white;
 }

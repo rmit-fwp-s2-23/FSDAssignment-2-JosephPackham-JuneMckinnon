@@ -22,6 +22,7 @@ db.sessiontimes = require('./models/sessiontimes.js')(db.sequelize, DataTypes);
 // Define the relationships between the models.
 db.reviews.belongsTo(db.user, { foreignKey: { name: 'author_email', allowNull: false } });
 db.tickets.belongsTo(db.user, { foreignKey: { name: 'author_email', allowNull: false } });
+db.movies.hasMany(db.sessiontimes, { foreignKey: 'sessiontime_movie' });
 db.sessiontimes.belongsTo(db.movies, { foreignKey: { name: 'sessiontime_movie', allowNull: false } });
 
 // Define a function to synchronize the database and seed it with data.
@@ -35,19 +36,15 @@ db.sync = async () => {
 async function seedData() {   
   const count = await db.reviews.count();
   if(count > 0)
-    return;
+  return;
   const argon2 = require('argon2');
-
+  
   let hash = await argon2.hash('abc123', {type: argon2.argon2id});
   await db.user.create({name: 'User1', password_hash: hash, email:'User@Email.com', joined: '2023-04-01', blocked: false, admin: false});
   await db.user.create({name: 'Admin', password_hash: hash, email:'admin@email.com', joined: '2023-04-01', blocked: false, admin: false});
    
   await db.reviews.create({movie: 'Movie1', author_name: 'User1', author_email: 'User@Email.com', review_rating: 5, review_text: 'SampleReview', review_date: '2023-04-01'});
-
-   await db.movies.create({movie_name: 'Movie1', movie_image: 'Movie1.jpg'});
-   
-   await db.sessiontimes.create({sessiontime_movie: 'Movie1', sessiontime_day:'Sample Day', sessiontime_time: '9:30', sessiontime_available_seats: 5,})
-  
+ 
   await db.tickets.create({movie: 'Movie1', author_name: 'User1', author_email: 'User@Email.com', ticket_quantity: 5, ticket_day: 'Sample Day', ticket_time: '9:30'});
 };
 

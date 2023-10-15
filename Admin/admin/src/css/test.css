@@ -1,0 +1,29 @@
+.outer {
+    position: relative;
+    width: 200px;
+    height: 200px;
+    background-color: #f0f0f0;
+  }
+  
+.inner {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    width: 160px;
+    height: 160px;
+    background-color: #fff; /* Set the background color of the cutout */
+    border-radius: 10px; /* Optional: Add rounded corners to the cutout */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Shadow around the cutout */
+
+    /* Create a pseudo-element to cover the container with a shadow */
+    &::before {
+        content: '';
+        position: absolute;
+        top: -10px;
+        left: -10px;
+        right: -10px;
+        bottom: -10px;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.8); /* Adjust the shadow as needed */
+        z-index: -1;
+    }
+}
