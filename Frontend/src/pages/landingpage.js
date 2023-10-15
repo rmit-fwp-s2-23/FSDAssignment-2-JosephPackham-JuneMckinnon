@@ -36,7 +36,10 @@ const LandingPage = (props) => {
     }, []);
   
     const changeImg = (movie) => {
-      // TODO: set the image source based on the selected movie
+      console.log(movie);
+      setImgSrc(movie.movie_image);
+      setMovie(movie.movie_name);
+      document.getElementById('movie-title').innerText = movie.movie_name;
     };
   
     const handleReview = () => {
@@ -56,7 +59,7 @@ const LandingPage = (props) => {
         <div className="movie-container" id="movie-container">
           <div className="contain-left">
             <div id="movie-title" data-testid="MovieTitle">
-              Barbie
+              
             </div>
             <img src={imgSrc} alt="barbie" id="movie-poster" data-testid="MoviePoster"></img>
             <div className="handle-review" onClick={handleReview} data-testid="ReviewButton">
@@ -79,8 +82,8 @@ const LandingPage = (props) => {
             </div>
             <div id="movies">
               {movies.map((movie) => (
-                <div className="movie" key={movie.id} onClick={() => changeImg(movie)}>
-                  <img src={movie.poster} alt={movie.title} />
+                <div className="movie" onClick={() => changeImg(movie)}>
+                  <img src={movie.movie_image} alt={movie.movie_name} />
                 </div>
               ))}
             </div>

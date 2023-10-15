@@ -124,21 +124,8 @@
     filter: brightness(0.9);
 }
 
-.movie:nth-child(1) {
-    background-image: url('../images/barbie/barbie-side.jpeg');
-}
 
-.movie:nth-child(2) {
-    background-image: url('../images/oppenheimer/oppenheimer-side.jpeg');
-}
 
-.movie:nth-child(3) {
-    background-image: url('../images/avengers/avengers-side.jpeg');
-}
-
-.movie:nth-child(4) {
-    background-image: url('../images/lotr/lotr-side.jpeg');
-}
 
 .handle-review {
     background-color: rgba(100, 100, 100, 0.5);
