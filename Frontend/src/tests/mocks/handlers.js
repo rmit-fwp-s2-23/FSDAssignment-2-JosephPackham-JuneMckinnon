@@ -13,7 +13,7 @@ export const handlers = [
             })
         )
     }),
-    
+
 
     rest.post('http://localhost:4000/api/users/', async (req, res, ctx) => {
         return res(
@@ -26,6 +26,32 @@ export const handlers = [
             })
         )
     } ),
+
+    // rest.get('http://localhost:4000/api/tickets/email/:email', async (req, res, ctx) => {
+        
+    //     return res(
+    //         ctx.status(200),
+    //         ctx.json({
+    //             ticket_id: 1,
+    //             movie: "Test Movie",
+    //             author_name: "Test User",
+    //             author_email: "june@email.com",
+    //             ticket_quantity: 1,
+    //             ticket_day: "01/01/2022",
+    //             ticket_time: "12:00",
+    //         },
+    //         {
+    //             ticket_id: 1,
+    //             movie: "Test Movie",
+    //             author_name: "Test User",
+    //             author_email: "june@email.com",
+    //             ticket_quantity: 1,
+    //             ticket_day: "01/01/2022",
+    //             ticket_time: "12:00",
+    //         })
+    //         )
+    //     } ),
+    
 
 
 ]

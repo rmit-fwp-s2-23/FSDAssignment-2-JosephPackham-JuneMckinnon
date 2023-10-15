@@ -21,7 +21,9 @@ Object.defineProperty(global, 'localStorage', { value: mockLocalStorage });
 
 test('renders Sign In page with correct information', async () => {
 
-    mockLocalStorage.getItem.mockReturnValue(JSON.stringify({ email: 'june@email.com'}));
+    mockLocalStorage.getItem.mockReturnValue(JSON.stringify({  name: "June",
+    email: "june@email.com",
+    joined: "10/10/2023"}));
 
     render(
         <MemoryRouter>

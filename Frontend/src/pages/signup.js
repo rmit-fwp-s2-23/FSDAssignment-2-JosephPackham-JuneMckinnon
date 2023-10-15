@@ -71,8 +71,13 @@ const SignUp = (props) => {
         }
         else{
             const createdUser = await createUser(user);
-            localStorage.setItem('loggedUser' , JSON.stringify(createdUser)); //set loggedUser in local storage to new user
-            props.setUser({name: user.name, password: user.password, email: user.email, joined: user.joined }); //set user state to new user
+            const loggedUser = {
+              name: createdUser.name,
+              email: createdUser.email,
+              joined: createdUser.joined,
+            }
+            localStorage.setItem('loggedUser' , JSON.stringify(loggedUser)); //set loggedUser in local storage to new user
+            props.setUser({name: createdUser.name, email: createdUser.email, joined: createdUser.joined }); //set user state to new user
             navigate('/');
             // createUser(user).then((response) => {
             //     
