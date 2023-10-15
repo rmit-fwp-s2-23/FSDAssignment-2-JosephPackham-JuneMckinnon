@@ -12,7 +12,7 @@ test('renders navbar for non-signed in users', () => {
     </MemoryRouter>
   );
 
-  // Assert that the correct information is displayed on the page
+  // Assert that the correct information is displayed on the page for non-signed in users
   expect(screen.getByTestId('Navbar-guest')).toBeInTheDocument();
   expect(screen.getByText('LOOP CINEMAS')).toBeInTheDocument();
   expect(screen.getByText('Welcome Guest')).toBeInTheDocument();
@@ -21,27 +21,31 @@ test('renders navbar for non-signed in users', () => {
 });
 
 test('renders navbar for signed in users', () => {
-  //Define the mock user object
+  // Define the mock user object
   const user = {
     name: 'Test User',
   };
 
+  // Define the mock localStorage object
   const localStorageMock = {
     getItem: jest.fn(() => JSON.stringify(user)),
     removeItem: jest.fn(),
   };
+
+  // Define the mock setUser function
   const setUserMock = jest.fn();
 
+  // Define the mock window.confirm function
   window.confirm = jest.fn(() => true);
 
   // Render the Navbar component with the mock user object
   render(
     <MemoryRouter>
-      <Navbar user={user} setUser={jest.fn()} />
+      <Navbar user={user} setUser={setUserMock} />
     </MemoryRouter>
   );
 
-  // Assert that the correct information is displayed on the page
+  // Assert that the correct information is displayed on the page for signed in users
   expect(screen.getByTestId('Navbar')).toBeInTheDocument();
   expect(screen.getByText('LOOP CINEMAS')).toBeInTheDocument();
   expect(screen.getByText(`Welcome ${user.name}`)).toBeInTheDocument();
@@ -54,7 +58,6 @@ test('renders navbar for signed in users', () => {
   // Assert that the user is logged out and redirected to the landing page
   expect(window.confirm).toBeCalledWith('Are you sure you want to logout?');
   expect(localStorage.getItem('loggedUser')).toBeNull();
-  
 });
 
 
