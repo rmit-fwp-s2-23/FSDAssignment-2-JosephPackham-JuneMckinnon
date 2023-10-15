@@ -1,49 +1,54 @@
 import axios from "axios";
 
 // --- Constants ----------------------------------------------------------------------------------
+// Define the API host URL and the user key for localStorage
 const API_HOST = "http://localhost:4000";
 const USER_KEY = "user";
 
-// --- User -----------------------------------------------------------------------------
+// --- User ----------------------------------------------------------------------------- 
+// Find a user by ID
 async function findUser(id) {
     const response = await axios.get(API_HOST + `/api/users/select/${id}`);
 
     return response.data;
 }
 
-//verify user
+// Verify a user's email and password
 async function verifyUser(email, password) {
     const response = await axios.get(API_HOST + "/api/users/login", { params: { email, password } });
     const user = response.data;
     
     return user;
-  }
+}
 
-
-//get user by email
+// Find a user by email
 async function findUserByEmail(email) {
     const response = await axios.get(API_HOST + `/api/users/select/${email}`);
 
     return response.data;
 }
 
+// Get all users
 async function getAllUsers() {
     const response = await axios.get(API_HOST + "/api/users");
 
     return response.data;
 }
 
+// Create a new user
 async function createUser(user) {
     const response = await axios.post(API_HOST + "/api/users", user);
 
     return response.data;
 }
 
+// Delete a user by ID
 async function deleteUser(id) {
     const response = await axios.delete(API_HOST + `/api/users/${id}`); 
     return response.status;
 }
     
+// Update a user's information
 async function updateUser(email, updateData) {
     const response = await axios.put(API_HOST + `/api/users/update`, {
         name: updateData.name,
@@ -55,32 +60,28 @@ async function updateUser(email, updateData) {
     return response.status;
 }
 
-
-
-
-
-// --- Reviews -----------------------------------------------------------------------------
-//create a review
+// --- Reviews ----------------------------------------------------------------------------- 
+// Create a new review
 async function createReview(review) {
     const response = await axios.post(API_HOST + "/api/reviews", review);
 
     return response.data;
 }
 
-//get reviews by movie name
+// Get all reviews for a given movie
 async function getReviewsByMovie(movie) {
     const response = await axios.get(API_HOST + `/api/reviews/${movie}`);
 
     return response.data;
-    
 }
 
-//delete review
+// Delete a review by ID
 async function deleteReview(review_id) {
     const response = await axios.delete(API_HOST + `/api/reviews/${review_id}`); 
     return response.data;
 }
-//update review
+
+// Update a review's information
 async function updateReview(review_id, review) {
     const response = await axios.put(API_HOST + `/api/reviews/${review_id}`, review);
 
@@ -88,35 +89,35 @@ async function updateReview(review_id, review) {
 }
 
 // --- Movies -----------------------------------------------------------------------------------
-// get all movies
+// Get all movies
 async function getAllMovies() {
     const response = await axios.get(API_HOST + "/api/movies");
 
     return response.data;
 }
 
-// get movie by movie name
+// Get a movie by name
 async function getMovie(movie_name) {
     const response = await axios.get(API_HOST + `/api/movies/${movie_name}`);
 
     return response.data;
 }
 
-// create a movie
+// Create a new movie
 async function createMovie(movie) {
     const response = await axios.post(API_HOST + "/api/movies", movie);
 
     return response.data;
 }
 
-// delete a movie
+// Delete a movie by ID
 async function deleteMovie(movie_id) {
     const response = await axios.delete(API_HOST + `/api/movies/${movie_id}`);
 
     return response.data;
 }
 
-// update a movie
+// Update a movie's information
 async function updateMovie(movie_id, movie) {
     const response = await axios.put(API_HOST + `/api/movies/${movie_id}`, movie);
 
@@ -124,85 +125,99 @@ async function updateMovie(movie_id, movie) {
 }
 
 // --- Session Times ----------------------------------------------------------------------------------
-// get all session times
+// Get all session times
 async function getAllSessionTimes() {
     const response = await axios.get(API_HOST + "/api/sessiontimes");
 
     return response.data;
 }
 
-// get session time by movie name
-async function getSessionTime(sessiontime_movie) {
-    const response = await axios.get(API_HOST + `/api/sessiontimes/${sessiontime_movie}`);
+// Get a session time by ID
+async function getSessionTime(sessiontime_id) {
+    const response = await axios.get(API_HOST + `/api/sessiontimes/id/${sessiontime_id}`);
 
     return response.data;
 }
 
-// create a session time
+// Get all session times for a given movie
+async function getSessionTimeByMovie(movie) {
+    const response = await axios.get(API_HOST + `/api/sessiontimes/movie/${movie}`);
+
+    return response.data;
+}
+
+// Get all session times for a given day and movie
+async function getSessionTimeByDay(sessiontime_day, movie) {
+    const response = await axios.get(API_HOST + `/api/sessiontimes/day/${sessiontime_day}/${movie}`);
+
+    return response.data;
+}
+
+// Create a new session time
 async function createSessionTime(sessiontime) {
     const response = await axios.post(API_HOST + "/api/sessiontimes", sessiontime);
 
     return response.data;
 }
 
-// delete a session time
+// Delete a session time by ID
 async function deleteSessionTime(sessiontime_id) {
     const response = await axios.delete(API_HOST + `/api/sessiontimes/${sessiontime_id}`);
 
     return response.data;
 }
 
-// update a session time
+// Update a session time's information
 async function updateSessionTime(sessiontime_id, sessiontime) {
     const response = await axios.put(API_HOST + `/api/sessiontimes/${sessiontime_id}`, sessiontime);
 
     return response.data;
 }
 
-// get session times by day and movie name
-async function getSessionTimeByDay(sessiontime_day, sessiontime_movie) {
-    const response = await axios.get(API_HOST + `/api/sessiontimes/${sessiontime_movie}/${sessiontime_day}`);
+// Update the available seats for a session time
+async function updateAvailableSeats(sessiontime_id, sessiontime_available_seats) {
+    const response = await axios.put(API_HOST + `/api/sessiontimes/availableseats/${sessiontime_id}`, {sessiontime_available_seats});
 
     return response.data;
 }
 
 // --- Tickets ----------------------------------------------------------------------------------
-// get all tickets
+// Get all tickets
 async function getAllTickets() {
     const response = await axios.get(API_HOST + "/api/tickets");
 
     return response.data;
 }
 
-// get ticket by movie name
+// Get a ticket by movie name
 async function getTicket(movie) {
-    const response = await axios.get(API_HOST + `/api/tickets/${movie}`);
+    const response = await axios.get(API_HOST + `/api/tickets/movie/${movie}`);
 
     return response.data;
 }
 
-// get ticket by email
+// Get a ticket by email
 async function getTicketByEmail(email) {
-    const response = await axios.get(API_HOST + `/api/tickets/${email}`);
+    const response = await axios.get(API_HOST + `/api/tickets/email/${email}`);
 
     return response.data;
 }
 
-// create a ticket
+// Create a new ticket
 async function createTicket(ticket) {
     const response = await axios.post(API_HOST + "/api/tickets", ticket);
 
     return response.data;
 }
 
-// delete a ticket
+// Delete a ticket by ID
 async function deleteTicket(ticket_id) {
     const response = await axios.delete(API_HOST + `/api/tickets/${ticket_id}`);
 
     return response.data;
 }
 
-// update a ticket
+// Update a ticket's information
 async function updateTicket(ticket_id, ticket) {
     const response = await axios.put(API_HOST + `/api/tickets/${ticket_id}`, ticket);
 
@@ -210,14 +225,7 @@ async function updateTicket(ticket_id, ticket) {
 }
 
 // --- Exports ----------------------------------------------------------------------------------
-
-
-
-
-
-
-
-
+// Export all functions as named exports
 export {
     findUser,
     createUser,
@@ -237,18 +245,16 @@ export {
     updateMovie,
     getAllSessionTimes,
     getSessionTime,
+    getSessionTimeByMovie,
+    getSessionTimeByDay,
     createSessionTime,
     deleteSessionTime,
     updateSessionTime,
-    getSessionTimeByDay,
+    updateAvailableSeats,
     getAllTickets,
     getTicket,
     getTicketByEmail,
     createTicket,
     deleteTicket,
-    updateTicket
-
+    updateTicket,
 };
-
-
-

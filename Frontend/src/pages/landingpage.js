@@ -10,181 +10,126 @@ import avengers from '../images/avengersendgame_lob_crd_05.jpg';
 import avengers_bkg from '../images/avengers/avengers-bkg.jpeg';
 import lotr from '../images/lordoftherings.jpg'
 import lotr_bkg from '../images/lotr/lotr-bkg.jpeg';
-import { getAllMovies, getMovie, getAllSessionTimes, getSessionTime, getSessionTimeByDay } from '../data/repository';
+import { getAllMovies, getMovie, getAllSessionTimes, getSessionTime, getSessionTimeByDay, getSessionTimeByMovie } from '../data/repository';
 import { all } from 'axios';
 
 //this is the landing page
 
-const LandingPage = (props) => {
-    const navigate = useNavigate();
+const LandingPage = (props) => { //props are passed in from app.js
+    const navigate = useNavigate(); //used to navigate to different pages
+    const { setMovie, movie } = props; //get movie and setMovie from props
+    const [imgSrc, setImgSrc] = useState(movie); //set imgSrc to movie
+    const [sessionTimes, setSessionTimes] = useState([]); //set sessionTimes to empty array
+    const [movies, setMovies] = useState([]); //set movies to empty array -- this is the array of movies that will be displayed on the landing page, where as movie is the prop
 
-    const [imgSrc, setImgSrc] = useState(barbie);
-    const movie = "Barbie";
-    const [sessionTimes, setSessionTimes] = useState([]);
+  
     
+  
+    useEffect(() => { //useEffect is used to fetch data from the database
+      async function fetchData() { //async function to fetch data
+        const AllsessionTimes = await getAllSessionTimes(); //get all session times
+        const allMovies = await getAllMovies(); //get all movies
+        const filteredMovies = allMovies.filter((movie) => movie.movie_name !== "Movie1"); // exclude movie with movie_name "Movie1" -- test movie
+        const sessionTimes = await getSessionTimeByMovie(filteredMovies[1].movie_name);// get session times for the first movie in the filtered movies array
+        setSessionTimes(sessionTimes); //set session times state
+        setMovies(filteredMovies); //set movies state
+        setMovie(filteredMovies[1].movie_name); //set movie state
+        setImgSrc(filteredMovies[1].movie_image); //set imgSrc state
+      }
+      fetchData(); //call the async function
+    }, []); //empty array means useEffect will only run once
 
-    
+    let sessionTimesByMovie = []; //create empty array to store session times for the selected movie
+  
+    const changeImg = async (movie) => { //change the image when a movie is clicked
+      
+      setImgSrc(movie.movie_image); //set imgSrc state
+      setMovie(movie.movie_name);  //set movie state
 
-    
-    
-    const { setMovie } = props;
+        // fetch session times for the selected movie
+      const response = await getSessionTimeByMovie(movie.movie_name);
+      sessionTimesByMovie = response; //set sessionTimesByMovie to the response
 
-    useEffect(() => {
-        async function fetchData() {
-            const response = await getAllSessionTimes();
-            setSessionTimes(response);
+      // update the session times state
+      setSessionTimes(sessionTimesByMovie); 
+      console.log(sessionTimesByMovie);
 
-            setMovie("Barbie");           
+      
+      
+      
 
-            
-        }
-        fetchData();
-    }, []);
-
-        
-    
-   
-    const changeImg = (movie) => {
-        
-        //TODO: this cant be a switch case, could have it just pass in the value and have it get the movie by name from the database?
-        switch (movie) {
-            case "barbie":
-                setImgSrc(barbie);
-                props.setMovie("Barbie");
-                
-                document.getElementById('movie-title').innerText = "Barbie (2023)";
-                break;
-            case "oppenheimer":
-                setImgSrc(oppenheimer);
-                props.setMovie("Oppenheimer");
-                
-                document.getElementById('movie-title').innerText = "Oppenheimer";
-                break;
-            case "avengers":
-                setImgSrc(avengers);
-                props.setMovie("Avengers");
-                
-                document.getElementById('movie-title').innerText = "Avengers";
-                break;
-            case "lotr":
-                setImgSrc(lotr);
-                props.setMovie("The Lord of the Rings");
-                
-                document.getElementById('movie-title').innerText = "LOTR";
-                break;
-            default:
-                setImgSrc(barbie);
-                props.setMovie("Barbie");
-                document.getElementById('movie-title').innerText = "Barbie (2023)";
-                break;
-        }
-    }
-
+    };
+  
     const handleReview = () => {
-        localStorage.setItem('movie' , props.movie);
-        // props.setMovie(props.movie);
-        // console.log('props movie handleReview: ' , props.movie);
-        navigate('/reviews');
-    }
+      localStorage.setItem('movie', props.movie); //set movie in local storage to the selected movie
+      navigate('/reviews'); //navigate to reviews page
+    };
+  
+    const handleSessionTime = (sessionTime) => { //handle session time
+      localStorage.setItem('movie', props.movie); //set movie in local storage to the selected movie
+      props.setDay(sessionTime.replace(/\//g, '-')); //set day state to the selected session time
+      localStorage.setItem('day', sessionTime.replace(/\//g, '-')); //set day in local storage to the selected session time
+      navigate('/ticket'); //navigate to ticket reservation page
+    };
 
-    const handleSessionTime = (sessionTime) => {
-        console.log('session time: ' , sessionTime);
-        console.log('props movie handleSessionTime: ' , props.movie);
-        localStorage.setItem('movie' , props.movie);
-        props.setDay(sessionTime);
-        
-        
-        console.log('props day handleSessionTime: ' , props.day);
-        navigate('/ticket');
-
-    }
-
-
+  
     return (
-        <div className  = 'page'>
-            {/* shows a grid of movies with buttons underneath for session times and reviews */}
-            <div className = "movie-container" id = "movie-container">
-                <div className = "contain-left">
-                    <div id = "movie-title">
-                        Barbie
-                    </div>
-                    <img src = {imgSrc} alt = "barbie" id = "movie-poster" />
-                    <div className = "handle-review" onClick = {handleReview}>
-                        Leave a Review
-                    </div>
-                </div>
-                <div className = "contain-right">
-                <div id="sessiontimes">
-                    <div className="header">Session Times</div>
-                    <div className="session-times">
-                    {sessionTimes
-                        .filter(
-                        (sessionTime, index, self) =>
-                            self.findIndex((t) => t.sessiontime_day === sessionTime.sessiontime_day) === index && sessionTime.sessiontime_day !== "Sample Day"
-                        )
-                        .map((sessionTime) => (
-                        <button className="session-time" onClick={() => handleSessionTime(sessionTime.sessiontime_day)}>{sessionTime.sessiontime_day}</button>
-                        ))}
-                    
-                        </div>
-                
-                    </div>
-
-                    
-                    
-                    {/* Session Times */}
-                    
-                    {/* <div id = "movie-times">
-                        <div className = "header">Session Times</div>
-                        <div className = "session-day">Wednesday 23/08/2023</div>
-                        <div className = "session-times">
-                            <div className = "session-time">9:00</div>
-                            <div className = "session-time">13:00</div>
-                            <div className = "session-time">16:00</div>
-                            <div className = "session-time">19:00</div>
-                        </div>
-                        <div className = "session-day">Thursday 24/08/2023</div>
-                        <div className = "session-times">
-                            <div className = "session-time">9:00</div>
-                            <div className = "session-time">11:00</div>
-                            <div className = "session-time">14:00</div>
-                            <div className = "session-time">16:00</div>
-                        </div>
-                        <div className = "session-day">Friday 25/08/2023</div>
-                        <div className = "session-times">
-                            <div className = "session-time">7:00</div>
-                            <div className = "session-time">12:00</div>
-                            <div className = "session-time">16:00</div>
-                            <div className = "session-time">19:00</div>
-                        </div>
-                        <div className = "session-day">Saturday 26/08/2023</div>
-                        <div className = "session-times">
-                            <div className = "session-time">8:00</div>
-                            <div className = "session-time">15:00</div>
-                            <div className = "session-time">16:00</div>
-                            <div className = "session-time">20:00</div>
-                        </div>
-                        <div className = "session-day">Sunday 27/08/2023</div>
-                        <div className = "session-times">
-                            <div className = "session-time">9:00</div>
-                            <div className = "session-time">12:00</div>
-                            <div className = "session-time">15:00</div>
-                            <div className = "session-time">18:00</div>
-                        </div>
-                    </div> */}
-                </div>
+      <div className='page' data-testid="LandingPage">
+        <div className="movie-container" id="movie-container">
+          <div className="contain-left">
+            <div id="movie-title" data-testid="MovieTitle">
+              {movie}
             </div>
-            <div className = "flex-center">
-                <div id = "movie-select">
-                    <div className = "movie" onClick = {() => changeImg("barbie")}></div>
-                    <div className = "movie" onClick = {() => changeImg("oppenheimer")}></div>
-                    <div className = "movie" onClick = {() => changeImg("avengers")}></div>
-                    <div className = "movie" onClick = {() => changeImg("lotr")}></div>
-                </div>
+            <img src={imgSrc} alt={movie.movie_name} id="movie-poster" data-testid="MoviePoster"></img>
+            
+            <div className="handle-review" onClick={handleReview} data-testid="ReviewButton">
+              Leave a Review
             </div>
+          </div>
+          <div className="contain-right">
+            <div id="sessiontimes">
+              <div className="header" data-testid="SessionTimesHeading">Session Times</div>
+              <div className="session-times" data-testid="SessionTimes">
+                  {/* display session times and filter out duplicate days */}
+  {sessionTimes
+    .filter(
+      (sessionTime, index, self) => //filter out duplicate days
+        index === 
+        self.findIndex((t) => t.sessiontime_day === sessionTime.sessiontime_day) 
+    )
+    .map((sessionTime) => { //map through session times
+      const [day, date] = sessionTime.sessiontime_day.split(" "); //split the session time day into day and date
+      const formattedDate = date.replace(/-/g, "/"); //replace - with /
+      return (
+        <div
+          key={sessionTime.sessiontime_id} //set key to session time id
+          className="session-time"
+          onClick={() => handleSessionTime(sessionTime.sessiontime_day)} //handle session time
+        >
+        <div className="session-day">{sessionTime.sessiontime_day.split(" ")[0]}</div> {/* split the session time day into day and date */}
+        <br></br>
+   
+        <div className="session-day">{sessionTime.sessiontime_day.split(" ")[1].replace(/-/g, "/")}</div> {/* split the session time day into day and date */}
         </div>
+      );
+    })}
+
+              </div>
+            </div>
+            <div id="movies" className='movie-list-container' data-testid="movies-container">
+              
+              {movies.map((movie) => (
+                <div key = {movie.movie_name} data-testid="movie" className="movie" onClick={() => changeImg(movie)} >
+                  <img className='poster' src={movie.movie_image} alt={movie.movie_name} />
+                  <div className = "moviename">{movie.movie_name}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
     );
-};
+  };
 
 export default LandingPage;
 

@@ -27,7 +27,7 @@ module.exports = (sequelize, DataTypes) =>
       allowNull: false
     },
     review_text: {
-      type: DataTypes.STRING(500),
+      type: DataTypes.TEXT,
       allowNull: false
     },
     review_date: {

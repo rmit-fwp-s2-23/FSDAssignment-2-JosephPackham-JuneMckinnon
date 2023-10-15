@@ -12,7 +12,7 @@ const App = () => {
     //set movie title for reviews and ticket reservation
     const [movie, setMovie] = useState(localStorage.getItem('movie'));
     //set day for ticket reservation
-    const [day, setDay] = useState();
+    const [day, setDay] = useState(localStorage.getItem('day'));
     return (
         //return page with header, footer and routing
         <BrowserRouter>

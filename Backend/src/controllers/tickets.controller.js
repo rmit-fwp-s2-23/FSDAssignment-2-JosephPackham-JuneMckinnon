@@ -1,26 +1,27 @@
 const db = require("../database");
 
-//select all tickets
+// Select all tickets from the database.
 exports.all = async (req, res) => {
   const tickets = await db.tickets.findAll();
 
   res.json(tickets);
 };
 
-//create a new ticket
+// Create a new ticket in the database.
 exports.create = async (req, res) => {
   const tickets = await db.tickets.create({
     movie: req.body.movie,
     author_name: req.body.author_name,
     author_email: req.body.author_email,
     ticket_quantity: req.body.ticket_quantity,
-    ticket_session: req.body.ticket_session
+    ticket_day: req.body.ticket_day,
+    ticket_time: req.body.ticket_time
   });
 
   res.json(tickets);
 };
 
-//select ticket by movie name
+// Select tickets by movie name.
 exports.one = async (req, res) => {
   const tickets = await db.tickets.findAll({
     where: {
@@ -31,7 +32,7 @@ exports.one = async (req, res) => {
   res.json(tickets);
 }
 
-//select ticket by email
+// Select tickets by author email.
 exports.email = async (req, res) => {
   const tickets = await db.tickets.findAll({
     where: {
@@ -42,7 +43,7 @@ exports.email = async (req, res) => {
   res.json(tickets);
 }
 
-//delete a ticket by ticket_id
+// Delete a ticket by ticket ID.
 exports.delete = async (req, res) => {
   const tickets = await db.tickets.findByPk(req.params.id);
   await tickets.destroy();
@@ -50,31 +51,17 @@ exports.delete = async (req, res) => {
   res.json(tickets);
 }
 
-//update a ticket in the database by ticket_id
+// Update a ticket in the database by ticket ID.
 exports.update = async (req, res) => {
   const tickets = await db.tickets.findByPk(req.params.id);
   tickets.movie = req.body.movie;
   tickets.author_name = req.body.author_name;
   tickets.author_email = req.body.author_email;
   tickets.ticket_quantity = req.body.ticket_quantity;
-  tickets.ticket_session = req.body.ticket_session;
+  tickets.ticket_day = req.body.ticket_day;
+  tickets.ticket_time = req.body.ticket_time;
 
   await tickets.save();
 
   res.json(tickets);
 }
-
-//update a ticket in the database
-exports.update = async (req, res) => {
-  const tickets = await db.tickets.findByPk(req.params.id);
-  tickets.movie = req.body.movie;
-  tickets.author_name = req.body.author_name;
-  tickets.author_email = req.body.author_email;
-  tickets.ticket_quantity = req.body.ticket_quantity;
-  tickets.ticket_session = req.body.ticket_session;
-
-  await tickets.save();
-
-  res.json(tickets);
-}   
-

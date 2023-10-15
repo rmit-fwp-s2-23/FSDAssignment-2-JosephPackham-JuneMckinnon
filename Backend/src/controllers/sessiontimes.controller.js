@@ -1,12 +1,28 @@
 const db = require("../database");
 
-//select all session times
+// Select all session times from the database.
 exports.all = async (req, res) => {
   const sessiontimes = await db.sessiontimes.findAll();
   res.json(sessiontimes);
 };
 
-//select session time by movie name
+// Select a session time by session time ID.
+exports.oneById = async (req, res) => {
+  try {
+    const sessiontime = await db.sessiontimes.findByPk(req.params.id);
+
+    if (!sessiontime) {
+      return res.status(404).json({ error: "Session time not found" });
+    }
+
+    res.json(sessiontime);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Internal server error" });
+  }
+};
+
+// Select session times by movie name.
 exports.one = async (req, res) => {
   const sessiontimes = await db.sessiontimes.findAll({
     where: {
@@ -17,19 +33,28 @@ exports.one = async (req, res) => {
   res.json(sessiontimes);
 }
 
-//select a session time by session tiem day and movie name
+// Select a session time by session time day and movie name.
 exports.oneByDay = async (req, res) => {
-  const sessiontimes = await db.sessiontimes.findAll({
-    where: {
-      sessiontime_day: req.params.sessiontime_day,
-      sessiontime_movie: req.params.sessiontime_movie
-    }
-  });
+  try {
+    const sessiontimes = await db.sessiontimes.findAll({
+      where: {
+        sessiontime_day: req.params.sessiontime_day,
+        sessiontime_movie: req.params.sessiontime_movie
+      }
+    });
 
-  res.json(sessiontimes);
+    if (sessiontimes.length === 0) {
+      return res.status(404).json({ error: "Session times not found" });
+    }
+
+    res.json(sessiontimes);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Internal server error" });
+  }
 }
 
-//delete a session time by session time id
+// Delete a session time by session time ID.
 exports.delete = async (req, res) => {
   const sessiontimes = await db.sessiontimes.findByPk(req.params.id);
   await sessiontimes.destroy();
@@ -37,7 +62,7 @@ exports.delete = async (req, res) => {
   res.json(sessiontimes);
 }
 
-//update a session time in the database by session time id
+// Update a session time in the database by session time ID.
 exports.update = async (req, res) => {
   const sessiontimes = await db.sessiontimes.findByPk(req.params.id);
   sessiontimes.sessiontime_movie = req.body.sessiontime_movie;
@@ -51,7 +76,25 @@ exports.update = async (req, res) => {
   res.json(sessiontimes);
 }
 
-//create a session time in the database
+// Update the available seats for a session time by session time ID.
+exports.updateAvailableSeats = async (req, res) => {
+  try {
+    const sessiontime = await db.sessiontimes.findByPk(req.params.id);
+
+    if (!sessiontime) {
+      return res.status(404).json({ error: "Session time not found" });
+    }
+
+    await sessiontime.update({ sessiontime_available_seats: req.body.sessiontime_available_seats });
+
+    res.json(sessiontime);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Internal server error" });
+  }
+};
+
+// Create a session time in the database.
 exports.create = async (req, res) => {
   const sessiontimes = await db.sessiontimes.create({
     sessiontime_movie: req.body.sessiontime_movie,

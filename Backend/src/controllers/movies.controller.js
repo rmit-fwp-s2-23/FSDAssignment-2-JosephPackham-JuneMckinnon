@@ -55,6 +55,4 @@ exports.create = async (req, res) => {
     });
     
     res.json(movies);
-    };
-
-    
+};

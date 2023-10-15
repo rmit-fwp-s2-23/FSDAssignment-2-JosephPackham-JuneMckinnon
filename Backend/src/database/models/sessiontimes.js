@@ -1,4 +1,4 @@
-module.exports = (sequelize, DataTypes) =>
+module.exports = (sequelize, DataTypes) => //Sessiontimes table in database
     sequelize.define('sessiontimes', {
         sessiontime_id: {
             type: DataTypes.INTEGER,
@@ -18,7 +18,12 @@ module.exports = (sequelize, DataTypes) =>
         },
         sessiontime_available_seats: {
             type: DataTypes.INTEGER,
-            allowNull: false
+            allowNull: false,
+            validate: {
+                min: -1000, 
+                notNull: true,
+                isInt: true,
+              },
         },
         
        

@@ -1,4 +1,4 @@
-module.exports = (sequelize, DataTypes) =>
+module.exports = (sequelize, DataTypes) => //User table in database
 sequelize.define("user", {
   email: {
     type: DataTypes.STRING(40),

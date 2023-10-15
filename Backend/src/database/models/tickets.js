@@ -27,7 +27,6 @@ module.exports = (sequelize, DataTypes) =>
             type: DataTypes.STRING(32),
             allowNull: false,
             ForeignKey: true
-
         },
         ticket_time: {
             type: DataTypes.STRING(32),

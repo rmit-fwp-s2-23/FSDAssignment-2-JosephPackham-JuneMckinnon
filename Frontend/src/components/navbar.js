@@ -17,7 +17,7 @@ const Navbar = (props) => {
     if(!props.user){
         return (
             <>
-                <nav className = 'nav'>
+                <nav className = 'nav' data-testid='Navbar-guest'>
                     <Link to='/' className='nav-left' id = 'nav-item'>
                         <div className=''>
                             LOOP CINEMAS
@@ -41,7 +41,7 @@ const Navbar = (props) => {
     }
     return (
         <>
-            <nav className = 'nav'>
+            <nav className = 'nav' data-testid='Navbar'>
                 <Link to='/' className='nav-left' id = 'nav-item'>
                     <div className=''>
                         LOOP CINEMAS
