@@ -1,40 +1,64 @@
 import React, { useContext, useState, useEffect } from "react";
 import { TabContext, MovieContext } from "./dashboard.js"
 import "../css/edit.css";
-import { updateMovie, getReviewsByMovie, deleteReviewById } from "../data/repository.js";
+import { updateMovie, getReviewsByMovie, deleteReviewById, updateSessionById } from "../data/repository.js";
 
 const EditMovie = () => {
     const { movie } = useContext(MovieContext);
     const [editedMovie, setEditedMovie] = useState(movie);
+    const [editedSessions, setEditedSessions] = useState({});
     const [reviews, setReviews] = useState(null);
 
     useEffect(() => {
-        const getReviews = async () => {
+        const getReviewsAndSessions = async () => {
             const retrievedReviews = await getReviewsByMovie(movie.movie_name);
             setReviews(retrievedReviews);
+
+            const sessionData = {};
+            for (const session of movie.sessiontimes) {
+                // Assuming sessiontime_id is unique, you can use it as the key
+                sessionData[session.sessiontime_id] = {
+                    time: session.sessiontime_time,
+                    day: session.sessiontime_day,
+                    seats: session.sessiontime_available_seats,
+                };
+            }
+            setEditedSessions(sessionData);
         }
-        getReviews();
-    }, [movie.movie_name])
+        getReviewsAndSessions();
+    }, [movie.movie_name, movie.sessiontimes])
 
     const setTab = useContext(TabContext);
     const handleClick = () => {
         setTab("movies")
     }
 
-    const handleInputChange = (key, value) => {
+    const handleMovieChange = (key, value) => {
         setEditedMovie(prevState => ({
-          ...prevState,
-          [key]: value,
+            ...prevState,
+            [key]: value,
         }));
-      };
+    };
+
+    const handleSessionChange = (sessionId, field, value) => {
+        setEditedSessions((prevValues) => ({
+            ...prevValues,
+            [sessionId]: {
+                ...prevValues[sessionId],
+                [field]: value,
+            },
+        }));
+    }
 
     const saveChanges = async () => {
         const response = await updateMovie(editedMovie.movie_name, editedMovie.movie_image);
         alert(response.message)
     }
 
-    const saveSession = async () => {
-
+    const saveSession = async (sessionId) => {
+        const { time, day, seats } = editedSessions[sessionId];
+        const response = await updateSessionById(sessionId, time, day, parseInt(seats));
+        alert(response.message);
     }
 
     const deleteReview = async (reviewID) => {
@@ -58,15 +82,30 @@ const EditMovie = () => {
                                             <div key = {session.sessiontime_id} className = "session-entry">
                                                 <div className = "input-container">
                                                     <label for = "time">Time: </label>
-                                                    <input id = "time" className = "session-input" value = {session.sessiontime_time}></input>
+                                                    <input 
+                                                        id = "time" 
+                                                        className = "session-input" 
+                                                        defaultValue = {session.sessiontime_time}
+                                                        onChange={(e) => handleSessionChange(session.sessiontime_id, 'time', e.target.value)}
+                                                    ></input>
                                                 </div>
                                                 <div className = "input-container">
                                                     <label for = "day">Day: </label>
-                                                    <input id = "day" className = "session-input" value = {session.sessiontime_day}></input>
+                                                    <input 
+                                                        id = "day" 
+                                                        className = "session-input" 
+                                                        defaultValue = {session.sessiontime_day}
+                                                        onChange={(e) => handleSessionChange(session.sessiontime_id, 'day', e.target.value)}
+                                                    ></input>
                                                 </div>
                                                 <div className = "input-container">
                                                     <label for = "seats">Seats: </label>
-                                                    <input id = "seats" className = "session-input" value = {session.sessiontime_available_seats}></input>
+                                                    <input 
+                                                        id = "seats" 
+                                                        className = "session-input" 
+                                                        defaultValue = {session.sessiontime_available_seats}
+                                                        onChange={(e) => handleSessionChange(session.sessiontime_id, 'seats', e.target.value)}
+                                                    ></input>
                                                 </div>
                                                 <button className = "save-session" onClick = {() => saveSession(session.sessiontime_id)}>Save</button>
                                             </div>
@@ -77,7 +116,11 @@ const EditMovie = () => {
                                 <>
                                     <div key={key} className="movie-entry">
                                         <div className="movie-key">{key}:</div>
-                                        <input className="movie-val" type="text" defaultValue={value} onChange = {(ev) => handleInputChange(key, ev.target.value)} />
+                                        <input 
+                                            className="movie-val" 
+                                            type="text" defaultValue={value} 
+                                            onChange = {(ev) => handleMovieChange(key, ev.target.value)} 
+                                        />
                                     </div>
                                     <button className = "edit-save" onClick = {() => saveChanges()}>Save</button>
                                 </>

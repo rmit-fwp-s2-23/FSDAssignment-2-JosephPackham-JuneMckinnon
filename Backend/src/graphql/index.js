@@ -69,6 +69,7 @@ graphql.schema = buildSchema(`
 	}
 
 	input SessionTimeInput {
+		sessiontime_id: Int,
 		sessiontime_time: String,
 		sessiontime_day: String,
 		sessiontime_available_seats: Int
@@ -98,7 +99,8 @@ graphql.schema = buildSchema(`
 		set_blocked(email: String, blocked: Boolean): AuthResponse,
 		create_movie(input: MovieInput): AuthResponse,
 		update_movie(input: MovieInput): AuthResponse,
-		delete_movie(input: MovieInput): AuthResponse
+		delete_movie(input: MovieInput): AuthResponse,
+		update_sessiontime(input: SessionTimeInput): AuthResponse
 	}
 
 	type AuthResponse {
@@ -391,6 +393,27 @@ graphql.root = {
 			}
 		}
 	},
+	update_sessiontime: async (args) => {
+		try {
+			const session = await db.sessiontimes.findByPk(args.input.sessiontime_id);
+
+			session.sessiontime_time = args.input.sessiontime_time;
+			session.sessiontime_day = args.input.sessiontime_day;
+			session.sessiontime_available_seats = args.input.sessiontime_available_seats;
+
+			await session.save();
+
+			return {
+				success: true,
+				message: "Successfully updated session time"
+			}
+		} catch (error) {
+			return {
+				success: false,
+				message: error
+			}
+		}
+	}
 };
 
 module.exports = graphql;

@@ -149,6 +149,34 @@ async function deleteReviewById(review_id) {
     return data.delete_review;
 }
 
+async function updateSessionById(id, time, day, seats) {
+    const mutation = gql`
+        mutation UpdateSession($sessionID: Int, $sessionTime: String, $sessionDay: String, $sessionSeats: Int) {
+            update_sessiontime(input: {
+                sessiontime_id: $sessionID,
+                sessiontime_time: $sessionTime,
+                sessiontime_day: $sessionDay,
+                sessiontime_available_seats: $sessionSeats
+            }) {
+                success
+                message
+            }
+        }
+    `;
+
+    const data = await request(GRAPH_QL_URL, mutation, {
+        sessionID: id,
+        sessionTime: time,
+        sessionDay: day,
+        sessionSeats: seats
+    });
+
+    return data.update_sessiontime;
+}
+
 export {
-    getUsers, loginUser, setAdmin, setBlocked, getMovies, updateMovie, getReviewsByMovie, deleteReviewById
+    getUsers, loginUser, setAdmin, setBlocked, 
+    getMovies, updateMovie, 
+    getReviewsByMovie, deleteReviewById, 
+    updateSessionById
 }
