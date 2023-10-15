@@ -17,20 +17,22 @@ import { all } from 'axios';
 
 const LandingPage = (props) => {
     const navigate = useNavigate();
-  
-    const [imgSrc, setImgSrc] = useState(barbie);
+    const { setMovie, movie } = props;
+    const [imgSrc, setImgSrc] = useState(movie);
     const [sessionTimes, setSessionTimes] = useState([]);
     const [movies, setMovies] = useState([]);
+    console.log(imgSrc);
   
-    const { setMovie, movie } = props;
+    
   
     useEffect(() => {
       async function fetchData() {
         const sessionTimes = await getAllSessionTimes();
-        const movies = await getAllMovies();
+        const allMovies = await getAllMovies();
+        const filteredMovies = allMovies.filter((movie) => movie.movie_name !== "Movie1"); // exclude movie with movie_name "Movie1"
         setSessionTimes(sessionTimes);
-        setMovies(movies);
-        setMovie("Barbie");
+        setMovies(filteredMovies);
+        setMovie(filteredMovies[0].movie_name);
       }
       fetchData();
     }, []);
@@ -40,6 +42,8 @@ const LandingPage = (props) => {
       setImgSrc(movie.movie_image);
       setMovie(movie.movie_name);
       document.getElementById('movie-title').innerText = movie.movie_name;
+      
+      
     };
   
     const handleReview = () => {
@@ -61,7 +65,8 @@ const LandingPage = (props) => {
             <div id="movie-title" data-testid="MovieTitle">
               
             </div>
-            <img src={imgSrc} alt="barbie" id="movie-poster" data-testid="MoviePoster"></img>
+            <img src={imgSrc} alt={movie.movie_name} id="movie-poster" data-testid="MoviePoster"></img>
+            
             <div className="handle-review" onClick={handleReview} data-testid="ReviewButton">
               Leave a Review
             </div>
@@ -83,7 +88,8 @@ const LandingPage = (props) => {
             <div id="movies">
               {movies.map((movie) => (
                 <div className="movie" onClick={() => changeImg(movie)}>
-                  <img src={movie.movie_image} alt={movie.movie_name} />
+                  <img className='poster' src={movie.movie_image} alt={movie.movie_name} />
+                  
                 </div>
               ))}
             </div>
